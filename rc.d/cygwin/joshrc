@@ -5,7 +5,7 @@
 #          this one.
 
 # Location of shared rc folders
-targetpath="$HOME/gdbash/rc.d"
+targetpath="$HOME/repos/dotfiles/rc.d"
 
 # Path to each rc folder
 commpath="$targetpath/common"
