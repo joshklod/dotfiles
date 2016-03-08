@@ -1,0 +1,5 @@
+#!/bin/sh
+#
+# Cygwin startxwinrc
+
+exec /usr/bin/xwin-xdg-menu

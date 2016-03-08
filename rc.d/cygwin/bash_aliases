@@ -1,0 +1,6 @@
+#!/bin/bash
+#
+# Cygwin bash_aliases: Sourced in interactive shell
+
+# Windows GUI for updating Cygwin
+alias cygsetup='setup-x86_64.exe'

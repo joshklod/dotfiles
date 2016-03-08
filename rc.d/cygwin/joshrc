@@ -1,0 +1,38 @@
+#!/bin/bash
+#
+# .joshrc: A script that links rc files in ~ to their respective scripts
+#          in the shared folder. Files in home folder are symlinked to
+#          this one.
+
+# Location of shared rc folders
+targetpath="$HOME/gdbash/rc.d"
+
+# Path to each rc folder
+commpath="$targetpath/common"
+cygpath="$targetpath/cygwin"
+
+
+#### Source Common Script ####
+
+# Get name of linking file
+temp=${BASH_SOURCE##*/}
+# Locate matching name at target
+filepath="$commpath/${temp#.}"
+
+# Source the target file if it exists
+if [ -f $filepath ] ; then
+	source $filepath
+fi
+
+
+#### Source Cygwin Script ####
+
+# Get name of linking file
+temp=${BASH_SOURCE##*/}
+# Locate matching name at target
+filepath="$cygpath/${temp#.}"
+
+# Source the target file if it exists
+if [ -f $filepath ] ; then
+	source $filepath
+fi

@@ -1,0 +1,32 @@
+# common nanorc
+
+# Custom syntax definitions
+include ~/gdbash/rc.d/common/nanorc.d/*.nanorc
+
+# Default syntax definitions
+include /usr/share/nano/c.nanorc
+include /usr/share/nano/changelog.nanorc
+include /usr/share/nano/css.nanorc
+include /usr/share/nano/debian.nanorc
+include /usr/share/nano/default.nanorc
+include /usr/share/nano/html.nanorc
+include /usr/share/nano/java.nanorc
+include /usr/share/nano/javascript.nanorc
+include /usr/share/nano/man.nanorc
+include /usr/share/nano/nanorc.nanorc
+include /usr/share/nano/php.nanorc
+include /usr/share/nano/python.nanorc
+include /usr/share/nano/sh.nanorc
+include /usr/share/nano/tcl.nanorc
+include /usr/share/nano/tex.nanorc
+include /usr/share/nano/texinfo.nanorc
+include /usr/share/nano/xml.nanorc
+
+# Editor options
+set autoindent
+set smarthome
+set softwrap
+set tabsize    3
+set wordbounds
+set fill 80
+set suspend
