@@ -18,3 +18,10 @@ alias mv='mv -i'
 cs() {
 	cd $1; ls
 }
+
+# UART picocom shortcut
+uart() {
+	arg=$1
+	comport="/dev/ttyS$arg"
+	picocom -b 115200 $comport
+}
