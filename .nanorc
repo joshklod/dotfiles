@@ -28,5 +28,5 @@ set smarthome
 set softwrap
 set tabsize    3
 set wordbounds
-set fill       78
+set fill       75
 set suspend
