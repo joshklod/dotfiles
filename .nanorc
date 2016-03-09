@@ -1,7 +1,7 @@
 # common nanorc
 
 # Custom syntax definitions
-include ~/gdbash/rc.d/common/nanorc.d/*.nanorc
+include ~/repos/dotfiles/nanorc.d/*.nanorc
 
 # Default syntax definitions
 include /usr/share/nano/c.nanorc
@@ -28,5 +28,5 @@ set smarthome
 set softwrap
 set tabsize    3
 set wordbounds
-set fill 80
+set fill       78
 set suspend
