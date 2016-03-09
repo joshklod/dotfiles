@@ -1,0 +1,4 @@
+.config/user-dirs.*
+.config/xwin-xdg-menu
+.ssh/id*
+.ssh/known_hosts

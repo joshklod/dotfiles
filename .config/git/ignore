@@ -1,0 +1,6 @@
+# MPLAB (NetBeans) Files
+build/
+dist/
+nbproject/Makefile-*
+nbproject/Package-*
+nbproject/private/
