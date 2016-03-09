@@ -6,3 +6,4 @@ FontIsBold=no
 BoldAsColour=yes
 Rows=40
 RowSpacing=0
+Transparency=off

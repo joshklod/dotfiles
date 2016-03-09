@@ -2,6 +2,9 @@
 #
 # Cygwin bash_profile: Sourced in login shells
 
+# Source common bash_profile
+source "${HOME}/repos/dotfiles/.bash_profile"
+
 # Include Windows Applications folder in PATH
 PATH="${PATH}:/cygdrive/c/Applications"
 

@@ -1,0 +1,1 @@
+/home/Josh/repos/dotfiles/.bashrc
