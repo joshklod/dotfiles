@@ -9,3 +9,4 @@
 	graphs = !"COLS=$(($(tput cols)-10)); FORMATSTR='\t%C(auto)%h %C(12)%<(15)%an%Creset%C(auto)%d%n\t  %<('${COLS}',trunc)%s'; git log --graph --decorate --format=\"$FORMATSTR\""
 	grapha = !git graphs --all
 	lg = !git grapha
+	lgs = !git grapha --simplify-by-decoration
