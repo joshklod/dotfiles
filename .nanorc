@@ -1,7 +1,7 @@
 # common nanorc
 
-# Custom syntax definitions
-include ~/repos/dotfiles/nanorc.d/*.nanorc
+# Bash first so others are not overridden
+include ~/repos/dotfiles/nanorc.d/nano-highlight/bash.nanorc
 
 # Default syntax definitions
 include /usr/share/nano/c.nanorc
@@ -21,6 +21,10 @@ include /usr/share/nano/tcl.nanorc
 include /usr/share/nano/tex.nanorc
 include /usr/share/nano/texinfo.nanorc
 include /usr/share/nano/xml.nanorc
+
+# Custom syntax definitions
+include ~/repos/dotfiles/nanorc.d/*.nanorc
+include ~/repos/dotfiles/nanorc.d/nano-highlight/markdown.nanorc
 
 # Editor options
 set autoindent
