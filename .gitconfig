@@ -10,3 +10,4 @@
 	grapha = !git graphs --all
 	lg = !git grapha
 	lgs = !git grapha --simplify-by-decoration
+	lgl = log --graph --all --decorate --abbrev-commit
