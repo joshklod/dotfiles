@@ -16,7 +16,7 @@ colors=$(tput colors)
 if [[ $colors ]] && [[ $colors -ge 8 ]]; then
 	# [blue]user@host [cyan]path
 	# [cyan]$
-	prompt='\n\[\e[34m\]\u@\h \[\e[36m\]\w\[\e[36m\]\n\$\[\e[0m\] '
+	prompt='\n\[\e[34m\]\u@\h \[\e[36m\]\w\n\$\[\e[0m\] '
 else
 	# user@host path
 	# $
