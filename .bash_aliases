@@ -14,6 +14,9 @@ alias rm='rm -I'
 alias cp='cp -i'
 alias mv='mv -i'
 
+# View readonly
+alias view='nano --view'
+
 # cd and ls
 cs() {
 	cd $1; ls
