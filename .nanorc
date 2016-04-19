@@ -26,11 +26,14 @@ include /usr/share/nano/xml.nanorc
 include ~/repos/dotfiles/nanorc.d/*.nanorc
 include ~/repos/dotfiles/nanorc.d/nano-highlight/markdown.nanorc
 
-# Editor options
+## Editor options
 set autoindent
 set smarthome
 set softwrap
-set tabsize    3
+set tabsize      3
 set wordbounds
-set fill       75
+set fill         75
 set suspend
+set positionlog
+set constantshow
+set mouse
