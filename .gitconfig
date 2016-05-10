@@ -3,6 +3,7 @@
 	email = joshklod@gmail.com
 [core]
 	editor = nano
+	whitespace = cr-at-eol
 [push]
 	default = simple
 [alias]
