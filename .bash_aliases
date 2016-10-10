@@ -17,6 +17,9 @@ alias mv='mv -i'
 # View readonly
 alias view='nano --view'
 
+# Start X on default DISPLAY
+alias x='export DISPLAY=:0.0; startxwin'
+
 # cd and ls
 cs() {
 	# Parse command line parameters
