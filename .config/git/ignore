@@ -4,3 +4,12 @@ dist/
 nbproject/Makefile-*
 nbproject/Package-*
 nbproject/private/
+
+## CCS (Eclipse) Files
+.cproject
+.launches/
+.settings/
+Debug/
+targetConfigs/
+*.cmd
+*_startup_ccs.c
