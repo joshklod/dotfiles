@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# common bash_aliases: Sourced in interactive shells
+# bash_aliases: Sourced in interactive shells
 
 # ls preferences
 alias ls='ls -C --color=auto --group-directories-first --human-readable'
@@ -61,3 +61,11 @@ uart() {
 	comport="/dev/ttyS$arg"
 	picocom -b 115200 $comport
 }
+
+## Xterm-compatible only
+
+
+## Cygwin only
+
+# Windows GUI for updating Cygwin
+alias cygupgrade='cygsetup --quiet-mode'
