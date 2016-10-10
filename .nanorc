@@ -1,8 +1,6 @@
-# common nanorc
+# nanorc
 
-# Bash first so others are not overridden
-include ~/repos/dotfiles/nanorc.d/nano-highlight/bash.nanorc
-
+## Syntax highlighting
 # Default syntax definitions
 include /usr/share/nano/c.nanorc
 include /usr/share/nano/changelog.nanorc
@@ -13,7 +11,6 @@ include /usr/share/nano/html.nanorc
 include /usr/share/nano/java.nanorc
 include /usr/share/nano/javascript.nanorc
 include /usr/share/nano/man.nanorc
-include /usr/share/nano/nanorc.nanorc
 include /usr/share/nano/php.nanorc
 include /usr/share/nano/python.nanorc
 include /usr/share/nano/sh.nanorc
@@ -25,6 +22,8 @@ include /usr/share/nano/xml.nanorc
 # Custom syntax definitions
 include ~/repos/dotfiles/nanorc.d/*.nanorc
 include ~/repos/dotfiles/nanorc.d/nano-highlight/markdown.nanorc
+# Make sure bash is after sh so it will take priority
+include ~/repos/dotfiles/nanorc.d/bash.nanorc
 
 ## Editor options
 set autoindent
