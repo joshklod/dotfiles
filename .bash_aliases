@@ -60,9 +60,9 @@ cs() {
 
 # UART picocom shortcut
 uart() {
-	arg=$1
-	comport="/dev/ttyS$arg"
-	picocom -b 115200 $comport
+	local arg="$1"
+	local comport="/dev/ttyS$arg"
+	picocom -b 115200 "$comport"
 }
 
 ## Xterm-compatible only
