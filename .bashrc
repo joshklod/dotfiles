@@ -20,10 +20,12 @@ if [ $COLORS -ge 8 ]; then
 	# [blue]user@host [cyan]path
 	# [cyan]$
 	PS1='\n\[\e[34m\]\u@\h \[\e[36m\]\w\n\$\[\e[0m\] '
+	PS2='\[\e[36m\]>\[\e[0m\] '
 else
 	# user@host path
 	# $
 	PS1='\n\u@\h \w\n\$ '
+	PS2='> '
 fi
 
 # Set window title in xterm
