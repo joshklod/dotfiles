@@ -3,39 +3,32 @@
 # bash_profile: Sourced in login shells
 
 # source the users bashrc if it exists
-if [ -f "${HOME}/.bashrc" ] ; then
-  source "${HOME}/.bashrc"
-fi
+[ -f "$HOME/.bashrc" ] && source "$HOME/.bashrc"
 
 # Set PATH so it includes user's private bin if it exists
-if [ -d "${HOME}/bin" ] ; then
-  PATH="${HOME}/bin:${PATH}"
-fi
+[ -d "${HOME}/bin" ] && PATH="$HOME/bin:$PATH"
 
 # Set MANPATH so it includes users' private man if it exists
-if [ -d "${HOME}/man" ]; then
-  MANPATH="${HOME}/man:${MANPATH}"
-fi
+[ -d "$HOME/man" ] && MANPATH="$HOME/man:$MANPATH"
 
 # Set INFOPATH so it includes users' private info if it exists
-if [ -d "${HOME}/info" ]; then
-  INFOPATH="${HOME}/info:${INFOPATH}"
-fi
+[ -d "$HOME/info" ] && INFOPATH="$HOME/info:$INFOPATH"
 
 # Include Google Drive bin in PATH
-PATH="${HOME}/gdbash/bin:${PATH}"
+[ -d "$HOME/gdbash/bin" ] && PATH="$HOME/gdbash/bin:$PATH"
 
 # Include Google Drive man in MANPATH
-MANPATH="${HOME}/gdbash/bin/man:${MANPATH}"
+[ -d "$HOME/gdbash/bin/man" ] && MANPATH="$HOME/gdbash/bin/man:$MANPATH"
 
 
 ## Cygwin only
 
 # Include Windows Applications folder in PATH
-PATH="${PATH}:/cygdrive/c/Applications"
+[ -d "/cygdrive/c/Applications" ] && PATH="$PATH:/cygdrive/c/Applications"
 
 # Include Cygwin-specific bin in PATH
-PATH="${HOME}/gdbash/bin/cygwin:$PATH"
+[ -d "$HOME/gdbash/bin/cygwin" ] && PATH="$HOME/gdbash/bin/cygwin:$PATH"
 
 # Include Cygwin-specific man in MANPATH
-MANPATH="${HOME}/gdbash/bin/cygwin/man:$MANPATH"
+[ -d "$HOME/gdbash/bin/cygwin/man" ] && \
+MANPATH="$HOME/gdbash/bin/cygwin/man:$MANPATH"
