@@ -2,17 +2,20 @@
 #
 # bash_aliases: Sourced in interactive shells
 
-# ls preferences
+## Preferences
+# ls defaults
 alias ls='ls -C --color=auto --group-directories-first --human-readable'
-
-# ls shortcuts
-alias la='ls --almost-all'
-alias ll='ls -g --almost-all --no-group'
 
 # Interactive overwriting
 alias rm='rm -I'
 alias cp='cp -i'
 alias mv='mv -i'
+
+## Shortcuts
+# ls all
+alias la='ls --almost-all'
+# ls list
+alias ll='ls -g --almost-all --no-group'
 
 # View readonly
 alias view='nano --view'
