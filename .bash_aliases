@@ -31,6 +31,9 @@ cs() {
 	local lsargs
 	local wdstr
 	
+	# Necessary for case statement
+	shopt -s extglob
+	
 	# Parse command line parameters
 	# Args before path assumed to be for cd it exists
 	# Loop until path is found
@@ -41,7 +44,7 @@ cs() {
 			break
 		fi
 		case "$1" in
-			-L|-P|-e|-@|-L@|-Pe|-P@|-eP|-@L|-@P)
+			-+([LPe@]) )
 				cdargs="$cdargs $1"
 				;;
 			-*)
@@ -56,11 +59,13 @@ cs() {
 	# Args after path assumed to be for ls
 	lsargs="$lsargs $@"
 	
-	cd $cdargs "$path"
+	# Change directory
+	cd $cdargs "$path" || return 1
 	# Print new working directory
 	wdstr="${PWD/#$HOME/\~}:"
 	[ $COLORS -ge 8 ] && wdstr="\e[1m$wdstr\e[0m" # Use color if available
 	echo -e "$wdstr"
+	# List new directory contents
 	ls $lsargs
 }
 
