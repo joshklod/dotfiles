@@ -5,13 +5,14 @@
 # If not running interactively, don't do anything
 [[ "$-" != *i* ]] && return
 
+# Check terminal for color support
+tmp=$(tput colors) && export COLORS=$tmp
+
 # Source aliases file
 [ -f "$HOME/.bash_aliases" ] && source "$HOME/.bash_aliases"
 
 ## Set prompt
-# Check terminal for color support
-colors=$(tput colors)
-if [[ $colors ]] && [[ $colors -ge 8 ]]; then
+if [ $COLORS -ge 8 ]; then
 	# [blue]user@host [cyan]path
 	# [cyan]$
 	PS1='\n\[\e[34m\]\u@\h \[\e[36m\]\w\n\$\[\e[0m\] '

@@ -22,6 +22,9 @@ alias x='export DISPLAY=:0.0; startxwin'
 
 # cd and ls
 cs() {
+	# Declare local variables
+	local wdstr
+	
 	# Parse command line parameters
 	# Args before path assumed to be for cd it exists
 	# Loop until path is found
@@ -48,12 +51,9 @@ cs() {
 	local lsargs="$lsargs $@"
 	
 	cd $cdargs "$dir"
-	# Check terminal for color support
-	if [[ $(tput colors) ]] && [[ $(tput colors) -ge 8 ]]; then
-		local wdstr="\e[1m$PWD:\e[0m"
-	else
-		local wdstr="$PWD:"
-	fi
+	# Print new working directory
+	wdstr="${PWD/#$HOME/\~}:"
+	[ $COLORS -ge 8 ] && wdstr="\e[1m$wdstr\e[0m" # Use color if available
 	echo -e "$wdstr"
 	ls $lsargs
 }
