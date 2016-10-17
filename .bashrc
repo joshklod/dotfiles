@@ -5,6 +5,10 @@
 # If not running interactively, don't do anything
 [[ "$-" != *i* ]] && return
 
+# Shell options
+shopt -s extglob # Interpret extended glob syntax
+shopt -s dotglob # Include .* files in glob
+
 # Check terminal for color support
 tmp=$(tput colors) && export COLORS=$tmp
 
