@@ -9,6 +9,9 @@
 shopt -s extglob # Interpret extended glob syntax
 shopt -s dotglob # Include .* files in glob
 
+# Ignore duplicates in history
+HISTCONTROL=ignoredups
+
 # Check terminal for color support
 tmp=$(tput colors) && export COLORS=$tmp
 
