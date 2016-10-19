@@ -29,7 +29,7 @@ color red "\<(aclocal|aconnect|aplay|apm|apmsleep|apropos|ar|arecord|as|as86|aut
 color blue "\"(\\.|[^\"])*\""
 # Variables
 color cyan "\$[[:alnum:]_]+"
-color cyan "\${[^}]*}"
+color cyan "\${.*}"
 color cyan "\$[#*@!?$-]"
 # Single quoted strings
 color blue "'(\\.|[^\'])*'"
