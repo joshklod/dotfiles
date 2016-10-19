@@ -3,8 +3,9 @@
 # bash_aliases: Sourced in interactive shells
 
 ## Preferences
-# ls defaults
+# Command defaults
 alias ls='ls -C --color=auto --group-directories-first --human-readable'
+alias grep='grep --color=auto'
 
 # Interactive overwriting
 alias rm='rm -I'
@@ -22,6 +23,9 @@ alias view='nano --view'
 
 # Start X on default DISPLAY
 alias x='export DISPLAY=:0.0; startxwin'
+
+# Enjoy!
+alias lulz='cat /dev/urandom | hexdump -C | grep -E "[[:xdigit:]]{4}0000"'
 
 # cd and ls
 cs() {
