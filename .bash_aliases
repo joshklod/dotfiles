@@ -1,6 +1,9 @@
 #!/bin/bash
 #
 # bash_aliases: Sourced in interactive shells
+	
+# Necessary for case statement in cs()
+shopt -s extglob
 
 ## Preferences
 # Command defaults
@@ -34,9 +37,6 @@ cs() {
 	local cdargs
 	local lsargs
 	local wdstr
-	
-	# Necessary for case statement
-	shopt -s extglob
 	
 	# Parse command line parameters
 	# Args before path assumed to be for cd it exists
