@@ -14,4 +14,4 @@
 	lg = !git graph
 	lga = !git lg --all
 	lgs = !git lga --simplify-by-decoration
-
+	stl = !"git status; git lgs"
