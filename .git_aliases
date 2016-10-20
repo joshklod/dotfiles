@@ -1,0 +1,19 @@
+[alias]
+	# Not meant to be used
+	log2 = !"/dev/null; git log --decorate --abbrev-commit --date-order"
+	log3 = !"COLS=$(($(tput cols)-10)); FORMATSTR='\t%C(auto)%h %C(4)%<(15)%an%Creset%C(auto)%d%n\t  %<('$COLS',trunc)%s'; git log2 --format=\"$FORMATSTR\""
+
+	# Log shortcuts
+	llog = !git log2
+	logg = !git log2 --graph
+	loga = !git log2 --graph --all
+	lgg = !git log3
+	lg  = !git log3 --graph
+	lga = !git log3 --graph --all
+	lgs = !git log3 --graph --all --simplify-by-decoration
+
+	# Other shortcuts
+	stl = !"git status; git lgs"
+
+[pager]
+	lgs = less -FRX

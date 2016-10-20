@@ -7,15 +7,5 @@
 	whitespace = cr-at-eol,indent-with-non-tab,tabwidth=4
 [push]
 	default = simple
-[alias]
-	llog = !"/dev/null; git log --decorate --abbrev-commit --date-order"
-	logg = !git llog --graph
-	loga = !git logg --all
-	graph = !"COLS=$(($(tput cols)-10)); FORMATSTR='\t%C(auto)%h %C(4)%<(15)%an%Creset%C(auto)%d%n\t  %<('${COLS}',trunc)%s'; git logg --format=\"$FORMATSTR\""
-	lg = !git graph
-	lga = !git lg --all
-	lgs = !git lga --simplify-by-decoration
-	stl = !"git status; git lgs"
-
-[pager]
-	lgs = less -FRX
+[include]
+	path = ~/.git_aliases
