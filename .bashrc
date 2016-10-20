@@ -16,6 +16,7 @@ shopt -s dotglob # Include .* files in glob
 
 # Environment variables
 export HISTCONTROL=ignoredups # Ignore duplicates in history
+export LESS='-R'              # Interpret ANSI escape sequences
 
 ## Set prompt
 if [ $COLORS -ge 8 ]; then
