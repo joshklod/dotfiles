@@ -5,25 +5,30 @@
 # If not running interactively, don't do anything
 [[ "$-" != *i* ]] && return
 
+# Check terminal for color support
+tmp=$(tput colors) && export COLORS=$tmp
+unset tmp
+
+## Shell configuration
 # Shell options
 shopt -s extglob # Interpret extended glob syntax
 shopt -s dotglob # Include .* files in glob
 
-# Ignore duplicates in history
-HISTCONTROL=ignoredups
-
-# Check terminal for color support
-tmp=$(tput colors) && export COLORS=$tmp
-
-# Source aliases file
-[ -f "$HOME/.bash_aliases" ] && source "$HOME/.bash_aliases"
+# Environment variables
+export HISTCONTROL=ignoredups # Ignore duplicates in history
 
 ## Set prompt
 if [ $COLORS -ge 8 ]; then
+	blue='\[\e[34;22m\]'
+	cyan='\[\e[36;22m\]'
+	reset='\[\e[0m\]'
+	
 	# [blue]user@host [cyan]path
 	# [cyan]$
-	PS1='\n\[\e[34m\]\u@\h \[\e[36m\]\w\n\$\[\e[0m\] '
-	PS2='\[\e[36m\]>\[\e[0m\] '
+	PS1="\n$blue\u@\h $cyan\w\n\$ $reset"
+	PS2="$cyan> $reset"
+	
+	unset blue cyan reset
 else
 	# user@host path
 	# $
@@ -32,7 +37,11 @@ else
 fi
 
 # Set window title in xterm
-[[ "$TERM" = xterm* ]] && PS1="\[\e]0;\w\a\]$PS1"
+if [[ "$TERM" = xterm* ]]; then
+	settitle() { echo "\[\e]0;$1\a\]"; }
+	PS1="$(settitle '\w')$PS1"
+	unset settitle
+fi
 
-# Clear temporary variables
-unset tmp
+## Source aliases file
+[ -f "$HOME/.bash_aliases" ] && source "$HOME/.bash_aliases"
