@@ -3,7 +3,8 @@
 	email = joshklod@gmail.com
 [core]
 	editor = nano
-	whitespace = cr-at-eol
+	pager = less -+FX
+	whitespace = cr-at-eol,indent-with-non-tab,tabwidth=4
 [push]
 	default = simple
 [alias]
@@ -15,3 +16,6 @@
 	lga = !git lg --all
 	lgs = !git lga --simplify-by-decoration
 	stl = !"git status; git lgs"
+
+[pager]
+	lgs = less -FRX
