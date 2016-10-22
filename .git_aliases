@@ -7,13 +7,15 @@
 	llog = !git log2
 	logg = !git log2 --graph
 	loga = !git log2 --graph --all
-	lgg = !git log3
-	lg  = !git log3 --graph
-	lga = !git log3 --graph --all
-	lgs = !git log3 --graph --all --simplify-by-decoration
+	lgg  = !git log3
+	lg   = !git log3 --graph
+	lga  = !git log3 --graph --all
+	lgs  = !git log3 --graph --all --simplify-by-decoration
 
 	# Other shortcuts
-	stl = !"git status; git lgs"
+	stl   = !"git status; git lgs"
+	diffs = diff --stat
 
 [pager]
-	lgs = less -FRX
+	lgs   = less -FRX
+	diffs = less -FRX
