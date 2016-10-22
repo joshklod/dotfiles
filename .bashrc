@@ -18,6 +18,9 @@ shopt -s dotglob # Include .* files in glob
 export HISTCONTROL=ignoredups # Ignore duplicates in history
 export LESS='-R'              # Interpret ANSI escape sequences
 
+# LS Colors
+[ -f "$HOME/.dircolors" ] && eval $(dircolors "$HOME/.dircolors")
+
 ## Set prompt
 if [ $COLORS -ge 8 ]; then
 	blue='\[\e[34;22m\]'
