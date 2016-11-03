@@ -9,3 +9,6 @@
 	default = simple
 [include]
 	path = ~/.git_aliases
+[pager]
+	diff = less -S
+	log  = less -S
