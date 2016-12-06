@@ -10,7 +10,7 @@ header "^#!.*/bash[-0-9_]*"
 color magenta "\<(if|else|for|function|case|esac|in|select|until|while|do|elif|then|set|\.|done|fi)\>"
 
 ## Brackets and redirects
-color yellow "[(){}[;|<>]"
+color yellow "[(){}[;|&<>]"
 color yellow "(\]|\$\()"
 
 ## Builtins
