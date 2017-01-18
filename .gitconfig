@@ -12,3 +12,5 @@
 [pager]
 	diff = less -S
 	log  = less -S
+[log]
+	date = iso
