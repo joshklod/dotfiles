@@ -10,7 +10,7 @@
 [include]
 	path = ~/.git_aliases
 [pager]
-	diff = less -S
+	diff = less -Sx 5,9
 	log  = less -S
 [log]
 	date = iso
