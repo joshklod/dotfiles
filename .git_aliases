@@ -1,23 +1,27 @@
+[pretty]
+	twoline  = tformat:%C(auto)%h %C(4)%<(16)%an%Creset%C(auto)%d%n  %s
+	twolineg = tformat:\t%C(auto)%h %C(4)%<(16)%an%Creset%C(auto)%d%n\t  %s
+
 [alias]
 	# Not meant to be used
 	log2  = !"/dev/null; git log --decorate --abbrev-commit"
-	log3  = !"COLS=$(($(tput cols)-10)); FORMATSTR='\t%C(auto)%h %C(4)%<(15)%an%Creset%C(auto)%d%n\t  %<('$COLS',trunc)%s'; git log2 --format=\"$FORMATSTR\""
-	log2n = !git log2 --author-date-order --show-linear-break
-	log3n = !git log3 --author-date-order --show-linear-break
+	log3  = !"git log2 --pretty=twoline"
+	log3g = !"git log3 --pretty=twolineg --graph"
 
 	# Log shortcuts
-	llog = !git log2n
+	llog = !git log2 --author-date-order --show-linear-break
 	logg = !git log2 --graph
 	loga = !git log2 --graph --all
-	lgg  = !git log3n
-	lg   = !git log3 --graph
-	lga  = !git log3 --graph --all
-	lgs  = !git log3 --graph --all --simplify-by-decoration
+	lgg  = !git log3 --author-date-order --show-linear-break
+	lg   = !git log3g
+	lga  = !git log3g --all
+	lgs  = !git log3g --all --simplify-by-decoration
 
 	# Other shortcuts
 	stl   = !"git status; git lgs"
 	diffs = diff --stat
 
 [pager]
+	log3  = less -S
 	lgs   = less -FRX
 	diffs = less -FRX
