@@ -14,3 +14,5 @@
 	log  = less -S
 [log]
 	date = iso
+[diff "word"]
+	textconv = docx2txt
