@@ -7,7 +7,7 @@ shopt -s extglob
 
 ## Preferences
 # Command defaults
-alias ls='ls -C --color=auto --group-directories-first --human-readable'
+alias ls='ls -C --color=auto --dereference-command-line --group-directories-first --human-readable'
 alias grep='grep --color=auto'
 
 # Interactive overwriting
