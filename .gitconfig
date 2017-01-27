@@ -2,7 +2,7 @@
 	name = Josh Klodnicki
 	email = joshklod@gmail.com
 [core]
-	editor = nano -N
+	editor = vim
 	pager = less -+FX
 	whitespace = cr-at-eol,indent-with-non-tab,tabwidth=4
 [push]
