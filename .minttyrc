@@ -8,8 +8,12 @@ FontSmoothing=default
 FontIsBold=no
 
 Rows=40
+Columns=80
 RowSpacing=0
 Transparency=off
+
+CursorType=block
+Scrollbar=none
 
 #ForegroundColour=229,229,229
 BackgroundColour=0,0,0
