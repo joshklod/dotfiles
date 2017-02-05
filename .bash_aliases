@@ -21,11 +21,9 @@ alias la='ls --almost-all'
 # ls list
 alias ll='ls -g --almost-all --no-group'
 
-# View readonly
-alias view='nano --view'
-
 # Start X on default DISPLAY
 alias x='export DISPLAY=:0.0; startxwin'
+alias disp='export DISPLAY=:0.0'
 
 # Enjoy!
 alias lulz='cat /dev/urandom | hexdump -C | grep -E "[[:xdigit:]]{4}0000"'
