@@ -1,1 +1,9 @@
+" GUI-only settings
 set guifont=Consolas\ 10
+
+" Syntax highlighting
+let         g:solarized_contrast ="normal" " Reset to default
+colorscheme solarized                      " Reload colorscheme
+
+set listchars   =tab:⇥\ ,trail:·,extends:»,precedes:«,nbsp:␣ " Use fancy Unicode characters
+set showbreak   =↪\ "

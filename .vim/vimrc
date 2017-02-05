@@ -1,18 +1,50 @@
+" Source default vimrc
+unlet! skip_defaults_vim
+source $VIMRUNTIME/defaults.vim
+
+" Start plugin manager
 execute  pathogen#infect()
 filetype plugin indent on
 
-syntax      on
-set         background=dark
-let         g:solarized_termcolors=256
+" Syntax highlighting
+let         g:solarized_contrast   ="high"
+let         g:solarized_hitrail    =1"      Highlight trailing spaces
+let         g:solarized_termcolors =256
+syntax      enable
+set         background             =dark
 colorscheme solarized
 
+" Movement
+set scrolloff =8
+
+" Visual indicators
 set cursorline
-set colorcolumn=100
+set colorcolumn =100
+set list
+set listchars   =tab:›\ ,trail:·,extends:»,precedes:«,nbsp:· " Use simple characters
+set showbreak   =»\                                          " for terminal mode
 
-set tabstop=4
-set shiftwidth=4
+" Tab behavior
+set tabstop        =4
+set shiftwidth     =0
 set noexpandtab
+set autoindent
+set linebreak
+set breakindent
+set breakindentopt =min:20,shift:8
 
-set winwidth=80
-set winminwidth=20
+" Window behavior
+set winwidth    =80
+set winminwidth =20
+set splitbelow
+set splitright
 set nowrap
+
+" Editing behavior
+set virtualedit =block,onemore
+set mouse       =a   " Enable mouse
+set ttymouse    =sgr " Enable advanced mouse behavior
+
+" Navigation
+map <X1Mouse> <C-O>
+map <X2Mouse> <C-I>
