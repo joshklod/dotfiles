@@ -1,7 +1,7 @@
-[submodule "nanorc.d/nano-highlight"]
-	path = nanorc.d/nano-highlight
+[submodule "nano-highlight"]
+	path = submodules/nano-highlight
 	url = https://github.com/serialhex/nano-highlight.git
-[submodule "submodules/vim-pathogen"]
+[submodule "vim-pathogen"]
 	path = submodules/vim-pathogen
 	url = git://github.com/tpope/vim-pathogen.git
 [submodule "vim-colors-solarized"]
