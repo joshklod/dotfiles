@@ -1,7 +1,7 @@
 #!/bin/bash
 #
-# bash_aliases: Sourced in interactive shells
-	
+# .bash_aliases: Sourced in interactive shells
+
 # Necessary for case statement in cs()
 shopt -s extglob
 
@@ -70,18 +70,6 @@ cs() {
 	# List new directory contents
 	ls $lsargs
 }
-
-# UART picocom shortcut
-uart() {
-	local arg="$1"
-	local comport="/dev/ttyS$arg"
-	picocom -b 115200 "$comport"
-}
-
-## Xterm-compatible only
-
-
-## Cygwin only
 
 # Windows GUI for updating Cygwin
 alias cygupgrade='cygsetup --quiet-mode'
