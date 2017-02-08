@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# common bashrc: Sourced in interactive shells
+# .bashrc: Sourced in interactive shells
 
 # If not running interactively, don't do anything
 [[ "$-" != *i* ]] && return

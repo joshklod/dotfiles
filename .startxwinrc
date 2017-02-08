@@ -1,6 +1,0 @@
-#!/bin/sh
-#
-# startxwinrc
-
-#exec /usr/bin/xwin-xdg-menu
-exec sleep infinity
