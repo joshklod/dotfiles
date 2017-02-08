@@ -13,3 +13,6 @@
 
 # Set INFOPATH so it includes users' private info if it exists
 [ -d "$HOME/info" ] && INFOPATH="$HOME/info:$INFOPATH"
+
+# Include Windows Applications folder in PATH
+[ -d "/cygdrive/c/Applications" ] && PATH="$PATH:/cygdrive/c/Applications"
