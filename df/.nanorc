@@ -20,10 +20,10 @@ include /usr/share/nano/texinfo.nanorc
 include /usr/share/nano/xml.nanorc
 
 # Custom syntax definitions
-include ~/repos/dotfiles/nanorc.d/*.nanorc
-include ~/repos/dotfiles/nanorc.d/nano-highlight/markdown.nanorc
+include ~/.config/nano/*.nanorc
+include ~/.config/nano/nano-highlight/markdown.nanorc
 # Make sure bash is after sh so it will take priority
-include ~/repos/dotfiles/nanorc.d/bash.nanorc
+include ~/.config/nano/bash.nanorc
 
 ## Editor options
 set autoindent
