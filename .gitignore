@@ -1,6 +1,6 @@
 # SSH system-specific generated files
-.ssh/id*
-.ssh/known_hosts
+df/.ssh/id*
+df/.ssh/known_hosts
 
 # Vim netrw history file
-.vim/.netrwhist
+df/.vim/.netrwhist
