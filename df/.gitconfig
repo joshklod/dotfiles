@@ -16,3 +16,5 @@
 	date = iso
 [diff "word"]
 	textconv = docx2txt
+[diff]
+	algorithm = histogram
