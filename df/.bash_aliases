@@ -19,7 +19,9 @@ alias mv='mv -i'
 # ls all
 alias la='ls --almost-all'
 # ls list
-alias ll='ls -g --almost-all --no-group'
+alias ll='ls -g --no-group'
+# ls all list
+alias lal='ls -g --almost-all --no-group'
 
 # Enjoy!
 alias lulz='cat /dev/urandom | hexdump -C | grep -E "[[:xdigit:]]{4}0000"'
