@@ -15,4 +15,4 @@
 [ -d "$HOME/info" ] && INFOPATH="$HOME/info:$INFOPATH"
 
 # Include Windows Applications folder in PATH
-[ -d "/cygdrive/c/Applications" ] && PATH="$PATH:/cygdrive/c/Applications"
+[ -d "/proc/cygdrive/c/Applications" ] && PATH="$PATH:/proc/cygdrive/c/Applications"
