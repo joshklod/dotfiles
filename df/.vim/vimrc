@@ -48,3 +48,7 @@ set ttymouse    =sgr " Enable advanced mouse behavior
 " Navigation
 map <X1Mouse> <C-O>
 map <X2Mouse> <C-I>
+
+" Searching
+set ignorecase
+set smartcase  " Ignore case only when all lowercase
