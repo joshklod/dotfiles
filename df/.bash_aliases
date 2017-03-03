@@ -37,7 +37,7 @@ cs() {
 	# Parse command line parameters
 	# Args before path assumed to be for cd it exists
 	# Loop until path is found
-	while [ -z $path ]; do
+	while [ -z "$path" ]; do
 		# If no directory specified, default to $HOME
 		if [ $# -eq 0 ]; then
 			path="$HOME"
