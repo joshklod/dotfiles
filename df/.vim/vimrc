@@ -8,14 +8,15 @@ filetype plugin indent on
 
 " Syntax highlighting
 let         g:solarized_contrast   ="high"
-let         g:solarized_hitrail    =1"      Highlight trailing spaces
 let         g:solarized_termcolors =256
+let         g:solarized_menu       =0
 syntax      enable
 set         background             =dark
 colorscheme solarized
 
 " Movement
-set scrolloff =8
+set scrolloff     =8
+set nostartofline
 
 " Visual indicators
 set cursorline
