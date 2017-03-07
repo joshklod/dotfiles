@@ -23,9 +23,12 @@ alias ll='ls -g --no-group'
 # ls all list
 alias lal='ls -g --almost-all --no-group'
 
-# Start X on default DISPLAY
-alias x='export DISPLAY=:0.0; startxwin'
-alias disp='export DISPLAY=:0.0'
+# Automatically set $DISPLAY if unset
+alias auto-disp='[ -z "$DISPLAY" ] && export DISPLAY=:0.0'
+
+# Start X programs with default DISPLAY
+alias x='auto-disp; startxwin'
+alias gvim='auto-disp; gvim'
 
 # Enjoy!
 alias lulz='cat /dev/urandom | hexdump -C | grep -E "[[:xdigit:]]{4}0000"'
