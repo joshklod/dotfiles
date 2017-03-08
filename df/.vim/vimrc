@@ -42,9 +42,11 @@ set splitright
 set nowrap
 
 " Editing behavior
-set virtualedit =block,onemore
-set mouse       =a   " Enable mouse
-set ttymouse    =sgr " Enable advanced mouse behavior
+set virtualedit   =block,onemore
+set formatoptions =croqlj " Specify default line-wrapping behavior
+set textwidth     =78
+set mouse         =a      " Enable mouse
+set ttymouse      =sgr    " Enable advanced mouse behavior
 
 " Navigation
 map <X1Mouse> <C-O>
