@@ -6,6 +6,9 @@ source $VIMRUNTIME/defaults.vim
 execute  pathogen#infect()
 filetype plugin indent on
 
+" UI Preferences
+set laststatus =2 " Always show status line
+
 " Syntax highlighting
 let         g:solarized_contrast   ="high"
 let         g:solarized_termcolors =256
@@ -27,7 +30,8 @@ set showbreak   =»\                                          " for terminal mod
 
 " Tab behavior
 set tabstop        =4
-set shiftwidth     =0
+set shiftwidth     =0  " Use value of tabstop
+set softtabstop    =-1 " Use value of shiftwidth
 set noexpandtab
 set autoindent
 set linebreak
@@ -55,3 +59,9 @@ map <X2Mouse> <C-I>
 " Searching
 set ignorecase
 set smartcase  " Ignore case only when all lowercase
+
+" Macros
+" Delete trailing whitespace
+nmap <silent> ,d :s/\s\+$//<CR>
+" Change word
+nmap <silent> cc lbce
