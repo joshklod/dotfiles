@@ -52,11 +52,13 @@ log() {
 	echo -e "\n######## Program Terminated $(date) ########" >> "$logfile"
 }
 
+# Start X Server in the background silently
+alias silentx='log startxwin &'
+
 # Automatically set $DISPLAY if unset
 alias auto-disp='[ -z "$DISPLAY" ] && export DISPLAY=:0.0'
-
 # Start X programs with default DISPLAY
-alias x='auto-disp; startxwin'
+alias x='auto-disp; silentx'
 alias gvim='auto-disp; gvim'
 
 # Enjoy!
