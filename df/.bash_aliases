@@ -30,6 +30,9 @@ alias back='cd "$OLDPWD"'
 # Print $PATH in a human-readable format
 alias path='echo $PATH | tr : \\n'
 
+# Open Explorer window in current directory
+alias exp='explorer .'
+
 # Run command with output redirected to logfile
 log() {
 	# Default directory to contain logfile
@@ -103,4 +106,5 @@ cs() {
 }
 
 # Windows GUI for updating Cygwin
+alias cygupdate='curl -o "/proc/cygdrive/c/applications/cygwin-setup.exe" https://cygwin.com/setup-x86_64.exe'
 alias cygupgrade='cygsetup --quiet-mode'
