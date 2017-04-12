@@ -59,3 +59,9 @@ map <X2Mouse> <C-I>
 " Searching
 set ignorecase
 set smartcase  " Ignore case only when all lowercase
+
+" Macros
+" Delete trailing whitespace
+nmap <silent> ,d :s/\s\+$//<CR>
+" Change word
+nmap <silent> cc lbce
