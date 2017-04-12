@@ -11,6 +11,7 @@
 	path = ~/.git_aliases
 [pager]
 	diff = less -Sx 5,9
+	show = less -Sx 5,9
 	log  = less -S
 [log]
 	date = iso
