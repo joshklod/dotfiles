@@ -10,6 +10,7 @@ shopt -s extglob
 alias ls='ls -C --color=auto --dereference-command-line --group-directories-first --human-readable'
 alias grep='grep --color=auto'
 alias picocom='picocom -b 19200'
+alias bc='bc -l'
 
 # Interactive overwriting
 alias rm='rm -I'
