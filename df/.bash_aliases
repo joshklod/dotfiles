@@ -74,7 +74,7 @@ log() {
 }
 
 # Start X Server in the background silently
-alias silentx='log startxwin &'
+alias silentx='log --stderr startxwin &'
 
 # Automatically set $DISPLAY if unset
 alias auto-disp='[ -z "$DISPLAY" ] && export DISPLAY=:0.0'
