@@ -8,7 +8,7 @@
 [push]
 	default = simple
 [include]
-	path = ~/.git_aliases
+	path = ~/.config/git/aliases
 [pager]
 	diff = less -Sx 5,9
 	show = less -Sx 5,9
