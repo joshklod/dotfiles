@@ -91,15 +91,9 @@ cs() {
 			break
 		fi
 		case "$1" in
-			-+([LPe@]) )
-				cdargs="$cdargs $1"
-				;;
-			-*)
-				lsargs="$lsargs $1"
-				;;
-			*)
-				path="$1"
-				;;
+			-+([LPe@]) ) cdargs="$cdargs $1" ;;
+			-*         ) lsargs="$lsargs $1" ;;
+			*          ) path="$1"           ;;
 		esac
 		shift
 	done
