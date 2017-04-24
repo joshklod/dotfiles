@@ -19,6 +19,7 @@
 	textconv = docx2txt
 [diff]
 	algorithm = histogram
+	indentHeuristic = true
 [stash]
 	showPatch = true
 	showStat = false
