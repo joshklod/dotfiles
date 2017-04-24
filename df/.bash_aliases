@@ -36,21 +36,41 @@ alias exp='explorer .'
 
 # Run command with output redirected to logfile
 log() {
+	# Default mode
+	local mode="stdout"
 	# Default directory to contain logfile
 	[ -z "$LOGDIR" ] && local LOGDIR="$HOME/.logs"
 	# Create directory if it does not exist, or default to $HOME
 	[ ! -d "$LOGDIR" ] && { mkdir "$LOGDIR" || LOGDIR="$HOME"; }
+
+	# Process commandline args
+	while [[ $1 == -* ]]; do
+		case "$1" in
+			-o | --stdout ) mode="stdout" ;;
+			-e | --stderr ) mode="stderr" ;;
+			-b | --both   ) mode="both"   ;;
+			* )
+				echo "Unknown option '$1'" >&2
+				return 1
+				;;
+		esac
+		shift
+	done
+
 	# Name of logfile is name of command
-	local logfile="$LOGDIR/$1.log";
+	local logfile="$LOGDIR/${1##*/}.log";
 	# Append a header indicating start of new log
 	echo -e "\n\n################ LOG $(date) ###############\n" >> "$logfile"
-	# Escape command line arguments
-	local command=""
-	for arg in "$@"; do command="$command'${arg//\'/\'\"\'\"\'}' "; done
-	# Execute command with redirected output
-	eval "$command >> $logfile 2>&1"
+	# Notify user of logging
+	echo -e "Writing to $logfile...\n"
+	# Execute command depending on mode
+	case "$mode" in
+		stdout ) "$@"  >> $logfile      ;;
+		stderr ) "$@" 2>> $logfile      ;;
+		both   ) "$@"  >> $logfile 2>&1 ;;
+	esac
 	# Timestamp end of program execution
-	echo -e "\n######## Program Terminated $(date) ########" >> "$logfile"
+	echo -e "\n######## Program Terminated $(date) ########\n" >> "$logfile"
 }
 
 # Start X Server in the background silently
@@ -83,15 +103,9 @@ cs() {
 			break
 		fi
 		case "$1" in
-			-+([LPe@]) )
-				cdargs="$cdargs $1"
-				;;
-			-*)
-				lsargs="$lsargs $1"
-				;;
-			*)
-				path="$1"
-				;;
+			-+([LPe@]) ) cdargs="$cdargs $1" ;;
+			-*         ) lsargs="$lsargs $1" ;;
+			*          ) path="$1"           ;;
 		esac
 		shift
 	done
