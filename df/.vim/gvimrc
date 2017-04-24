@@ -1,6 +1,8 @@
 " GUI-only settings
-set guifont   =Consolas\ 10
-set linespace =1
+set guioptions -=m
+set guioptions -=T
+set guifont     =Consolas\ 10
+set linespace   =1
 
 " Syntax highlighting
 let         g:solarized_contrast ="normal" " Reset to default
