@@ -38,7 +38,7 @@ log() {
 	# Create directory if it does not exist, or default to $HOME
 	[ ! -d "$LOGDIR" ] && { mkdir "$LOGDIR" || LOGDIR="$HOME"; }
 	# Name of logfile is name of command
-	local logfile="$LOGDIR/$1.log";
+	local logfile="$LOGDIR/${1##*/}.log";
 	# Append a header indicating start of new log
 	echo -e "\n\n################ LOG $(date) ###############\n" >> "$logfile"
 	# Escape command line arguments
@@ -47,7 +47,7 @@ log() {
 	# Execute command with redirected output
 	eval "$command >> $logfile 2>&1"
 	# Timestamp end of program execution
-	echo -e "\n######## Program Terminated $(date) ########" >> "$logfile"
+	echo -e "\n######## Program Terminated $(date) ########\n" >> "$logfile"
 }
 
 # Enjoy!
