@@ -82,6 +82,9 @@ alias auto-disp='[ -z "$DISPLAY" ] && export DISPLAY=:0.0'
 alias x='auto-disp; silentx'
 alias gvim='auto-disp; gvim'
 
+# Executes command in a separate window
+win () { mintty "$@" & }
+
 # Enjoy!
 alias lulz='cat /dev/urandom | hexdump -C | grep -E "[[:xdigit:]]{4}0000"'
 
