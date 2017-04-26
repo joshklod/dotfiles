@@ -73,6 +73,9 @@ log() {
 # Enjoy!
 alias lulz='cat /dev/urandom | hexdump -C | grep -E "[[:xdigit:]]{4}0000"'
 
+# mkdir and cd
+mkcd() { mkdir "$1" && cd "$1"; }
+
 # cd and ls
 cs() {
 	# Declare local variables
