@@ -1,6 +1,8 @@
 " Source default vimrc
-unlet! skip_defaults_vim
-source $VIMRUNTIME/defaults.vim
+if has("patch-7.4.2111")
+	unlet! skip_defaults_vim
+	source $VIMRUNTIME/defaults.vim
+endif
 
 " Start plugin manager
 execute  pathogen#infect()
