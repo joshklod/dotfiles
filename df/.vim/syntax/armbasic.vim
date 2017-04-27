@@ -1,10 +1,197 @@
-runtime syntax/vb.vim
+" Vim syntax file
+" Language: ARMbasic
 
-syntax keyword armbasicConditional ENDIF ENDSELECT de#rp
-syntax keyword armbasicStatement   ENDSUB ENDFUNCTION
+if exists("b:current_syntax")
+	finish
+endif
 
-syntax match   armbasicPreProc     /^\s*#\w\+/
+" Debug
+syntax   clear
+" Temporary
+" runtime! syntax/vb.vim
+" syntax keyword armbasicKeyword ENDSUB ENDFUNCTION
 
-highlight link armbasicConditional vbConditional
-highlight link armbasicStatement   vbStatement
-highlight link armbasicPreProc     PreProc
+syntax case ignore
+
+" Allows me to specify 'contains=TOP+extra'
+syntax	cluster	armbasicTop		contains=TOP
+
+" Comments
+syntax	match	armbasicComment		/'.*/ contains=armbasicTodo
+
+" Strings
+" All printable ASCII chars except '"'
+syntax	match	armbasicString		/"\([\d32-\d126]\&[^"]\)*"/
+syntax	match	armbasicCharacter	/"\([\d32-\d126]\&[^"]\)"/
+
+" Operators
+syntax	keyword	armbasicMath		ABS MOD
+syntax	match	armbasicMath		"[*/+-]\|<<\|>>"
+syntax	match	armbasicBoolOp		/\<\(AND\|OR\|XOR\|NOT\)\>/
+syntax	region	armbasicParenRegion	matchgroup=armbasicParen start=/(/ end=/)/ oneline contains=TOP
+syntax	keyword	armbasicOperator	ADDRESSOF
+syntax	match	armbasicOperator	/[&+,]/
+syntax	match	armbasicAssignment	/=/
+syntax	match	armbasicAssignment	/\([*/+-]\|<<\|>>\|\<\(AND\|OR\|XOR\)\)=/
+
+" Numbers
+syntax	cluster	armbasicNumberGroup	contains=armbasicDecimal,armbasicHex,armbasicBinary,armbasicFloat
+syntax	match	armbasicDecimal		/\(\<\|-\)\d\+\>/
+syntax	match	armbasicHex		/\(\$\|&H\)\x\+\>/
+syntax	match	armbasicBinary		/%[01]\+\>/
+syntax	match	armbasicFloat		/\(\<\|-\)\d\+\.\(\d\+\>\)\?/
+
+" Goto Labels
+syntax	match	armbasicGotoLabel	/^\s*\zs\h\w*:/ nextgroup=armbasicLabelError
+syntax	match	armbasicMain		/^\s*\zsMAIN:/ nextgroup=armbasicLabelError
+syntax	match	armbasicLabelError	/.\+/ contained contains=armbasicComment
+
+" Variables
+"syntax	match	armbasicVariable	/\<\h\w*\ze\s\+\([*/+-]\|<<\|>>\|\<\(AND\|OR\|XOR\)\)\==/ nextgroup=armbasicAssignment
+
+" Subs and Functions
+syntax	cluster	armbasicSubGroup	contains=armbasicSubStart,armbasicFunStart
+syntax	match	armbasicSubStart	/^\s*\zsSUB\>/ nextgroup=armbasicSub skipwhite
+syntax	match	armbasicFunStart	/^\s*\zsFUNCTION\>/ nextgroup=armbasicFunc skipwhite
+syntax	region	armbasicSub		matchgroup=armbasicSubName start=/\<\h\w*\>:\=/ matchgroup=armbasicSubEnd end=/^\s*\zsEND \?SUB\>/ keepend contained contains=TOP,@armbasicSubGroup
+syntax	region	armbasicFunc		matchgroup=armbasicSubName start=/\<\h\w*\>:\=/ matchgroup=armbasicSubEnd end=/^\s*\zsEND \?FUNCTION\>/ keepend contained contains=TOP,@armbasicSubGroup
+
+" Statements
+syntax	keyword	armbasicStatement	GOSUB CALL EXIT GOTO RETURN __ASM__ CONST DIM
+syntax	match	armbasicStatement	/\<END\>\( \(SUB\|FUNCTION\)\)\@!/
+
+" __MAP__
+syntax	keyword	armbasicStatement	__MAP__ nextgroup=armbasicMapArgLine
+syntax	match	armbasicMapArgLine	/.\+/ contained contains=armbasicMapArgs,armbasicComment
+syntax	keyword	armbasicMapArgs		CODE CONST DATA STRING contained nextgroup=@armbasicNumberGroup skipwhite
+
+" Conditionals
+syntax	keyword	armbasicConditional	IF ELSEIF nextgroup=armbasicIfLine
+syntax	keyword	armbasicConditional	THEN ELSE
+syntax	match	armbasicIfLine		/[^']\+\ze\<THEN\>/ contained contains=@armbasicBoolGroup
+syntax	match	armbasicConditional	/\<SELECT\( CASE\)\?\>/
+syntax	match	armbasicConditional	/\<END \?\(IF\|SELECT\)\>/
+
+" Boolean Regions
+syntax	cluster	armbasicBoolGroup	contains=armbasicString,armbasicChar,armbasicMath,armbasicBoolOp,@armbasicNumberGroup,armbasicComparison,armbasicBoolParens
+syntax	match	armbasicComparison	/[<>=]\|<=\|<>\|>=/ contained
+syntax	region	armbasicBoolParens	matchgroup=armbasicParen start=/(/ end=/)/ contained oneline contains=@armbasicBoolGroup
+
+" Other Keywords
+syntax	keyword	armbasicRepeat		DO WHILE FOR LOOP UNTIL NEXT TO DOWNTO STEP
+syntax	match	armbasicCaseLabel	/\<CASE\( ELSE\)\?\>/
+syntax	keyword	armbasicKeyword		AS nextgroup=armbasicType skipwhite
+
+" PreProc
+syntax case match
+syntax	match	armbasicInclude		/^\s*\zs#include\>/ nextgroup=armbasicIncluded skipwhite
+syntax	match	armbasicIncluded	/"[^"]*"\|<[^>]*>/ contained
+
+syntax	match	armbasicDefine		/^\s*\zs#\(define\|undef\)\>/
+syntax	match	armbasicPreCondit	/^\s*\zs#\(if\|elif\|else\|endif\)\>/
+syntax	match	armbasicPreCondit	/^\s*\zs#\(ifdef\|ifndef\)\>/
+
+syntax	match	armbasicPreError	/^\s*\zs#\(warning\|error\)\>/ nextgroup=armbasicPreErrorLine
+syntax	match	armbasicPreErrorLine	/.\+/ contained contains=armbasicComment
+syntax case ignore
+
+" Types
+syntax	keyword	armbasicType		INTEGER SINGLE BYTE STRING contained
+syntax	keyword	armbasicParamType	BYREF BYVAL PARAMARRAY
+
+" Special
+syntax	keyword	armbasicDebug		DEBUGIN PRINT STOP RUN
+
+" Memory Read/Write Debug Commands
+syntax	match	armbasicDebug		/@\x*\>/
+syntax	match	armbasicDebug		/!\x*\>/ nextgroup=armbasicMemWrite skipwhite
+syntax	match	armbasicMemWrite	/\<\x\+\>/ contained
+
+" Others
+syntax	match	armbasicError		/==/
+syntax	keyword	armbasicTodo		TODO FIXME contained
+
+" TODO Add default to all commands after testing
+" Comments
+" Constants
+highlight link armbasicDecimal		armbasicNumber
+highlight link armbasicHex		armbasicNumber
+highlight link armbasicBinary		armbasicNumber
+" Identifiers
+highlight link armbasicVariable		armbasicIdentifier
+highlight link armbasicGotoLabel	armbasicFunction
+highlight link armbasicMain		armbasicUnderlined
+highlight link armbasicLabelError	armbasicError
+highlight link armbasicSubStart		armbasicType
+highlight link armbasicFunStart		armbasicType
+highlight link armbasicSub		armbasicNormal
+highlight link armbasicFunc		armbasicNormal
+highlight link armbasicSubName		armbasicFunction
+highlight link armbasicSubEnd		armbasicType
+" Statements
+highlight link armbasicMapArgLine	armbasicNormal
+highlight link armbasicMapArgs		armbasicKeyword
+" Operators
+highlight link armbasicMath		armbasicOperator
+highlight link armbasicBoolOp		armbasicOperator
+highlight link armbasicComparison	armbasicOperator
+highlight link armbasicParen		armbasicOperator
+highlight link armbasicAssignment	armbasicOperator
+" PreProc
+highlight link armbasicIncluded		armbasicString
+highlight link armbasicPreError		armbasicPreProc
+highlight link armbasicPreErrorLine	armbasicString
+" Types
+highlight link armbasicParamType	armbasicType
+" Special
+highlight link armbasicMemWrite		armbasicNumber
+" Others
+
+highlight link armbasicNormal		Normal
+
+highlight link armbasicComment		Comment
+
+highlight link armbasicConstant		Constant
+highlight link armbasicString		String
+highlight link armbasicCharacter	Character
+highlight link armbasicNumber		Number
+highlight link armbasicBoolean		Boolean
+highlight link armbasicFloat		Float
+
+highlight link armbasicIdentifier	Identifier
+highlight link armbasicFunction		Function
+
+highlight link armbasicStatement	Statement
+highlight link armbasicConditional	Conditional
+highlight link armbasicRepeat		Repeat
+highlight link armbasicCaseLabel	Label
+highlight link armbasicOperator		Operator
+highlight link armbasicKeyword		Keyword
+highlight link armbasicException	Exception
+
+highlight link armbasicPreProc		PreProc
+highlight link armbasicInclude		Include
+highlight link armbasicDefine		Define
+highlight link armbasicMacro		Macro
+highlight link armbasicPreCondit	PreCondit
+
+highlight link armbasicType		Type
+highlight link armbasicStorageClass	StorageClass
+highlight link armbasicStructure	Structure
+highlight link armbasicTypedef		Typedef
+
+highlight link armbasicSpecial		Special
+highlight link armbasicSpecialChar	SpecialChar
+highlight link armbasicTag		Tag
+highlight link armbasicDelimiter	Delimiter
+highlight link armbasicSpecialComment	SpecialComment
+highlight link armbasicDebug		Debug
+
+highlight link armbasicUnderlined	Underlined
+highlight link armbasicIgnore		Ignore
+highlight link armbasicError		Error
+highlight link armbasicTodo		Todo
+
+let b:current_syntax = "armbasic"
+
+" vim: wrap ts=8
