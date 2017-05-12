@@ -17,7 +17,7 @@
 [log]
 	date = iso
 [diff "word"]
-	textconv = docx2txt
+	textconv = ~/.config/git/scripts/word-textconv.sh
 [diff]
 	algorithm = histogram
 	indentHeuristic = true
