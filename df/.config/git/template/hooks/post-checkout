@@ -1,0 +1,5 @@
+#!/bin/sh
+#
+# .git/hooks/post-checkout
+
+~/.config/git/scripts/ctags.sh &

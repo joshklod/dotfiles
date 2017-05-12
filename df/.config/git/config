@@ -24,3 +24,5 @@
 [stash]
 	showPatch = true
 	showStat = false
+[init]
+	templateDir = ~/.config/git/template

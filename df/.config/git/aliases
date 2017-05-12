@@ -20,6 +20,7 @@
 	# Other shortcuts
 	stl   = !"git status; git lgs"
 	diffs = diff --stat
+	ctags = !~/.config/git/scripts/ctags.sh
 
 [pager]
 	log3  = less -S

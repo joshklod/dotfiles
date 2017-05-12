@@ -1,5 +1,8 @@
 # TODO Automate using git filter
 
+## Custom
+.tags
+
 ## Vim.gitignore
 # swap
 [._]*.s[a-v][a-z]
