@@ -54,6 +54,9 @@ set textwidth     =78
 set mouse         =a      " Enable mouse
 set ttymouse      =sgr    " Enable advanced mouse behavior
 
+" Tags
+set tags +=./.tags,.tags,/usr/local/lib/**/tags,/usr/local/lib/**/.tags
+
 " Navigation
 map <X1Mouse> <C-O>
 map <X2Mouse> <C-I>
