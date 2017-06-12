@@ -4,9 +4,10 @@
 [core]
 	editor = vim
 	pager = less -+FX
-	whitespace = cr-at-eol,indent-with-non-tab,tabwidth=4
+	whitespace = cr-at-eol,tabwidth=4
 [push]
 	default = simple
+	followTags = true
 [include]
 	path = ~/.config/git/aliases
 [pager]
@@ -15,11 +16,14 @@
 	log  = less -S
 [log]
 	date = iso
+	graphColors = 160,40,184,63,165,45,172,43,112,99,163,33
 [diff "word"]
-	textconv = docx2txt
+	textconv = ~/.config/git/scripts/word-textconv.sh
 [diff]
 	algorithm = histogram
 	indentHeuristic = true
 [stash]
 	showPatch = true
 	showStat = false
+[init]
+	templateDir = ~/.config/git/template
