@@ -16,6 +16,7 @@
 	log  = less -S
 [log]
 	date = iso
+	graphColors = 160,40,184,63,165,45,172,43,112,99,163,33
 [diff "word"]
 	textconv = ~/.config/git/scripts/word-textconv.sh
 [diff]
