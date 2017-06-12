@@ -48,7 +48,7 @@ set splitright
 set nowrap
 
 " Editing behavior
-set virtualedit   =block,onemore
+set virtualedit   =block
 set formatoptions =croqlj " Specify default line-wrapping behavior
 set textwidth     =78
 set mouse         =a      " Enable mouse
