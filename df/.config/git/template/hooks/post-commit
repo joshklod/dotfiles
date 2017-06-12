@@ -1,0 +1,5 @@
+#!/bin/sh
+#
+# .git/hooks/post-commit
+
+~/.config/git/scripts/ctags.sh &

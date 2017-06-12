@@ -12,7 +12,7 @@ filetype plugin indent on
 set laststatus =2 " Always show status line
 
 " Syntax highlighting
-let         g:solarized_contrast   ="high"
+set         termguicolors
 let         g:solarized_termcolors =256
 let         g:solarized_menu       =0
 syntax      enable
@@ -48,11 +48,14 @@ set splitright
 set nowrap
 
 " Editing behavior
-set virtualedit   =block,onemore
+set virtualedit   =block
 set formatoptions =croqlj " Specify default line-wrapping behavior
 set textwidth     =78
 set mouse         =a      " Enable mouse
 set ttymouse      =sgr    " Enable advanced mouse behavior
+
+" Tags
+set tags +=./.tags,.tags,/usr/local/lib/**/tags,/usr/local/lib/**/.tags
 
 " Navigation
 map <X1Mouse> <C-O>

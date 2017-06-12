@@ -5,9 +5,18 @@
 # If not running interactively, don't do anything
 [[ "$-" != *i* ]] && return
 
+## Script utilities
+
+# Shortcut to check command existence
+iscommand () { command -v "$@" >/dev/null 2>&1; }
+
 # Check terminal for color support
-tmp=$(tput colors) && export COLORS=$tmp
-unset tmp
+if iscommand tput; then
+	COLORS=$(tput colors)
+else
+	COLORS=-1
+fi
+export COLORS
 
 ## Shell configuration
 # Shell options
@@ -19,7 +28,13 @@ export HISTCONTROL=ignoredups # Ignore duplicates in history
 export LESS='-R'              # Interpret ANSI escape sequences
 
 # LS Colors
-[ -f "$HOME/.dircolors" ] && eval $(dircolors "$HOME/.dircolors")
+if [ $COLORS -ge 8 ] && iscommand dircolors; then
+	if [ -f "$HOME/.dircolors" ]; then
+		eval $(dircolors -b "$HOME/.dircolors")
+	else
+		eval $(dircolors -b)
+	fi
+fi
 
 ## Set prompt
 if [ $COLORS -ge 8 ]; then
@@ -49,3 +64,6 @@ fi
 
 ## Source aliases file
 [ -f "$HOME/.bash_aliases" ] && source "$HOME/.bash_aliases"
+
+## Cleanup
+unset iscommand
