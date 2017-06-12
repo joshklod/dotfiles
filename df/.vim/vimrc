@@ -12,7 +12,7 @@ filetype plugin indent on
 set laststatus =2 " Always show status line
 
 " Syntax highlighting
-let         g:solarized_contrast   ="high"
+set         termguicolors
 let         g:solarized_termcolors =256
 let         g:solarized_menu       =0
 syntax      enable
