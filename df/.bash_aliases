@@ -35,7 +35,7 @@ alias path='echo $PATH | tr : \\n'
 alias exp='explorer .'
 
 # Start X Server in the background silently
-alias silentx='log --stderr startxwin &'
+alias silentx='log --stderr startxwin'
 
 # Automatically set $DISPLAY if unset
 alias auto-disp='[ -z "$DISPLAY" ] && export DISPLAY=:0.0'

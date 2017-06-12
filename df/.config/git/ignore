@@ -25,6 +25,9 @@ Thumbs.db
 ehthumbs.db
 ehthumbs_vista.db
 
+# Dump file
+*.stackdump
+
 # Folder config file
 Desktop.ini
 
@@ -56,4 +59,4 @@ $RECYCLE.BIN/
 ~$*.ppt*
 
 # Visio autosave temporary files
-*.~vsdx
+*.~vsd*
