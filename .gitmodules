@@ -1,12 +1,24 @@
 [submodule "nano-highlight"]
 	path = submodules/nano-highlight
 	url = https://github.com/serialhex/nano-highlight.git
+	update = merge
+	branch = master
+	shallow = true
 [submodule "vim-pathogen"]
 	path = submodules/vim-pathogen
 	url = git://github.com/tpope/vim-pathogen.git
+	update = merge
+	branch = master
+	shallow = true
 [submodule "vim-colors-solarized"]
 	path = submodules/vim-colors-solarized
 	url = git://github.com/joshklod/vim-colors-solarized.git
+	update = merge
+	branch = dev
+	shallow = true
 [submodule "gitignore"]
 	path = submodules/gitignore
 	url = git://github.com/github/gitignore.git
+	update = merge
+	branch = master
+	shallow = true
