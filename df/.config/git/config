@@ -8,6 +8,7 @@
 [push]
 	default = simple
 	followTags = true
+	recurseSubmodules = check
 [include]
 	path = ~/.config/git/aliases
 [pager]
@@ -22,8 +23,11 @@
 [diff]
 	algorithm = histogram
 	indentHeuristic = true
+	submodule = log
 [stash]
 	showPatch = true
 	showStat = false
 [init]
 	templateDir = ~/.config/git/template
+[submodule]
+	fetchJobs = 0 # Detect reasonable default
