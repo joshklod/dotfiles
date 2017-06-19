@@ -1,7 +1,13 @@
-let s:undo_ftplugin = "setl ts< et<"
+let s:undo_ftplugin = "setl tw< cc< ts< et< fo< isk<"
 
-setl tabstop   =4
-setl expandtab
+setlocal textwidth      =78
+setlocal colorcolumn    =80
+
+setlocal tabstop        =4
+setlocal expandtab
+
+setlocal formatoptions +=t
+setlocal iskeyword      =@,48-57,'
 
 if exists('b:undo_ftplugin')
 	let b:undo_ftplugin .= '|'.s:undo_ftplugin
