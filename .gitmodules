@@ -12,7 +12,7 @@
 	path = submodules/vim-colors-solarized
 	url = git://github.com/joshklod/vim-colors-solarized.git
 	update = merge
-	branch = dev
+	branch = dev/tgc
 [submodule "gitignore"]
 	path = submodules/gitignore
 	url = git://github.com/github/gitignore.git
