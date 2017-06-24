@@ -4,7 +4,7 @@
 
 [alias]
 	# Not meant to be used
-	log2  = !"/dev/null; git log --decorate --abbrev-commit"
+	log2  = !":; git log --decorate --abbrev-commit"
 	log3  = !"git log2 --pretty=twoline"
 	log3g = !"git log3 --pretty=twolineg --graph"
 
