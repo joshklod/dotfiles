@@ -1,23 +1,34 @@
 " Source default vimrc
-if has("patch-7.4.2111")
+if filereadable($VIMRUNTIME . "/defaults.vim")
 	unlet! skip_defaults_vim
 	source $VIMRUNTIME/defaults.vim
 endif
 
-" Start plugin manager
-execute  pathogen#infect()
-filetype plugin indent on
+" Plugins
+if has("eval")
+	" Start plugin manager
+	execute pathogen#infect()
+endif
+if has("autocmd")
+	filetype plugin indent on
+endif
 
 " UI Preferences
 set laststatus =2 " Always show status line
 
 " Syntax highlighting
-set         termguicolors
-let         g:solarized_termcolors =256
-let         g:solarized_menu       =0
-syntax      enable
-set         background             =dark
-colorscheme solarized
+if has("termguicolors")
+	set termguicolors
+endif
+set background =dark
+if g:loaded_pathogen == 1
+	let         g:solarized_termcolors =256
+	let         g:solarized_menu       =0
+	colorscheme solarized
+endif
+if has("syntax")
+	syntax enable
+endif
 
 " Movement
 set scrolloff     =8
@@ -27,8 +38,19 @@ set nostartofline
 set cursorline
 set colorcolumn =100
 set list
-set listchars   =tab:›\ ,trail:·,extends:»,precedes:«,nbsp:· " Use simple characters
-set showbreak   =»\                                          " for terminal mode
+set listchars   =tab:>\ ,trail:~,extends:>,precedes:<,nbsp:\ "
+set showbreak   =>\ "
+if has("multi_byte")
+	" Use let instead of set so we don't have to include unicode chars literally
+	let &listchars = "tab:\u203a ,trail:\u00b7,extends:\u00bb,precedes:\u00ab,nbsp:\u00b7"
+	let &showbreak = "\u00bb "
+endif
+
+" Spell checking
+if has("syntax")
+	set spelllang =en_us
+	set spellfile =~/.vim/spell/personal.utf-8.add
+endif
 
 " Tab behavior
 set tabstop        =4
@@ -37,8 +59,10 @@ set softtabstop    =-1 " Use value of shiftwidth
 set noexpandtab
 set autoindent
 set linebreak
-set breakindent
-set breakindentopt =min:20,shift:8
+if has("linebreak")
+	set breakindent
+	set breakindentopt =min:20,shift:8
+endif
 
 " Window behavior
 set winwidth    =80
@@ -51,8 +75,12 @@ set nowrap
 set virtualedit   =block
 set formatoptions =croqlj " Specify default line-wrapping behavior
 set textwidth     =78
-set mouse         =a      " Enable mouse
-set ttymouse      =sgr    " Enable advanced mouse behavior
+if has("mouse")
+	set mouse =a " Enable mouse
+	if has("mouse_sgr")
+		set ttymouse =sgr " Enable advanced mouse behavior
+	endif
+endif
 
 " Tags
 set tags +=./.tags,.tags,/usr/local/lib/**/tags,/usr/local/lib/**/.tags

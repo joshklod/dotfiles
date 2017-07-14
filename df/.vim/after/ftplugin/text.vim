@@ -12,6 +12,10 @@ setlocal colorcolumn    =80
 setlocal formatoptions +=t
 setlocal iskeyword      =@,48-57,'
 
+if has("syntax")
+	setlocal spell
+endif
+
 if exists('b:undo_ftplugin')
 	let b:undo_ftplugin .= '|'.s:undo_ftplugin
 else

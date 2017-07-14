@@ -31,3 +31,9 @@
 	templateDir = ~/.config/git/template
 [submodule]
 	fetchJobs = 0 # Detect reasonable default
+[rerere]
+	enabled = true
+[merge]
+	tool = vimdiff
+[mergetool]
+	keepBackup = false
