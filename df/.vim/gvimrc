@@ -4,10 +4,6 @@ set guioptions -=T
 set guifont     =Consolas\ 10
 set linespace   =1
 
-" Syntax highlighting
-let         g:solarized_contrast ="normal" " Reset to default
-colorscheme solarized                      " Reload colorscheme
-
 " Visual indicators
 set listchars =tab:⇥\ ,trail:·,extends:»,precedes:«,nbsp:␣ " Use fancy Unicode characters
 set showbreak =↪\ "
