@@ -1,6 +1,6 @@
 [pretty]
-	twoline  = tformat:%C(auto)%h %C(4)%<(16)%an%Creset%C(auto)%d%n  %s
-	twolineg = tformat:\t%C(auto)%h %C(4)%<(16)%an%Creset%C(auto)%d%n\t  %s
+	twoline  = tformat:%C(auto)%h %C(auto,blue)%<(16)%an%C(auto)%d%n  %s
+	twolineg = tformat:\t%C(auto)%h %C(auto,blue)%<(16)%an%C(auto)%d%n\t  %s
 
 [alias]
 	# Not meant to be used
