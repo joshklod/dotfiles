@@ -41,8 +41,9 @@ set list
 set listchars   =tab:>\ ,trail:~,extends:>,precedes:<,nbsp:\ "
 set showbreak   =>\ "
 if has("multi_byte")
-	set listchars =tab:›\ ,trail:·,extends:»,precedes:«,nbsp:· " Use simple characters
-	set showbreak =»\                                          " for terminal mode
+	" Use let instead of set so we don't have to include unicode chars literally
+	let &listchars = "tab:\u203a ,trail:\u00b7,extends:\u00bb,precedes:\u00ab,nbsp:\u00b7"
+	let &showbreak = "\u00bb "
 endif
 
 " Spell checking
