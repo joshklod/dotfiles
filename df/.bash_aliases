@@ -24,6 +24,11 @@ alias la='ls --almost-all'
 alias ll='ls -g --no-group'
 # ls all list
 alias lal='ls -g --almost-all --no-group'
+# ls long list
+alias lll='ls -l'
+# ls all long list
+alias lall='ls -l --all'
+alias llal='lall'
 
 # Go back to previous directory
 alias back='cd "$OLDPWD"'
