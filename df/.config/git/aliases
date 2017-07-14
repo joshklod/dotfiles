@@ -18,7 +18,7 @@
 	lgs  = !git log3g --all --simplify-by-decoration
 
 	# Other shortcuts
-	stl   = !"git status; git lgs"
+	stl   = !"git status && git lgs"
 	diffs = diff --stat
 	ctags = !~/.config/git/scripts/ctags.sh
 	cptree = !~/.config/git/scripts/cptree.sh
