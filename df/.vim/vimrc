@@ -49,7 +49,7 @@ endif
 " Spell checking
 if has("syntax")
 	set spelllang =en_us
-	set spellfile =~/.vim/spell/personal.utf-8.add
+	set spellfile =~/.vim/spell/local.utf-8.add,~/.vim/spell/personal.utf-8.add
 endif
 
 " Tab behavior
