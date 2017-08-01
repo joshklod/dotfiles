@@ -65,20 +65,21 @@ syntax	keyword	armbasicStatement	__MAP__ nextgroup=armbasicMapArgLine
 syntax	match	armbasicMapArgLine	/.\+/ contained contains=armbasicMapArgs,armbasicComment
 syntax	keyword	armbasicMapArgs		CODE CONST DATA STRING contained nextgroup=@armbasicNumberGroup skipwhite
 
-" Conditionals
-syntax	keyword	armbasicConditional	IF ELSEIF nextgroup=armbasicIfLine
+" Conditionals and loops
+syntax	keyword	armbasicConditional	IF ELSEIF nextgroup=armbasicBoolLine
 syntax	keyword	armbasicConditional	THEN ELSE
-syntax	match	armbasicIfLine		/[^']\+\ze\<THEN\>/ contained contains=@armbasicBoolGroup
 syntax	match	armbasicConditional	/\<SELECT\( CASE\)\?\>/
 syntax	match	armbasicConditional	/\<END \?\(IF\|SELECT\)\>/
+syntax	keyword	armbasicRepeat		DO FOR LOOP NEXT TO DOWNTO STEP
+syntax	keyword	armbasicRepeat		WHILE UNTIL nextgroup=armbasicBoolLine
 
 " Boolean Regions
+syntax	match	armbasicBoolLine	/[^']\{-}\ze\%(\<THEN\>\|'\|$\)/ contained contains=@armbasicBoolGroup
 syntax	cluster	armbasicBoolGroup	contains=armbasicString,armbasicChar,armbasicMath,armbasicBoolOp,@armbasicNumberGroup,armbasicComparison,armbasicBoolParens
 syntax	match	armbasicComparison	/[<>=]\|<=\|<>\|>=/ contained
 syntax	region	armbasicBoolParens	matchgroup=armbasicParen start=/(/ end=/)/ contained oneline contains=@armbasicBoolGroup
 
 " Other Keywords
-syntax	keyword	armbasicRepeat		DO WHILE FOR LOOP UNTIL NEXT TO DOWNTO STEP
 syntax	match	armbasicCaseLabel	/\<CASE\( ELSE\)\?\>/
 syntax	keyword	armbasicKeyword		AS nextgroup=armbasicType skipwhite
 
