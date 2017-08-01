@@ -4,6 +4,13 @@ if filereadable($VIMRUNTIME . "/defaults.vim")
 	source $VIMRUNTIME/defaults.vim
 endif
 
+" Handy shortcut
+if has("win32")
+	let s:homertp = $HOME . "/vimfiles"
+else
+	let s:homertp = $HOME . "/.vim"
+endif
+
 " Plugins
 if has("eval")
 	" Start plugin manager
@@ -49,7 +56,8 @@ endif
 " Spell checking
 if has("syntax")
 	set spelllang =en_us
-	set spellfile =~/.vim/spell/personal.utf-8.add
+	let &spellfile = s:homertp . "/spell/local.utf-8.add,"
+	             \ . s:homertp . "/spell/personal.utf-8.add"
 endif
 
 " Tab behavior

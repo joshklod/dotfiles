@@ -7,20 +7,30 @@ endif
 
 syntax case ignore
 
-syntax	match	idevFunction	/\<\h\w*\ze\s*(/
+syntax	keyword	idevFunction	SETUP INT RESET LIB STYLE DEL PAGE POSN TEXT DRAW IMG KEY LOOP SHOW HIDE LOAD VAR STRUCT FILE CALC RUN FUNC IF EXIT WAIT contained
+syntax	keyword	idevPreProc	FPROG FEND
+syntax	keyword	idevInclude	INC
 
 syntax	match	idevString	/"[^"]*"/ contains=idevHexChar
 syntax	match	idevNumber	/-\=\<\d\+\>\|\\\\\x\+/
 syntax	match	idevHexChar	/\\\\\x\{2}/ contained
 
-syntax	match	idevOperator	/[()[\]{};=<>?:,]\|\<\(AND\|OR\)\>/
+syntax	match	idevOperator	/[(){};=>?:,]/
+syntax	match	idevBoolOp	/[=<>+\-*/%&|^!~#]\|\<\(AND\|OR\)\>/
+syntax	match	idevAnonFunc	/[[\]]/
+syntax	match	idevRefresh	/;;/
+
+syntax	match	idevFuncZone	/\(^\|[[]\|;;\=\)\s*\ze\h\w*\s*(/ transparent nextgroup=idevFunction
 
 syntax	match	idevComment	"//.*" contains=idevTodo
 syntax	region	idevComment	start="/\*" end="\*/" contains=idevTodo
 syntax	keyword	idevTodo	TODO
 
 
-highlight default link idevHexChar		idevSpecial
+highlight default link idevHexChar		idevSpecialChar
+highlight default link idevBoolOp		idevOperator
+highlight default link idevAnonFunc		idevDelimiter
+highlight default link idevRefresh		idevSpecial
 
 highlight default link idevNormal		Normal
 
