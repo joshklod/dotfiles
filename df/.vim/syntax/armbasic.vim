@@ -16,9 +16,6 @@ syntax case ignore
 " Allows me to specify 'contains=TOP+extra'
 syntax	cluster	armbasicTop		contains=TOP
 
-" Comments
-syntax	match	armbasicComment		/'.*/ contains=armbasicTodo
-
 " Strings
 " All printable ASCII chars except '"'
 syntax	match	armbasicString		/"\([\d32-\d126]\&[^"]\)*"/
@@ -111,6 +108,11 @@ syntax	match	armbasicMemWrite	/\<\x\+\>/ contained
 " Others
 syntax	match	armbasicError		/==/
 syntax	keyword	armbasicTodo		TODO FIXME contained
+
+" Comments
+syntax	match	armbasicComment		/'.*/ contains=armbasicTodo
+syntax	match	armbasicComment		"//.*" contains=armbasicTodo
+syntax	region	armbasicComment		start="/\*" end="\*/" contains=armbasicTodo
 
 " TODO Add default to all commands after testing
 " Comments
