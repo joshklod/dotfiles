@@ -82,14 +82,14 @@ syntax	keyword	armbasicKeyword		AS nextgroup=armbasicType skipwhite
 
 " PreProc
 syntax case match
-syntax	match	armbasicInclude		/^\s*\zs#include\>/ nextgroup=armbasicIncluded skipwhite
+syntax	match	armbasicInclude		/^\s*\zs#\s*include\>/ nextgroup=armbasicIncluded skipwhite
 syntax	match	armbasicIncluded	/"[^"]*"\|<[^>]*>/ contained
 
-syntax	match	armbasicDefine		/^\s*\zs#\(define\|undef\)\>/
-syntax	match	armbasicPreCondit	/^\s*\zs#\(if\|elif\|else\|endif\)\>/
-syntax	match	armbasicPreCondit	/^\s*\zs#\(ifdef\|ifndef\)\>/
+syntax	match	armbasicDefine		/^\s*\zs#\s*\(define\|undef\)\>/
+syntax	match	armbasicPreCondit	/^\s*\zs#\s*\(if\|elif\|else\|endif\)\>/
+syntax	match	armbasicPreCondit	/^\s*\zs#\s*\(ifdef\|ifndef\)\>/
 
-syntax	match	armbasicPreError	/^\s*\zs#\(warning\|error\)\>/ nextgroup=armbasicPreErrorLine
+syntax	match	armbasicPreError	/^\s*\zs#\s*\(warning\|error\)\>/ nextgroup=armbasicPreErrorLine
 syntax	match	armbasicPreErrorLine	/.\+/ contained contains=armbasicComment
 syntax case ignore
 
