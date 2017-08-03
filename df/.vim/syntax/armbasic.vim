@@ -86,7 +86,12 @@ syntax	match	armbasicInclude		/^\s*\zs#\s*include\>/ nextgroup=armbasicIncluded 
 syntax	match	armbasicIncluded	/"[^"]*"\|<[^>]*>/ contained
 
 syntax	match	armbasicDefine		/^\s*\zs#\s*\(define\|undef\)\>/
-syntax	match	armbasicPreCondit	/^\s*\zs#\s*\(if\|elif\|else\|endif\)\>/
+
+syntax	match	armbasicPreCondit	/^\s*\zs#\s*\(if\|elif\)\>/ nextgroup=armbasicPreIfLine skipwhite
+syntax	match	armbasicPreIfLine	/.\+/ contained contains=@armbasicTop,armbasicDefined
+syntax	keyword	armbasicDefined		defined contained
+
+syntax	match	armbasicPreCondit	/^\s*\zs#\s*\(else\|endif\)\>/
 syntax	match	armbasicPreCondit	/^\s*\zs#\s*\(ifdef\|ifndef\)\>/
 
 syntax	match	armbasicPreError	/^\s*\zs#\s*\(warning\|error\)\>/ nextgroup=armbasicPreErrorLine
@@ -142,6 +147,7 @@ highlight link armbasicParen		armbasicOperator
 highlight link armbasicAssignment	armbasicOperator
 " PreProc
 highlight link armbasicIncluded		armbasicString
+highlight link armbasicDefined		armbasicPreProc
 highlight link armbasicPreError		armbasicPreProc
 highlight link armbasicPreErrorLine	armbasicString
 " Types
