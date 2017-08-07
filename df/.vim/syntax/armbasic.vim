@@ -16,9 +16,6 @@ syntax case ignore
 " Allows me to specify 'contains=TOP+extra'
 syntax	cluster	armbasicTop		contains=TOP
 
-" Comments
-syntax	match	armbasicComment		/'.*/ contains=armbasicTodo
-
 " Strings
 " All printable ASCII chars except '"'
 syntax	match	armbasicString		/"\([\d32-\d126]\&[^"]\)*"/
@@ -85,14 +82,19 @@ syntax	keyword	armbasicKeyword		AS nextgroup=armbasicType skipwhite
 
 " PreProc
 syntax case match
-syntax	match	armbasicInclude		/^\s*\zs#include\>/ nextgroup=armbasicIncluded skipwhite
+syntax	match	armbasicInclude		/^\s*\zs#\s*include\>/ nextgroup=armbasicIncluded skipwhite
 syntax	match	armbasicIncluded	/"[^"]*"\|<[^>]*>/ contained
 
-syntax	match	armbasicDefine		/^\s*\zs#\(define\|undef\)\>/
-syntax	match	armbasicPreCondit	/^\s*\zs#\(if\|elif\|else\|endif\)\>/
-syntax	match	armbasicPreCondit	/^\s*\zs#\(ifdef\|ifndef\)\>/
+syntax	match	armbasicDefine		/^\s*\zs#\s*\(define\|undef\)\>/
 
-syntax	match	armbasicPreError	/^\s*\zs#\(warning\|error\)\>/ nextgroup=armbasicPreErrorLine
+syntax	match	armbasicPreCondit	/^\s*\zs#\s*\(if\|elif\)\>/ nextgroup=armbasicPreIfLine skipwhite
+syntax	match	armbasicPreIfLine	/.\+/ contained contains=@armbasicTop,armbasicDefined
+syntax	keyword	armbasicDefined		defined contained
+
+syntax	match	armbasicPreCondit	/^\s*\zs#\s*\(else\|endif\)\>/
+syntax	match	armbasicPreCondit	/^\s*\zs#\s*\(ifdef\|ifndef\)\>/
+
+syntax	match	armbasicPreError	/^\s*\zs#\s*\(warning\|error\)\>/ nextgroup=armbasicPreErrorLine
 syntax	match	armbasicPreErrorLine	/.\+/ contained contains=armbasicComment
 syntax case ignore
 
@@ -111,6 +113,11 @@ syntax	match	armbasicMemWrite	/\<\x\+\>/ contained
 " Others
 syntax	match	armbasicError		/==/
 syntax	keyword	armbasicTodo		TODO FIXME contained
+
+" Comments
+syntax	match	armbasicComment		/'.*/ contains=armbasicTodo
+syntax	match	armbasicComment		"//.*" contains=armbasicTodo
+syntax	region	armbasicComment		start="/\*" end="\*/" contains=armbasicTodo
 
 " TODO Add default to all commands after testing
 " Comments
@@ -140,6 +147,7 @@ highlight link armbasicParen		armbasicOperator
 highlight link armbasicAssignment	armbasicOperator
 " PreProc
 highlight link armbasicIncluded		armbasicString
+highlight link armbasicDefined		armbasicPreProc
 highlight link armbasicPreError		armbasicPreProc
 highlight link armbasicPreErrorLine	armbasicString
 " Types

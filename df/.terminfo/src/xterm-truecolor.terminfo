@@ -1,0 +1,4 @@
+xterm-truecolor|mintty|hterm|An Xterm-Compatible Terminal Supporting True Color,
+	use=xterm-256color,
+# Custom entry for true color
+	truecolor,
