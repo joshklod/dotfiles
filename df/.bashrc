@@ -12,7 +12,7 @@ iscommand () { command -v "$@" >/dev/null 2>&1; }
 
 # Check terminal for color support
 if iscommand tput; then
-	COLORS=$(tput colors)
+	COLORS=$(tput colors) || COLORS=-1
 else
 	COLORS=-1
 fi
