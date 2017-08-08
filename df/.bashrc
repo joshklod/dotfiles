@@ -57,7 +57,7 @@ else
 fi
 
 # Set window title in xterm
-if [[ "$TERM" = xterm* ]]; then
+if [[ "$TERM" == @(xterm*|mintty) ]]; then
 	settitle() { echo "\[\e]0;$1\a\]"; }
 	PS1="$(settitle '\w')$PS1"
 	unset settitle
