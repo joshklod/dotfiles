@@ -25,6 +25,7 @@ shopt -s extglob # Interpret extended glob syntax
 shopt -s dotglob # Include .* files in glob
 
 # Environment variables
+export EDITOR=/usr/bin/vim    # Use Vim as default editor
 export HISTCONTROL=ignoredups # Ignore duplicates in history
 export LESS='-R'              # Interpret ANSI escape sequences
 
