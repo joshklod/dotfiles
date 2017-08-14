@@ -37,7 +37,7 @@ alias back='cd "$OLDPWD"'
 alias path='echo $PATH | tr : \\n'
 
 # Enjoy!
-alias lulz='cat /dev/urandom | hexdump -C | grep -E "[[:xdigit:]]{4}0000"'
+alias lulz='cat /dev/urandom | hexdump -C | GREP_COLORS="mt=1;32" grep -E "[[:xdigit:]]{4}0000"'
 
 # mkdir and cd
 mkcd() { mkdir "$1" && cd "$1"; }
