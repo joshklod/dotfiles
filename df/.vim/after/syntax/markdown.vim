@@ -1,4 +1,4 @@
 " Vim syntax file
 " Language: Markdown
 
-syn region markdownAutomaticLink matchgroup=markdownUrlDelimiter start="<\%(\w\+:\|[[:alnum:]_.+-]\+@\)\@=" end=">" keepend oneline
+syn region markdownAutomaticLink matchgroup=markdownUrlDelimiter start="<\%(\w\+:\|[^"(),:;<>@[\\\]]\+@[[:alnum:]\-.]\{-}>\)\@=" end=">" keepend oneline
