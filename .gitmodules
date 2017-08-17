@@ -11,3 +11,6 @@
 [submodule "gitignore"]
 	path = submodules/gitignore
 	url = git://github.com/github/gitignore.git
+[submodule "vim-eunuch"]
+	path = submodules/vim-eunuch
+	url = git://github.com/tpope/vim-eunuch.git
