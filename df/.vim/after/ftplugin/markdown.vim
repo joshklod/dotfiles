@@ -11,6 +11,7 @@ setlocal iskeyword      =@,48-57,'
 
 if has("syntax")
 	setlocal spell
+	let s:undo_ftplugin .= ' spell<'
 endif
 
 if exists('b:undo_ftplugin')
