@@ -4,15 +4,19 @@ if filereadable($VIMRUNTIME . "/defaults.vim")
 	source $VIMRUNTIME/defaults.vim
 endif
 
-" Handy shortcut
-if has("win32")
-	let s:homertp = $HOME . "/vimfiles"
-else
-	let s:homertp = $HOME . "/.vim"
+if has("eval")
+	" Check whether file exists in 'runtimepath'
+	function s:ExistsRTP(path)
+		return !empty(globpath(&rtp, a:path))
+	endfunction
+
+	" Handy shortcut for name of runtimepath directory in $HOME on current
+	" system (because Windows just has to be different...)
+	let s:homertp = $HOME . (has("win32") ? "/vimfiles" : "/.vim")
 endif
 
 " Plugins
-if has("eval")
+if s:ExistsRTP("autoload/pathogen.vim")
 	" Start plugin manager
 	execute pathogen#infect()
 endif
@@ -20,23 +24,23 @@ if has("autocmd")
 	filetype plugin indent on
 endif
 
-" UI Preferences
-set laststatus =2 " Always show status line
-
 " Syntax highlighting
-if has("termguicolors") && $COLORTERM == "truecolor"
-	set termguicolors
-	let &t_8f         ="\<Esc>[38;2;%lu;%lu;%lum"
-	let &t_8b         ="\<Esc>[48;2;%lu;%lu;%lum"
-endif
-set background =dark
-if g:loaded_pathogen == 1
-	let         g:solarized_termcolors =256
-	let         g:solarized_menu       =0
-	colorscheme solarized
-endif
 if has("syntax")
+	if has("termguicolors") && $COLORTERM == "truecolor"
+		set termguicolors
+		let &t_8f         ="\<Esc>[38;2;%lu;%lu;%lum"
+		let &t_8b         ="\<Esc>[48;2;%lu;%lu;%lum"
+	endif
+	set background =dark
 	syntax enable
+	if s:ExistsRTP("colors/solarized.vim")
+		let g:solarized_termcolors =256
+		let g:solarized_menu       =0
+		colorscheme solarized
+	endif
+	if s:ExistsRTP("autoload/togglebg.vim")
+		call togglebg#map("")
+	endif
 endif
 
 " Movement
@@ -44,15 +48,18 @@ set scrolloff     =8
 set nostartofline
 
 " Visual indicators
-set cursorline
-set colorcolumn =100
 set list
-set listchars   =tab:>\ ,trail:~,extends:>,precedes:<,nbsp:\ "
-set showbreak   =>\ "
+" Set this first, then reset it in case we don't have +eval
+set listchars =tab:>\ ,trail:~,extends:>,precedes:<,nbsp:\ "
 if has("multi_byte")
-	" Use let instead of set so we don't have to include unicode chars literally
-	let &listchars = "tab:\u203a ,trail:\u00b7,extends:\u00bb,precedes:\u00ab,nbsp:\u00b7"
-	let &showbreak = "\u00bb "
+	" Use let instead of set so we don't have to include unicode chars
+	" literally
+	let &listchars = "tab:\u203a ,trail:\u00b7,extends:\u00bb,"
+	             \ . "precedes:\u00ab,nbsp:\u00b7"
+endif
+if has("syntax")
+	set cursorline
+	set colorcolumn =+2 " Always 2 columns right of textwidth
 endif
 
 " Spell checking
@@ -63,26 +70,42 @@ if has("syntax")
 endif
 
 " Tab behavior
-set tabstop        =4
-set shiftwidth     =0  " Use value of tabstop
-set softtabstop    =-1 " Use value of shiftwidth
+set tabstop     =4
+set shiftwidth  =0  " Use value of tabstop
+set softtabstop =-1 " Use value of shiftwidth
 set noexpandtab
 set autoindent
-set linebreak
+
+" Line wrapping
+set nowrap
 if has("linebreak")
-	set breakindent
-	set breakindentopt =min:20,shift:8
+	set linebreak
+	if exists("&breakindent")
+		set breakindent
+		set breakindentopt =min:20,shift:8
+	endif
+	if has("multi_byte")
+		let &showbreak = "\u00bb "
+	else
+		set showbreak =>\ "
+	endif
 endif
 
 " Window behavior
-set winwidth    =80
-set winminwidth =20
-set splitbelow
-set splitright
-set nowrap
+if has("windows")
+	set splitbelow
+	set laststatus =2 " Always show status line
+	if has("vertsplit")
+		set splitright
+		set winwidth    =80
+		set winminwidth =20
+	endif
+endif
 
 " Editing behavior
-set virtualedit   =block
+if has("virtualedit")
+	set virtualedit =block
+endif
 set formatoptions =croqlj " Specify default line-wrapping behavior
 set textwidth     =78
 if has("mouse")
