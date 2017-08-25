@@ -23,9 +23,9 @@ map <buffer> ][ /\c^\(END \=SUB\>\<Bar>\h\w*:\)<CR>
 map <buffer> [] ?\c^\(END \=SUB\>\<Bar>\h\w*:\)<CR>
 
 let s:undo_ftplugin =
-		\ "let s:cpo_save=&cpo | set cpo&vim" .
+		\ "let b:cpo_save=&cpo | set cpo&vim" .
 		\ "|" . s:undo_ftplugin .
-		\ "|let &cpo=s:cpo_save | unlet s:cpo_save"
+		\ "|let &cpo=b:cpo_save | unlet b:cpo_save"
 if exists('b:undo_ftplugin')
 	let b:undo_ftplugin .= '|'.s:undo_ftplugin
 else
