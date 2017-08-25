@@ -4,6 +4,13 @@ if filereadable($VIMRUNTIME . "/defaults.vim")
 	source $VIMRUNTIME/defaults.vim
 endif
 
+if has("eval")
+	" Check whether file exists in 'runtimepath'
+	function s:ExistsRTP(path)
+		return !empty(globpath(&rtp, a:path))
+	endfunction
+endif
+
 " Handy shortcut
 if has("win32")
 	let s:homertp = $HOME . "/vimfiles"
@@ -12,7 +19,7 @@ else
 endif
 
 " Plugins
-if has("eval")
+if s:ExistsRTP("autoload/pathogen.vim")
 	" Start plugin manager
 	execute pathogen#infect()
 endif
@@ -30,7 +37,7 @@ if has("termguicolors") && $COLORTERM == "truecolor"
 	let &t_8b         ="\<Esc>[48;2;%lu;%lu;%lum"
 endif
 set background =dark
-if g:loaded_pathogen == 1
+if s:ExistsRTP("colors/solarized.vim")
 	let         g:solarized_termcolors =256
 	let         g:solarized_menu       =0
 	colorscheme solarized
