@@ -38,6 +38,9 @@ if has("syntax")
 		let g:solarized_menu       =0
 		colorscheme solarized
 	endif
+	if s:ExistsRTP("autoload/togglebg.vim")
+		call togglebg#map("")
+	endif
 endif
 
 " Movement
