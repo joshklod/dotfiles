@@ -59,7 +59,7 @@ if has("multi_byte")
 endif
 if has("syntax")
 	set cursorline
-	set colorcolumn =100
+	set colorcolumn =+2 " Always 2 columns right of textwidth
 endif
 
 " Spell checking
