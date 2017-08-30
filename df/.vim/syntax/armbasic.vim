@@ -2,7 +2,7 @@
 " Language: ARMbasic
 
 if exists("b:current_syntax")
-	finish
+    finish
 endif
 
 " Debug
@@ -203,4 +203,4 @@ highlight link armbasicTodo		Todo
 
 let b:current_syntax = "armbasic"
 
-" vim: wrap ts=8
+" vim: wrap ts=8 sw=4 sts=0 sta
