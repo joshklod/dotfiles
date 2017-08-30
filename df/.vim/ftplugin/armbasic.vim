@@ -6,13 +6,6 @@ let b:did_ftplugin = 1
 let s:cpo_save = &cpo
 set cpo&vim
 
-let s:undo_ftplugin =
-		\ "setl comments<" .
-		\ "|sil unmap <buffer> ]]" .
-		\ "|sil unmap <buffer> [[" .
-		\ "|sil unmap <buffer> ][" .
-		\ "|sil unmap <buffer> []"
-
 " Comments
 setlocal comments=:'
 
@@ -22,15 +15,26 @@ map <buffer> [[ ?\c^\(SUB\>\<Bar>\h\w*:\)<CR>
 map <buffer> ][ /\c^\(END \=SUB\>\<Bar>\h\w*:\)<CR>
 map <buffer> [] ?\c^\(END \=SUB\>\<Bar>\h\w*:\)<CR>
 
-let s:undo_ftplugin =
-		\ "let b:cpo_save=&cpo | set cpo&vim" .
-		\ "|" . s:undo_ftplugin .
-		\ "|let &cpo=b:cpo_save | unlet b:cpo_save"
-if exists('b:undo_ftplugin')
-	let b:undo_ftplugin .= '|'.s:undo_ftplugin
-else
-	let b:undo_ftplugin = s:undo_ftplugin
-endif
+" Footer
+function! s:undo_ftplugin()
+	let l:cpo_save = &cpo
+	set cpo&vim
+
+	setlocal comments<
+	silent unmap <buffer> ]]
+	silent unmap <buffer> [[
+	silent unmap <buffer> ][
+	silent unmap <buffer> []
+
+	let &cpo = l:cpo_save
+	unlet l:cpo_save
+endfunction
+
+function! s:SID()
+	return matchstr(expand("<sfile>"), '<SNR>\d\+_')
+endfunction
+
+let b:undo_ftplugin = "call ".s:SID()."undo_ftplugin()"
 
 let &cpo = s:cpo_save
 unlet s:cpo_save
