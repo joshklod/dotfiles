@@ -71,10 +71,12 @@ endif
 
 " Tab behavior
 set tabstop     =4
-set shiftwidth  =0  " Use value of tabstop
-set softtabstop =-1 " Use value of shiftwidth
+set shiftwidth  =0 " Use value of tabstop
+set softtabstop =0 " Disabled
+set smarttab       " Use shiftwidth at beginning of line, and tabstop (or
+                   "   softtabstop) elsewhere
 set noexpandtab
-set autoindent
+set autoindent     " Keep indent of previous line
 
 " Line wrapping
 set nowrap
