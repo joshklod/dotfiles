@@ -1,18 +1,10 @@
-let s:undo_ftplugin = "setl tw< cc< ts< et< fo< isk<"
+" Source text ftplugin
+source <sfile>:h/text.vim
 
-setlocal textwidth      =78
-setlocal colorcolumn    =80
-
-setlocal tabstop        =4
+setlocal tabstop   =4
 setlocal expandtab
 
-setlocal formatoptions +=t
-setlocal iskeyword      =@,48-57,'
-
-if has("syntax")
-	setlocal spell
-	let s:undo_ftplugin .= ' spell<'
-endif
+let s:undo_ftplugin = "setl ts< et<"
 
 if exists('b:undo_ftplugin')
 	let b:undo_ftplugin .= '|'.s:undo_ftplugin
