@@ -1,9 +1,6 @@
 let s:cpo_save = &cpo
 set cpo&vim
 
-setl textwidth =98
-setl winwidth  =100
-
 nmap <buffer> <silent> ,c @="^i' <C-V><Esc>j"<CR>k^
 nmap <buffer> <silent> ,C @="^2xj"<CR>k^
 
@@ -12,7 +9,6 @@ function! s:undo_ftplugin()
 	let l:cpo_save = &cpo
 	set cpo&vim
 
-	setlocal tw< ww<
 	silent nunmap <buffer> ,c
 	silent nunmap <buffer> ,C
 
