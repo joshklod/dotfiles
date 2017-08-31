@@ -7,7 +7,7 @@ let s:cpo_save = &cpo
 set cpo&vim
 
 " Comments
-setlocal comments=:'
+setlocal comments=sr:/*,m:*,ex:*/,://,:'
 
 " Function start/end jump commands
 map <buffer> ]] /\c^\(SUB\>\<Bar>\h\w*:\)<CR>
