@@ -4,13 +4,12 @@ if &buftype == "help"
 	finish
 endif
 
-let s:undo_ftplugin = 'setl tw< cc< fo< isk<'
-
 setlocal textwidth      =78
-setlocal colorcolumn    =80
 
 setlocal formatoptions +=t
 setlocal iskeyword      =@,48-57,'
+
+let s:undo_ftplugin = 'setl tw< fo< isk<'
 
 if has("syntax")
 	setlocal spell
