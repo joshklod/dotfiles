@@ -121,8 +121,8 @@ endif
 set tags +=./.tags,.tags,/usr/local/lib/**/tags,/usr/local/lib/**/.tags
 
 " Navigation
-map <X1Mouse> <C-O>
-map <X2Mouse> <C-I>
+nmap <X1Mouse> <C-O>
+nmap <X2Mouse> <C-I>
 
 " Searching
 set ignorecase
