@@ -6,7 +6,7 @@
 	# Not meant to be used
 	log2  = !":; git log --decorate --abbrev-commit"
 	log3  = !"git log2 --pretty=twoline"
-	log3g = !"git log3 --pretty=twolineg --graph"
+	log3g = !"git log2 --pretty=twolineg --graph"
 
 	# Log shortcuts
 	llog = !git log2 --author-date-order --show-linear-break

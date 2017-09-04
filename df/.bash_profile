@@ -14,5 +14,8 @@
 # Set INFOPATH so it includes users' private info if it exists
 [ -d "$HOME/info" ] && INFOPATH="$HOME/info:$INFOPATH"
 
+# Add ~/scripts to $PATH if it exists
+[ -d "$HOME/scripts" ] && PATH="$HOME/scripts:$PATH"
+
 # Include Windows Applications folder in PATH
 [ -d "/proc/cygdrive/c/Applications" ] && PATH="$PATH:/proc/cygdrive/c/Applications"
