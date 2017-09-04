@@ -23,9 +23,9 @@ function! s:FuncJump(side, dir, visual)
 	" side == 0: Beginning of function
 	" side == 1: End of function
 	if a:side == 0
-		let l:search_str = '\c^\s*\(SUB\>\|\h\w*:\)'
+		let l:search_str = '\c^\s*\(\(SUB\|FUNCTION\)\>\|\h\w*:\)'
 	else
-		let l:search_str = '\c^\s*\(END \=SUB\>\|\h\w*:\)'
+		let l:search_str = '\c^\s*END \=\(SUB\|FUNCTION\)\>'
 	endif
 	" dir == 0: Forward search
 	" dir == 1: Backward search
