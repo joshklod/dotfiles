@@ -3,7 +3,7 @@
 
 " quit when a syntax file was already loaded
 if exists("b:current_syntax")
-	finish
+    finish
 endif
 
 syntax clear
@@ -102,3 +102,4 @@ highlight default link matlabLogicalOperator    matlabOperator
 
 let b:current_syntax = "minttyrc"
 
+" vim: wrap ts=8 sw=4 sts=0 sta

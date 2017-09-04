@@ -2,7 +2,7 @@
 " Language: iDevOS
 
 if exists("b:current_syntax")
-	finish
+    finish
 endif
 
 syntax case ignore
@@ -79,4 +79,4 @@ highlight default link idevTodo			Todo
 
 let b:current_syntax = "idev"
 
-" vim: wrap ts=8
+" vim: wrap ts=8 sw=4 sts=0 sta

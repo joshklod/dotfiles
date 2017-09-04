@@ -10,9 +10,11 @@
 
 	# Log shortcuts
 	llog = !git log2 --author-date-order --show-linear-break
+	logp = !git log2 --patch --reverse
 	logg = !git log2 --graph
 	loga = !git log2 --graph --all
 	lgg  = !git log3 --author-date-order --show-linear-break
+	lgp  = !git log3 --patch --reverse
 	lg   = !git log3g
 	lga  = !git log3g --all
 	lgs  = !git log3g --all --simplify-by-decoration
@@ -25,6 +27,8 @@
 
 [pager]
 	log3  = less -S
+	logp  = less -Sx 1,5
+	lgp   = less -Sx 1,5
 	lgs   = less -FRX
 	diffs = less -FRX
 

@@ -2,15 +2,10 @@
 " Language: ARMbasic
 
 if exists("b:current_syntax")
-	finish
+    finish
 endif
 
-" Debug
-syntax   clear
-" Temporary
-" runtime! syntax/vb.vim
-" syntax keyword armbasicKeyword ENDSUB ENDFUNCTION
-
+syntax clear
 syntax case ignore
 
 " Allows me to specify 'contains=TOP+extra'
@@ -47,11 +42,9 @@ syntax	match	armbasicLabelError	/.\+/ contained contains=armbasicComment
 "syntax	match	armbasicVariable	/\<\h\w*\ze\s\+\([*/+-]\|<<\|>>\|\<\(AND\|OR\|XOR\)\)\==/ nextgroup=armbasicAssignment
 
 " Subs and Functions
-syntax	cluster	armbasicSubGroup	contains=armbasicSubStart,armbasicFunStart
-syntax	match	armbasicSubStart	/^\s*\zsSUB\>/ nextgroup=armbasicSub skipwhite
-syntax	match	armbasicFunStart	/^\s*\zsFUNCTION\>/ nextgroup=armbasicFunc skipwhite
-syntax	region	armbasicSub		matchgroup=armbasicSubName start=/\<\h\w*\>:\=/ matchgroup=armbasicSubEnd end=/^\s*\zsEND \?SUB\>/ keepend contained contains=TOP,@armbasicSubGroup
-syntax	region	armbasicFunc		matchgroup=armbasicSubName start=/\<\h\w*\>:\=/ matchgroup=armbasicSubEnd end=/^\s*\zsEND \?FUNCTION\>/ keepend contained contains=TOP,@armbasicSubGroup
+syntax	keyword	armbasicSub		SUB FUNCTION nextgroup=armbasicSubName skipwhite
+syntax	match	armbasicSub		/\<END \=\(SUB\|FUNCTION\)\>/
+syntax	match	armbasicSubName		/\<\h\w*\>:\=/ contained
 
 " Statements
 syntax	keyword	armbasicStatement	GOSUB CALL EXIT GOTO RETURN __ASM__ CONST DIM
@@ -130,12 +123,8 @@ highlight link armbasicVariable		armbasicIdentifier
 highlight link armbasicGotoLabel	armbasicFunction
 highlight link armbasicMain		armbasicUnderlined
 highlight link armbasicLabelError	armbasicError
-highlight link armbasicSubStart		armbasicType
-highlight link armbasicFunStart		armbasicType
-highlight link armbasicSub		armbasicNormal
-highlight link armbasicFunc		armbasicNormal
+highlight link armbasicSub		armbasicType
 highlight link armbasicSubName		armbasicFunction
-highlight link armbasicSubEnd		armbasicType
 " Statements
 highlight link armbasicMapArgLine	armbasicNormal
 highlight link armbasicMapArgs		armbasicKeyword
@@ -203,4 +192,4 @@ highlight link armbasicTodo		Todo
 
 let b:current_syntax = "armbasic"
 
-" vim: wrap ts=8
+" vim: wrap ts=8 sw=4 sts=0 sta

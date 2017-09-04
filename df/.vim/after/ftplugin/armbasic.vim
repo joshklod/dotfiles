@@ -1,26 +1,31 @@
 let s:cpo_save = &cpo
 set cpo&vim
 
-let s:undo_ftplugin =
-		\ "setl tw< ww<" .
-		\ "|sil nunmap <buffer> ,c" .
-		\ "|sil nunmap <buffer> ,C"
-
-setl textwidth =98
-setl winwidth  =100
-
 nmap <buffer> <silent> ,c @="^i' <C-V><Esc>j"<CR>k^
 nmap <buffer> <silent> ,C @="^2xj"<CR>k^
 
-let s:undo_ftplugin =
-		\ "let b:cpo_save=&cpo | set cpo&vim" .
-		\ "|" . s:undo_ftplugin .
-		\ "|let &cpo=b:cpo_save | unlet b:cpo_save"
-if exists('b:undo_ftplugin')
-	let b:undo_ftplugin .= '|'.s:undo_ftplugin
+" Footer
+function! s:undo_ftplugin()
+	let l:cpo_save = &cpo
+	set cpo&vim
+
+	silent nunmap <buffer> ,c
+	silent nunmap <buffer> ,C
+
+	let &cpo = l:cpo_save
+	unlet l:cpo_save
+endfunction
+
+function! s:SID()
+	return matchstr(expand("<sfile>"), '<SNR>\d\+_')
+endfunction
+
+if exists("b:undo_ftplugin")
+	let b:undo_ftplugin .= "|"
 else
-	let b:undo_ftplugin = s:undo_ftplugin
+	let b:undo_ftplugin = ""
 endif
+let b:undo_ftplugin .= "call ".s:SID()."undo_ftplugin()"
 
 let &cpo = s:cpo_save
 unlet s:cpo_save
