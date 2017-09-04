@@ -13,3 +13,6 @@
 
 # Set INFOPATH so it includes users' private info if it exists
 [ -d "$HOME/info" ] && INFOPATH="$HOME/info:$INFOPATH"
+
+# Add ~/scripts to $PATH if it exists
+[ -d "$HOME/scripts" ] && PATH="$HOME/scripts:$PATH"
