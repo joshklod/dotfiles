@@ -15,6 +15,9 @@ if has("gui_gtk")
 	endif
 elseif has("gui_win32")
 	set guifont =Consolas:h10
+	if has("directx")
+		set renderoptions =type:directx,level:1,geom:1,renmode:4,taamode:0
+	endif
 endif
 
 " Visual indicators
