@@ -133,3 +133,10 @@ set smartcase  " Ignore case only when all lowercase
 nmap <silent> ,d :s/\s\+$//<CR>
 " Change word
 nmap <silent> cc lbce
+
+" Custom commands
+if has("user_commands")
+	" Show all tabstop-related options
+	command! -bar Taboptions set ts? sw? sts? et? sta?
+	command! -bar Topt       Taboptions
+endif
