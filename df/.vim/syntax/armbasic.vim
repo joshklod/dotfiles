@@ -65,9 +65,10 @@ syntax	keyword	armbasicRepeat		WHILE UNTIL nextgroup=armbasicBoolLine
 
 " Boolean Regions
 syntax	match	armbasicBoolLine	/[^']\{-}\ze\%(\<THEN\>\|'\|$\)/ contained contains=@armbasicBoolGroup
-syntax	cluster	armbasicBoolGroup	contains=armbasicString,armbasicChar,armbasicMath,armbasicBoolOp,@armbasicNumberGroup,armbasicComparison,armbasicBoolParens
+syntax	cluster	armbasicBoolGroup	contains=armbasicString,armbasicChar,armbasicMath,armbasicBoolOp,@armbasicNumberGroup,armbasicComparison,armbasicBoolParens,armbasicBoolError
 syntax	match	armbasicComparison	/[<>=]\|<=\|<>\|>=/ contained
 syntax	region	armbasicBoolParens	matchgroup=armbasicParen start=/(/ end=/)/ contained oneline contains=@armbasicBoolGroup
+syntax	match	armbasicBoolError	/=\{2,}/ contained
 
 " Other Keywords
 syntax	match	armbasicCaseLabel	/\<CASE\( ELSE\)\?\>/
@@ -104,7 +105,6 @@ syntax	match	armbasicDebug		/!\x*\>/ nextgroup=armbasicMemWrite skipwhite
 syntax	match	armbasicMemWrite	/\<\x\+\>/ contained
 
 " Others
-syntax	match	armbasicError		/==/
 syntax	keyword	armbasicTodo		TODO FIXME contained
 
 " Comments
@@ -133,6 +133,7 @@ highlight link armbasicMath		armbasicOperator
 highlight link armbasicBoolOp		armbasicOperator
 highlight link armbasicComparison	armbasicOperator
 highlight link armbasicParen		armbasicOperator
+highlight link armbasicBoolError	armbasicError
 highlight link armbasicAssignment	armbasicOperator
 " PreProc
 highlight link armbasicIncluded		armbasicString
