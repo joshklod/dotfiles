@@ -1,9 +1,21 @@
 " GUI-only settings
 set guioptions -=m
 set guioptions -=T
-set guifont     =Consolas\ 10
-set linespace   =1
 
-" Visual indicators
-set listchars =tab:⇥\ ,trail:·,extends:»,precedes:«,nbsp:␣ " Use fancy Unicode characters
-set showbreak =↪\ "
+" Font
+if has("gui_gtk")
+	" GTK does not allow fallback fonts, so we have to do some guessing
+	if has("win32unix")
+		" Cygwin - Use Consolas
+		set guifont   =Consolas\ 10
+		set linespace =1
+	else
+		" Other Systems - Use DejaVu Sans Mono
+		set guifont =DejaVu\ Sans\ Mono\ 10
+	endif
+elseif has("gui_win32")
+	set guifont =Consolas:h10
+	if has("directx")
+		set renderoptions =type:directx,level:1,geom:1,renmode:4,taamode:0
+	endif
+endif
