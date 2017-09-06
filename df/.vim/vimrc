@@ -1,3 +1,8 @@
+" Backend
+if has("multi_byte")
+	set encoding =utf-8
+endif
+
 " Source default vimrc
 if filereadable($VIMRUNTIME . "/defaults.vim")
 	unlet! skip_defaults_vim
