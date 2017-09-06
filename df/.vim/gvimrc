@@ -19,7 +19,3 @@ elseif has("gui_win32")
 		set renderoptions =type:directx,level:1,geom:1,renmode:4,taamode:0
 	endif
 endif
-
-" Visual indicators
-set listchars =tab:⇥\ ,trail:·,extends:»,precedes:«,nbsp:␣ " Use fancy Unicode characters
-set showbreak =↪\ "
