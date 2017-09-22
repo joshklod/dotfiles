@@ -92,7 +92,13 @@ syntax	region	armbasicPreIfLine	excludenl matchgroup=armbasicPreCondit start=/\<
 
 syntax	region	armbasicPreDiag		excludenl matchgroup=armbasicPreProc start=/\<\(warning\|error\)\>/ end=/$/ contained contains=armbasicComment,armbasicLineCont,@Spell
 
-syntax	region	armbasicPreConditBlock	matchgroup=armbasicPreCondit start=/./ end=/^\s*#\s*endif\>/ contained contains=@armbasicTop
+syntax	region	armbasicIf0		matchgroup=armbasicPreCondit start=/^\s*\zs#\s*if\s\+0\+\s*$/ end=/^\s*#\s*endif\>/ end=/^\s*\ze#\s*\(elif\|else\)\>/ contains=armbasicIf0Skip nextgroup=armbasicIf0Else
+syntax	region	armbasicIf0		matchgroup=armbasicPreCondit start=/^\s*\zs#\s*elif\s\+0\+\s*$/ end=/^\ze\s*#\s*\(elif\|else\|endif\)\>/ contains=armbasicIf0Skip
+
+syntax	region	armbasicIf0Skip		start=/^\s*#\s*\(if\|ifdef\|ifndef\)\>/ end=/^\s*#\s*endif\>/ transparent contained contains=armbasicIf0Skip
+syntax	match	armbasicIf0Else		/\ze#\s*\(elif\|else\)\>/ contained nextgroup=armbasicPreConditBlock
+
+syntax	region	armbasicPreConditBlock	start=/.\@=/ matchgroup=armbasicPreCondit end=/^\s*\zs#\s*endif\>/ contained contains=@armbasicTop
 
 syntax	keyword	armbasicDefined		defined contained
 syntax case ignore
@@ -145,6 +151,7 @@ highlight link armbasicIncLine		armbasicError
 highlight link armbasicIncluded		armbasicString
 highlight link armbasicDefined		armbasicPreProc
 highlight link armbasicPreDiag		armbasicString
+highlight link armbasicIf0		armbasicComment
 " Types
 highlight link armbasicParamType	armbasicType
 " Special
