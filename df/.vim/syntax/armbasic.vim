@@ -13,7 +13,7 @@ syntax	cluster	armbasicTop		contains=TOP
 
 " Strings
 " All printable ASCII chars except '"'
-syntax	region	armbasicString		excludenl start=/"/ end=/"/ end=/$/
+syntax	region	armbasicString		excludenl start=/"/ end=/"/ end=/$/ contains=armbasicLineCont
 syntax	match	armbasicCharacter	/"\([\d32-\d126]\&[^"]\)"/
 
 " Operators
@@ -35,7 +35,7 @@ syntax	match	armbasicFloat		/\(\<\|-\)\d\+\.\(\d\+\>\)\?/
 " Goto Labels
 syntax	match	armbasicGotoLabel	/^\s*\zs\h\w*:/ nextgroup=armbasicLabelError
 syntax	match	armbasicMain		/^\s*\zsMAIN:/ nextgroup=armbasicLabelError
-syntax	region	armbasicLabelError	excludenl start=/./ end=/$/ contained contains=armbasicComment
+syntax	region	armbasicLabelError	excludenl start=/./ end=/$/ contained contains=armbasicComment,armbasicLineCont
 
 " Subs and Functions
 syntax	keyword	armbasicSub		SUB FUNCTION nextgroup=armbasicSubName skipwhite
@@ -48,7 +48,7 @@ syntax	match	armbasicStatement	/\<END\>\( \(SUB\|FUNCTION\)\)\@!/
 
 " __MAP__
 syntax	keyword	armbasicStatement	__MAP__ nextgroup=armbasicMapArgLine
-syntax	region	armbasicMapArgLine	excludenl start=/./ end=/$/ contained contains=armbasicMapArgs,armbasicComment
+syntax	region	armbasicMapArgLine	excludenl start=/./ end=/$/ contained contains=armbasicMapArgs,armbasicComment,armbasicLineCont
 syntax	keyword	armbasicMapArgs		CODE CONST DATA STRING contained nextgroup=@armbasicNumberGroup skipwhite
 
 " Conditionals and loops
@@ -60,10 +60,10 @@ syntax	keyword	armbasicRepeat		DO FOR LOOP NEXT TO DOWNTO STEP
 syntax	keyword	armbasicRepeat		WHILE UNTIL nextgroup=armbasicBoolLine
 
 " Boolean Regions
-syntax	region	armbasicBoolLine	excludenl start=/./ end=/\ze\<THEN\>/ end=/$/ contained contains=@armbasicBoolGroup,armbasicComment
+syntax	region	armbasicBoolLine	excludenl start=/./ end=/\ze\<THEN\>/ end=/$/ contained contains=@armbasicBoolGroup,armbasicComment,armbasicLineCont
 syntax	cluster	armbasicBoolGroup	contains=armbasicString,armbasicChar,armbasicMath,armbasicBoolOp,@armbasicNumberGroup,armbasicComparison,armbasicBoolParens,armbasicBoolError
 syntax	match	armbasicComparison	/[<>=]\|<=\|<>\|>=/ contained
-syntax	region	armbasicBoolParens	excludenl matchgroup=armbasicParen start=/(/ end=/)/ end=/$/ contained contains=@armbasicBoolGroup,armbasicComment
+syntax	region	armbasicBoolParens	excludenl matchgroup=armbasicParen start=/(/ end=/)/ end=/$/ contained contains=@armbasicBoolGroup,armbasicComment,armbasicLineCont
 syntax	match	armbasicBoolError	/=\{2,}/ contained
 
 " Other Keywords
@@ -72,6 +72,8 @@ syntax	keyword	armbasicKeyword		AS nextgroup=armbasicType skipwhite
 
 " PreProc
 syntax case match
+syntax	match	armbasicLineCont	/\\$/ extend
+
 syntax	match	armbasicInclude		/^\s*\zs#\s*include\>/ nextgroup=armbasicIncluded skipwhite
 syntax	match	armbasicIncluded	/"[^"]*"\|<[^>]*>/ contained
 
@@ -83,7 +85,7 @@ syntax	keyword	armbasicDefined		defined contained
 syntax	match	armbasicPreCondit	/^\s*\zs#\s*\(else\|endif\)\>/
 syntax	match	armbasicPreCondit	/^\s*\zs#\s*\(ifdef\|ifndef\)\>/
 
-syntax	region	armbasicPreError	excludenl matchgroup=armbasicPreCondit start=/^\s*\zs#\s*\(warning\|error\)\>/ end=/$/ contains=armbasicComment
+syntax	region	armbasicPreError	excludenl matchgroup=armbasicPreCondit start=/^\s*\zs#\s*\(warning\|error\)\>/ end=/$/ contains=armbasicComment,armbasicLineCont
 syntax case ignore
 
 " Types
@@ -102,8 +104,8 @@ syntax	match	armbasicMemWrite	/\<\x\+\>/ contained
 syntax	keyword	armbasicTodo		TODO FIXME contained
 
 " Comments
-syntax	region	armbasicComment		excludenl start=/'/ start="//" end=/$/ contains=armbasicTodo
-syntax	region	armbasicComment		start="/\*" end="\*/" keepend contains=armbasicTodo
+syntax	region	armbasicComment		excludenl start=/'/ start="//" end=/$/ contains=armbasicTodo,armbasicLineCont
+syntax	region	armbasicComment		start="/\*" end="\*/" keepend contains=armbasicTodo,armbasicLineCont
 
 " TODO Add default to all commands after testing
 " Comments
@@ -128,6 +130,7 @@ highlight link armbasicParen		armbasicOperator
 highlight link armbasicBoolError	armbasicError
 highlight link armbasicAssignment	armbasicOperator
 " PreProc
+highlight link armbasicLineCont		armbasicPreProc
 highlight link armbasicIncluded		armbasicString
 highlight link armbasicDefined		armbasicPreProc
 highlight link armbasicPreError		armbasicString
