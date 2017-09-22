@@ -8,6 +8,7 @@ endif
 syntax clear
 syntax case ignore
 syntax spell notoplevel
+syntax sync minlines=50
 
 " Allows me to specify 'contains=TOP+extra'
 syntax	cluster	armbasicTop		contains=TOP
