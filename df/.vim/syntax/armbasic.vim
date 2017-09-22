@@ -7,13 +7,14 @@ endif
 
 syntax clear
 syntax case ignore
+syntax spell notoplevel
 
 " Allows me to specify 'contains=TOP+extra'
 syntax	cluster	armbasicTop		contains=TOP
 
 " Strings
 " All printable ASCII chars except '"'
-syntax	region	armbasicString		excludenl start=/"/ end=/"/ end=/$/ contains=armbasicLineCont
+syntax	region	armbasicString		excludenl start=/"/ end=/"/ end=/$/ contains=armbasicLineCont,@Spell
 syntax	match	armbasicCharacter	/"\([\d32-\d126]\&[^"]\)"/
 
 " Operators
@@ -85,7 +86,7 @@ syntax	keyword	armbasicDefined		defined contained
 syntax	match	armbasicPreCondit	/^\s*\zs#\s*\(else\|endif\)\>/
 syntax	match	armbasicPreCondit	/^\s*\zs#\s*\(ifdef\|ifndef\)\>/
 
-syntax	region	armbasicPreError	excludenl matchgroup=armbasicPreCondit start=/^\s*\zs#\s*\(warning\|error\)\>/ end=/$/ contains=armbasicComment,armbasicLineCont
+syntax	region	armbasicPreError	excludenl matchgroup=armbasicPreCondit start=/^\s*\zs#\s*\(warning\|error\)\>/ end=/$/ contains=armbasicComment,armbasicLineCont,@Spell
 syntax case ignore
 
 " Types
@@ -104,8 +105,8 @@ syntax	match	armbasicMemWrite	/\<\x\+\>/ contained
 syntax	keyword	armbasicTodo		TODO FIXME contained
 
 " Comments
-syntax	region	armbasicComment		excludenl start=/'/ start="//" end=/$/ contains=armbasicTodo,armbasicLineCont
-syntax	region	armbasicComment		start="/\*" end="\*/" keepend contains=armbasicTodo,armbasicLineCont
+syntax	region	armbasicComment		excludenl start=/'/ start="//" end=/$/ contains=armbasicTodo,armbasicLineCont,@Spell
+syntax	region	armbasicComment		start="/\*" end="\*/" keepend contains=armbasicTodo,armbasicLineCont,@Spell
 
 " TODO Add default to all commands after testing
 " Comments
