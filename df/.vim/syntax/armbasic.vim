@@ -75,8 +75,9 @@ syntax	keyword	armbasicKeyword		AS nextgroup=armbasicType skipwhite
 syntax case match
 syntax	match	armbasicLineCont	/\\$/ extend
 
-syntax	match	armbasicInclude		/^\s*\zs#\s*include\>/ nextgroup=armbasicIncluded skipwhite
-syntax	match	armbasicIncluded	/"[^"]*"\|<[^>]*>/ contained
+syntax	region	armbasicIncLine		excludenl matchgroup=armbasicInclude start=/^\s*\zs#\s*include\>/ end=/$/ contains=armbasicIncluded,armbasicComment,armbasicLineCont
+syntax	region	armbasicIncluded	excludenl start=/"/ end=/"/ end=/$/ contained contains=armbasicLineCont
+syntax	region	armbasicIncluded	excludenl start=/</ end=/>/ end=/$/ contained contains=armbasicLineCont
 
 syntax	match	armbasicDefine		/^\s*\zs#\s*\(define\|undef\)\>/
 
@@ -86,7 +87,7 @@ syntax	keyword	armbasicDefined		defined contained
 syntax	match	armbasicPreCondit	/^\s*\zs#\s*\(else\|endif\)\>/
 syntax	match	armbasicPreCondit	/^\s*\zs#\s*\(ifdef\|ifndef\)\>/
 
-syntax	region	armbasicPreError	excludenl matchgroup=armbasicPreCondit start=/^\s*\zs#\s*\(warning\|error\)\>/ end=/$/ contains=armbasicComment,armbasicLineCont,@Spell
+syntax	region	armbasicPreDiag		excludenl matchgroup=armbasicPreCondit start=/^\s*\zs#\s*\(warning\|error\)\>/ end=/$/ contains=armbasicComment,armbasicLineCont,@Spell
 syntax case ignore
 
 " Types
@@ -132,9 +133,10 @@ highlight link armbasicBoolError	armbasicError
 highlight link armbasicAssignment	armbasicOperator
 " PreProc
 highlight link armbasicLineCont		armbasicPreProc
+highlight link armbasicIncLine		armbasicError
 highlight link armbasicIncluded		armbasicString
 highlight link armbasicDefined		armbasicPreProc
-highlight link armbasicPreError		armbasicString
+highlight link armbasicPreDiag		armbasicString
 " Types
 highlight link armbasicParamType	armbasicType
 " Special
