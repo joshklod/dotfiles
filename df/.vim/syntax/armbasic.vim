@@ -75,19 +75,25 @@ syntax	keyword	armbasicKeyword		AS nextgroup=armbasicType skipwhite
 syntax case match
 syntax	match	armbasicLineCont	/\\$/ extend
 
-syntax	region	armbasicIncLine		excludenl matchgroup=armbasicInclude start=/^\s*\zs#\s*include\>/ end=/$/ contains=armbasicIncluded,armbasicComment,armbasicLineCont
+syntax	cluster	armbasicPreProcGroup	contains=armbasicDefine,armbasicPreCondit,armbasicIncLine,armbasicPreIfLine,armbasicPreDiag
+syntax	match	armbasicPreProcStart	/^\s*\zs#/ nextgroup=@armbasicPreProcGroup skipwhite
+
+syntax	keyword	armbasicDefine		define undef contained
+syntax	keyword	armbasicPreCondit	else endif contained
+
+syntax	region	armbasicIncLine		excludenl matchgroup=armbasicInclude start=/\<include\>/ end=/$/ contained contains=armbasicIncluded,armbasicComment,armbasicLineCont
 syntax	region	armbasicIncluded	excludenl start=/"/ end=/"/ end=/$/ contained contains=armbasicLineCont
 syntax	region	armbasicIncluded	excludenl start=/</ end=/>/ end=/$/ contained contains=armbasicLineCont
 
-syntax	match	armbasicDefine		/^\s*\zs#\s*\(define\|undef\)\>/
+syntax	region	armbasicPreIfLine	excludenl matchgroup=armbasicPreCondit start=/\<if\>/ end=/$/ contained contains=@armbasicTop,armbasicDefined nextgroup=armbasicPreConditBlock skipempty
+syntax	region	armbasicPreIfLine	excludenl matchgroup=armbasicPreCondit start=/\<\(ifdef\|ifndef\)\>/ end=/$/ contained contains=@armbasicTop nextgroup=armbasicPreConditBlock skipempty
+syntax	region	armbasicPreIfLine	excludenl matchgroup=armbasicPreCondit start=/\<elif\>/ end=/$/ contained contains=@armbasicTop,armbasicDefined
 
-syntax	region	armbasicPreIf		excludenl matchgroup=armbasicPreCondit start=/^\s*\zs#\s*\(if\|elif\)\>/ end=/$/ contains=@armbasicTop,armbasicDefined
+syntax	region	armbasicPreDiag		excludenl matchgroup=armbasicPreProc start=/\<\(warning\|error\)\>/ end=/$/ contained contains=armbasicComment,armbasicLineCont,@Spell
+
+syntax	region	armbasicPreConditBlock	matchgroup=armbasicPreCondit start=/./ end=/^\s*#\s*endif\>/ contained contains=@armbasicTop
+
 syntax	keyword	armbasicDefined		defined contained
-
-syntax	match	armbasicPreCondit	/^\s*\zs#\s*\(else\|endif\)\>/
-syntax	match	armbasicPreCondit	/^\s*\zs#\s*\(ifdef\|ifndef\)\>/
-
-syntax	region	armbasicPreDiag		excludenl matchgroup=armbasicPreCondit start=/^\s*\zs#\s*\(warning\|error\)\>/ end=/$/ contains=armbasicComment,armbasicLineCont,@Spell
 syntax case ignore
 
 " Types
@@ -133,6 +139,7 @@ highlight link armbasicBoolError	armbasicError
 highlight link armbasicAssignment	armbasicOperator
 " PreProc
 highlight link armbasicLineCont		armbasicPreProc
+highlight link armbasicPreProcStart	armbasicPreProc
 highlight link armbasicIncLine		armbasicError
 highlight link armbasicIncluded		armbasicString
 highlight link armbasicDefined		armbasicPreProc
