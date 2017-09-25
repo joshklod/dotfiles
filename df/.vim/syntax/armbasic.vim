@@ -7,22 +7,23 @@ endif
 
 syntax clear
 syntax case ignore
+syntax spell notoplevel
+syntax sync minlines=50
 
 " Allows me to specify 'contains=TOP+extra'
 syntax	cluster	armbasicTop		contains=TOP
 
 " Strings
 " All printable ASCII chars except '"'
-syntax	match	armbasicString		/"\([\d32-\d126]\&[^"]\)*"/
+syntax	region	armbasicString		excludenl start=/"/ end=/"/ end=/$/ contains=armbasicLineCont,@Spell
 syntax	match	armbasicCharacter	/"\([\d32-\d126]\&[^"]\)"/
 
 " Operators
 syntax	keyword	armbasicMath		ABS MOD
 syntax	match	armbasicMath		"[*/+-]\|<<\|>>"
 syntax	match	armbasicBoolOp		/\<\(AND\|OR\|XOR\|NOT\)\>/
-syntax	region	armbasicParenRegion	matchgroup=armbasicParen start=/(/ end=/)/ oneline contains=TOP
 syntax	keyword	armbasicOperator	ADDRESSOF
-syntax	match	armbasicOperator	/[&+,]/
+syntax	match	armbasicOperator	/[&+,()]/
 syntax	match	armbasicAssignment	/=/
 syntax	match	armbasicAssignment	/\([*/+-]\|<<\|>>\|\<\(AND\|OR\|XOR\)\)=/
 
@@ -36,10 +37,7 @@ syntax	match	armbasicFloat		/\(\<\|-\)\d\+\.\(\d\+\>\)\?/
 " Goto Labels
 syntax	match	armbasicGotoLabel	/^\s*\zs\h\w*:/ nextgroup=armbasicLabelError
 syntax	match	armbasicMain		/^\s*\zsMAIN:/ nextgroup=armbasicLabelError
-syntax	match	armbasicLabelError	/.\+/ contained contains=armbasicComment
-
-" Variables
-"syntax	match	armbasicVariable	/\<\h\w*\ze\s\+\([*/+-]\|<<\|>>\|\<\(AND\|OR\|XOR\)\)\==/ nextgroup=armbasicAssignment
+syntax	region	armbasicLabelError	excludenl start=/./ end=/$/ contained contains=armbasicComment,armbasicLineCont
 
 " Subs and Functions
 syntax	keyword	armbasicSub		SUB FUNCTION nextgroup=armbasicSubName skipwhite
@@ -52,7 +50,7 @@ syntax	match	armbasicStatement	/\<END\>\( \(SUB\|FUNCTION\)\)\@!/
 
 " __MAP__
 syntax	keyword	armbasicStatement	__MAP__ nextgroup=armbasicMapArgLine
-syntax	match	armbasicMapArgLine	/.\+/ contained contains=armbasicMapArgs,armbasicComment
+syntax	region	armbasicMapArgLine	excludenl start=/./ end=/$/ contained contains=armbasicMapArgs,armbasicComment,armbasicLineCont
 syntax	keyword	armbasicMapArgs		CODE CONST DATA STRING contained nextgroup=@armbasicNumberGroup skipwhite
 
 " Conditionals and loops
@@ -64,10 +62,10 @@ syntax	keyword	armbasicRepeat		DO FOR LOOP NEXT TO DOWNTO STEP
 syntax	keyword	armbasicRepeat		WHILE UNTIL nextgroup=armbasicBoolLine
 
 " Boolean Regions
-syntax	match	armbasicBoolLine	/[^']\{-}\ze\%(\<THEN\>\|'\|$\)/ contained contains=@armbasicBoolGroup
+syntax	region	armbasicBoolLine	excludenl start=/./ end=/\ze\<THEN\>/ end=/$/ contained contains=@armbasicBoolGroup,armbasicComment,armbasicLineCont
 syntax	cluster	armbasicBoolGroup	contains=armbasicString,armbasicChar,armbasicMath,armbasicBoolOp,@armbasicNumberGroup,armbasicComparison,armbasicBoolParens,armbasicBoolError
 syntax	match	armbasicComparison	/[<>=]\|<=\|<>\|>=/ contained
-syntax	region	armbasicBoolParens	matchgroup=armbasicParen start=/(/ end=/)/ contained oneline contains=@armbasicBoolGroup
+syntax	region	armbasicBoolParens	excludenl matchgroup=armbasicParen start=/(/ end=/)/ end=/$/ contained contains=@armbasicBoolGroup,armbasicComment,armbasicLineCont
 syntax	match	armbasicBoolError	/=\{2,}/ contained
 
 " Other Keywords
@@ -76,20 +74,33 @@ syntax	keyword	armbasicKeyword		AS nextgroup=armbasicType skipwhite
 
 " PreProc
 syntax case match
-syntax	match	armbasicInclude		/^\s*\zs#\s*include\>/ nextgroup=armbasicIncluded skipwhite
-syntax	match	armbasicIncluded	/"[^"]*"\|<[^>]*>/ contained
+syntax	match	armbasicLineCont	/\\$/ extend
 
-syntax	match	armbasicDefine		/^\s*\zs#\s*\(define\|undef\)\>/
+syntax	cluster	armbasicPreProcGroup	contains=armbasicDefine,armbasicPreCondit,armbasicIncLine,armbasicPreIfLine,armbasicPreDiag
+syntax	match	armbasicPreProcStart	/^\s*\zs#/ nextgroup=@armbasicPreProcGroup skipwhite
 
-syntax	match	armbasicPreCondit	/^\s*\zs#\s*\(if\|elif\)\>/ nextgroup=armbasicPreIfLine skipwhite
-syntax	match	armbasicPreIfLine	/.\+/ contained contains=@armbasicTop,armbasicDefined
+syntax	keyword	armbasicDefine		define undef contained
+syntax	keyword	armbasicPreCondit	else endif contained
+
+syntax	region	armbasicIncLine		excludenl matchgroup=armbasicInclude start=/\<include\>/ end=/$/ contained contains=armbasicIncluded,armbasicComment,armbasicLineCont
+syntax	region	armbasicIncluded	excludenl start=/"/ end=/"/ end=/$/ contained contains=armbasicLineCont
+syntax	region	armbasicIncluded	excludenl start=/</ end=/>/ end=/$/ contained contains=armbasicLineCont
+
+syntax	region	armbasicPreIfLine	excludenl matchgroup=armbasicPreCondit start=/\<if\>/ end=/$/ contained contains=@armbasicTop,armbasicDefined nextgroup=armbasicPreConditBlock skipempty
+syntax	region	armbasicPreIfLine	excludenl matchgroup=armbasicPreCondit start=/\<\(ifdef\|ifndef\)\>/ end=/$/ contained contains=@armbasicTop nextgroup=armbasicPreConditBlock skipempty
+syntax	region	armbasicPreIfLine	excludenl matchgroup=armbasicPreCondit start=/\<elif\>/ end=/$/ contained contains=@armbasicTop,armbasicDefined
+
+syntax	region	armbasicPreDiag		excludenl matchgroup=armbasicPreProc start=/\<\(warning\|error\)\>/ end=/$/ contained contains=armbasicComment,armbasicLineCont,@Spell
+
+syntax	region	armbasicIf0		matchgroup=armbasicPreCondit start="^\s*\zs#\s*if\s\+0\+\s*\ze\($\|//\|/\*\)" end=/^\s*#\s*endif\>/ end=/^\s*\ze#\s*\(elif\|else\)\>/ contains=armbasicIf0Skip nextgroup=armbasicIf0Else
+syntax	region	armbasicIf0		matchgroup=armbasicPreCondit start="^\s*\zs#\s*elif\s\+0\+\s*\ze\($\|//\|/\*\)" end=/^\ze\s*#\s*\(elif\|else\|endif\)\>/ contains=armbasicIf0Skip
+
+syntax	region	armbasicIf0Skip		start=/^\s*#\s*\(if\|ifdef\|ifndef\)\>/ end=/^\s*#\s*endif\>/ transparent contained contains=armbasicIf0Skip
+syntax	match	armbasicIf0Else		/\ze#\s*\(elif\|else\)\>/ contained nextgroup=armbasicPreConditBlock
+
+syntax	region	armbasicPreConditBlock	start=/.\@=/ matchgroup=armbasicPreCondit end=/^\s*\zs#\s*endif\>/ contained contains=@armbasicTop
+
 syntax	keyword	armbasicDefined		defined contained
-
-syntax	match	armbasicPreCondit	/^\s*\zs#\s*\(else\|endif\)\>/
-syntax	match	armbasicPreCondit	/^\s*\zs#\s*\(ifdef\|ifndef\)\>/
-
-syntax	match	armbasicPreError	/^\s*\zs#\s*\(warning\|error\)\>/ nextgroup=armbasicPreErrorLine
-syntax	match	armbasicPreErrorLine	/.\+/ contained contains=armbasicComment
 syntax case ignore
 
 " Types
@@ -108,9 +119,8 @@ syntax	match	armbasicMemWrite	/\<\x\+\>/ contained
 syntax	keyword	armbasicTodo		TODO FIXME contained
 
 " Comments
-syntax	match	armbasicComment		/'.*/ contains=armbasicTodo
-syntax	match	armbasicComment		"//.*" contains=armbasicTodo
-syntax	region	armbasicComment		start="/\*" end="\*/" contains=armbasicTodo
+syntax	region	armbasicComment		excludenl start=/'/ start="//" end=/$/ contains=armbasicTodo,armbasicLineCont,@Spell
+syntax	region	armbasicComment		start="/\*" end="\*/" keepend contains=armbasicTodo,armbasicLineCont,@Spell
 
 " TODO Add default to all commands after testing
 " Comments
@@ -119,7 +129,6 @@ highlight link armbasicDecimal		armbasicNumber
 highlight link armbasicHex		armbasicNumber
 highlight link armbasicBinary		armbasicNumber
 " Identifiers
-highlight link armbasicVariable		armbasicIdentifier
 highlight link armbasicGotoLabel	armbasicFunction
 highlight link armbasicMain		armbasicUnderlined
 highlight link armbasicLabelError	armbasicError
@@ -136,10 +145,13 @@ highlight link armbasicParen		armbasicOperator
 highlight link armbasicBoolError	armbasicError
 highlight link armbasicAssignment	armbasicOperator
 " PreProc
+highlight link armbasicLineCont		armbasicPreProc
+highlight link armbasicPreProcStart	armbasicPreProc
+highlight link armbasicIncLine		armbasicError
 highlight link armbasicIncluded		armbasicString
 highlight link armbasicDefined		armbasicPreProc
-highlight link armbasicPreError		armbasicPreProc
-highlight link armbasicPreErrorLine	armbasicString
+highlight link armbasicPreDiag		armbasicString
+highlight link armbasicIf0		armbasicComment
 " Types
 highlight link armbasicParamType	armbasicType
 " Special
