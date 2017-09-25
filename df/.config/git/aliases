@@ -4,24 +4,25 @@
 
 [alias]
 	# Not meant to be used
-	log2  = !":; git log --decorate --abbrev-commit"
-	log3  = !"git log2 --pretty=twoline"
-	log3g = !"git log2 --pretty=twolineg --graph"
+	log2  = log --pretty=twoline
+	log2g = log --pretty=twolineg --graph
 
 	# Log shortcuts
-	llog = !git log2 --author-date-order --show-linear-break
-	logp = !git log2 --patch --reverse
-	logg = !git log2 --graph
-	loga = !git log2 --graph --all
-	lgg  = !git log3 --author-date-order --show-linear-break
-	lgp  = !git log3 --patch --reverse
-	lg   = !git log3g
-	lga  = !git log3g --all
-	lgs  = !git log3g --all --simplify-by-decoration
+	llog = log --author-date-order --show-linear-break
+	logp = log --patch --reverse
+	logg = log --graph
+	loga = log --graph --all
+	lgg  = !git log2 --author-date-order --show-linear-break
+	lgp  = !git log2 --patch --reverse
+	lg   = !git log2g
+	lga  = !git log2g --all
+	lgs  = !git log2g --all --simplify-by-decoration
 
 	# Other shortcuts
 	stl   = !"git status && git lgs"
 	diffs = diff --stat
+
+	# Custom commands
 	ctags = !~/.config/git/scripts/ctags.sh
 	cptree = !~/.config/git/scripts/cptree.sh
 
