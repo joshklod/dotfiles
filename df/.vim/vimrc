@@ -144,4 +144,7 @@ if has("user_commands")
 	" Show all tabstop-related options
 	command! -bar Taboptions set ts? sw? sts? et? sta?
 	command! -bar Topt       Taboptions
+
+	" Open scratchpad in new buffer
+	command! -bar Scratch new | setl bt=nofile bh=hide noswf
 endif
