@@ -11,7 +11,7 @@ endif
 
 if has("eval")
 	" Check whether file exists in 'runtimepath'
-	function s:ExistsRTP(path)
+	function! s:ExistsRTP(path)
 		return !empty(globpath(&rtp, a:path))
 	endfunction
 
@@ -138,6 +138,16 @@ set smartcase  " Ignore case only when all lowercase
 nmap <silent> ,d :s/\s\+$//<CR>
 " Change word
 nmap <silent> cc lbce
+
+" Toggle 'spell' option
+nmap <F8> <Plug>ToggleSpell
+vmap <F8> <Plug>ToggleSpell
+imap <F8> <Plug>ToggleSpell
+
+nnoremap <silent>  <SID>ToggleSpell :set spell! <Bar> set spell?<CR>
+nnoremap <script> <Plug>ToggleSpell      <SID>ToggleSpell
+vnoremap <script> <Plug>ToggleSpell <Esc><SID>ToggleSpell<Esc>gv
+inoremap <script> <Plug>ToggleSpell <C-O><SID>ToggleSpell
 
 " Custom commands
 if has("user_commands")
