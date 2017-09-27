@@ -132,6 +132,9 @@ nmap <X2Mouse> <C-I>
 " Searching
 set ignorecase
 set smartcase  " Ignore case only when all lowercase
+if has("extra_search")
+	set hlsearch
+endif
 
 " Macros
 " Change word
