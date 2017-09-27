@@ -26,6 +26,9 @@
 	ctags = !~/.config/git/scripts/ctags.sh
 	cptree = !~/.config/git/scripts/cptree.sh
 
+	# Typo correction
+	dif = diff
+
 [pager]
 	log3  = less -S
 	logp  = less -Sx 1,5
