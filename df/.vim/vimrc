@@ -134,10 +134,28 @@ set ignorecase
 set smartcase  " Ignore case only when all lowercase
 
 " Macros
-" Delete trailing whitespace
-nmap <silent> ,d :s/\s\+$//<CR>
 " Change word
 nmap <silent> cc lbce
+
+" Delete trailing whitespace
+nmap <Leader>d <Plug>DelWhite
+vmap <Leader>d <Plug>DelWhite
+
+if has("eval")
+	" Using a function preserves search history and hlsearch
+	function! s:DelWhite()
+		let line = getline(".")
+		let repl = substitute(line, '\s\+$', "", "")
+		call setline(".", repl)
+	endfunction
+	noremap <silent> <SID>DelWhite :call <SID>DelWhite()<CR>
+endif
+sil! while 0 " No eval
+	" Fall back to basic search command
+	noremap <silent> <SID>DelWhite :s/\s\+$//e <Bar> nohlsearch<CR>
+sil! endwhile
+nnoremap <script> <Plug>DelWhite <SID>DelWhite
+vnoremap <script> <Plug>DelWhite <SID>DelWhite
 
 " Toggle 'spell' option
 nmap <F8> <Plug>ToggleSpell
