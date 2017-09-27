@@ -7,7 +7,8 @@ shopt -s extglob
 
 ## Preferences
 # Command defaults
-alias ls='ls -C --color=auto --dereference-command-line --group-directories-first --human-readable'
+alias ls='ls -C --color=auto --dereference-command-line \
+          --group-directories-first --human-readable'
 alias grep='grep --color=auto'
 alias picocom='picocom -b 19200'
 alias bc='bc -l'
@@ -37,7 +38,8 @@ alias back='cd "$OLDPWD"'
 alias path='echo $PATH | tr : \\n'
 
 # Enjoy!
-alias lulz='cat /dev/urandom | hexdump -C | GREP_COLORS="mt=1;32" grep -E "[[:xdigit:]]{4}0000"'
+alias lulz='cat /dev/urandom | hexdump -C |
+            GREP_COLORS="mt=1;32" grep -E "[[:xdigit:]]{4}0000"'
 
 # mkdir and cd
 mkcd() { mkdir "$1" && cd "$1"; }
