@@ -48,7 +48,7 @@ function! s:undo_ftplugin()
 	let l:cpo_save = &cpo
 	set cpo&vim
 
-	setlocal comments<
+	setlocal iskeyword< comments<
 	silent unmap <buffer> ]]
 	silent unmap <buffer> [[
 	silent unmap <buffer> ][
