@@ -18,6 +18,16 @@ if has("eval")
 	" Handy shortcut for name of runtimepath directory in $HOME on current
 	" system (because Windows just has to be different...)
 	let s:homertp = $HOME . (has("win32") ? "/vimfiles" : "/.vim")
+
+	" Compatible with termguicolors
+	" Termguicolors requires that both the terminal and Vim are truecolor
+	" capable.  The environment variable $COLORTERM is usually not set
+	" automatically - this must be done manually (typically in .bashrc) when
+	" using a truecolor-capable terminal.
+	let s:has_tgc = has("termguicolors") && $COLORTERM == "truecolor"
+
+	" Some features only look good with at least 256 colors
+	let s:fancy_colors = &t_Co >= 256 || s:has_tgc || has("gui_running")
 endif
 
 " Plugins
@@ -32,16 +42,18 @@ endif
 " Syntax highlighting
 set background =dark
 if has("syntax")
-	if has("termguicolors") && $COLORTERM == "truecolor"
+	if s:has_tgc
 		set termguicolors
 		let &t_8f         ="\<Esc>[38;2;%lu;%lu;%lum"
 		let &t_8b         ="\<Esc>[48;2;%lu;%lu;%lum"
 	endif
 	syntax enable
-	if s:ExistsRTP("colors/solarized.vim")
+	if s:ExistsRTP("colors/solarized.vim") && s:fancy_colors
 		let g:solarized_termcolors =256
 		let g:solarized_menu       =0
 		colorscheme solarized
+	else
+		colorscheme industry
 	endif
 	if s:ExistsRTP("autoload/togglebg.vim")
 		call togglebg#map("")
@@ -63,7 +75,9 @@ if has("multi_byte")
 	             \ . "precedes:\u00ab,nbsp:\u00b7"
 endif
 if has("syntax")
-	set cursorline
+	if s:fancy_colors
+		set cursorline
+	endif
 	set colorcolumn =+2 " Always 2 columns right of textwidth
 endif
 
