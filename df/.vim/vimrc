@@ -99,6 +99,7 @@ set autoindent     " Keep indent of previous line
 
 " Line wrapping
 set nowrap
+set formatoptions =croqlj " Hard wrapping behavior
 if has("linebreak")
 	set linebreak
 	if exists("&breakindent")
@@ -127,7 +128,6 @@ endif
 if has("virtualedit")
 	set virtualedit =block
 endif
-set formatoptions =croqlj " Specify default line-wrapping behavior
 set textwidth     =78
 if has("mouse")
 	set mouse =a " Enable mouse
