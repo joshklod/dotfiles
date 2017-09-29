@@ -29,10 +29,10 @@ syntax	match	armbasicAssignment	/\([*/+-]\|<<\|>>\|\<\(AND\|OR\|XOR\)\)=/
 
 " Numbers
 syntax	cluster	armbasicNumberGroup	contains=armbasicDecimal,armbasicHex,armbasicBinary,armbasicFloat
-syntax	match	armbasicDecimal		/\(\<\|-\)\d\+\>/
+syntax	match	armbasicDecimal		/\(\<\|\(\W\&\S\&[^).]\|\<\(AND\|OR\|XOR\|NOT\|MOD\|RETURN\|CASE\)\>\)\@<=\s*\zs-\)\d\+\>/
 syntax	match	armbasicHex		/\(\$\|&H\)\x\+\>/
 syntax	match	armbasicBinary		/%[01]\+\>/
-syntax	match	armbasicFloat		/\(\<\|-\)\d\+\.\(\d\+\>\)\?/
+syntax	match	armbasicFloat		/\(\<\|\(\W\&\S\&[^).]\|\<\(AND\|OR\|XOR\|NOT\|MOD\|RETURN\|CASE\)\>\)\@<=\s*\zs-\)\d\+\.\(\d\+\>\)\?/
 
 " Goto Labels
 syntax	match	armbasicGotoLabel	/^\s*\zs\h\w*:/ nextgroup=armbasicLabelError
