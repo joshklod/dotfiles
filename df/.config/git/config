@@ -10,7 +10,7 @@
 	followTags = true
 	recurseSubmodules = check
 [include]
-	path = ~/.config/git/aliases
+	path = config.d/aliases
 [pager]
 	diff = less -Sx 5,9
 	show = less -Sx 5,9
