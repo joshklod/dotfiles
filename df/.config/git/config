@@ -1,45 +1,4 @@
-[user]
-	name = Josh Klodnicki
-	email = joshklod@gmail.com
-[core]
-	editor = vim
-	pager = less -+FX
-	whitespace = cr-at-eol,tabwidth=4
-[push]
-	default = simple
-	followTags = true
-	recurseSubmodules = check
-[pager]
-	diff = less -Sx 5,9
-	show = less -Sx 5,9
-	log  = less -S
-[log]
-	date = iso
-	graphColors = 160,40,184,63,165,45,172,43,112,99,163,33
-	abbrevCommit = true
-	decorate = auto # When output is a terminal
-[diff "word"]
-	textconv = ~/.config/git/scripts/word-textconv.sh
-[diff]
-	algorithm = histogram
-	indentHeuristic = true
-	submodule = log
-[stash]
-	showPatch = true
-	showStat = false
-[init]
-	templateDir = ~/.config/git/template
-[submodule]
-	fetchJobs = 0 # Detect reasonable default
-	recurse = true
-[rerere]
-	enabled = true
-[merge]
-	tool = vimdiff
-[mergetool]
-	keepBackup = false
-[status]
-	showStash = true
 [include]
+	path = config.d/default
 	path = config.d/aliases
 	path = config.d/local
