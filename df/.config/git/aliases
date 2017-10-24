@@ -27,7 +27,8 @@
 	cptree = !~/.config/git/scripts/cptree.sh
 
 	# Typo correction
-	dif = diff
+	dif   = diff
+	difff = diff
 
 [pager]
 	log3  = less -S
