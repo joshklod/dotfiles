@@ -14,3 +14,6 @@ df/.vim/spell/*.spl
 # Vim custom spell files (Whitelisted)
 df/.vim/spell/*.add
 !df/.vim/spell/personal.utf-8.add
+
+# Git system-local config
+df/.config/git/config.d/local

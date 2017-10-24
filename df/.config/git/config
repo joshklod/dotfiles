@@ -9,8 +9,6 @@
 	default = simple
 	followTags = true
 	recurseSubmodules = check
-[include]
-	path = config.d/aliases
 [pager]
 	diff = less -Sx 5,9
 	show = less -Sx 5,9
@@ -42,3 +40,6 @@
 	keepBackup = false
 [status]
 	showStash = true
+[include]
+	path = config.d/aliases
+	path = config.d/local
