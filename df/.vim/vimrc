@@ -181,6 +181,9 @@ if has("extra_search")
 	set hlsearch
 endif
 
+" Folding
+set foldminlines =4
+
 " Macros
 " Change word
 nmap <silent> cc lbce
