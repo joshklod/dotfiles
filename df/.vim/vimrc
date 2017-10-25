@@ -187,6 +187,9 @@ set foldminlines =4
 " Macros
 " Change word
 nmap <silent> cc lbce
+" Search in all files
+nnoremap <Leader>* :let @/='\<'.expand("<cword>").'\>'<CR>
+                 \ :vimgrep /<C-R>// %:p:h/*<CR>
 
 " Delete trailing whitespace
 nmap <Leader>d <Plug>DelWhite
