@@ -3,6 +3,12 @@ if has("multi_byte")
 	set encoding =utf-8
 endif
 
+" Recognize custom xterm-style terminals - Vim internally sets extra termcap
+" settings for terminals containing 'xterm'
+if &term =~ 'mintty\|hterm'
+	set term =xterm-truecolor
+endif
+
 " Source default vimrc
 if filereadable($VIMRUNTIME . "/defaults.vim")
 	unlet! skip_defaults_vim
@@ -44,8 +50,6 @@ set background =dark
 if has("syntax")
 	if s:has_tgc
 		set termguicolors
-		let &t_8f         ="\<Esc>[38;2;%lu;%lu;%lum"
-		let &t_8b         ="\<Esc>[48;2;%lu;%lu;%lum"
 	endif
 	syntax enable
 	if s:ExistsRTP("colors/solarized.vim") && s:fancy_colors
