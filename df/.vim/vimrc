@@ -90,6 +90,12 @@ set number norelativenumber
 if has("linebreak")
 	set numberwidth =3
 endif
+if has("cmdline_info")
+	set ruler " Show file position info on statusline
+	if has("statusline")
+		set rulerformat=%5l,%v%=\ %P " Hide byte column number
+	endif
+endif
 
 " Spell checking
 if has("syntax")
