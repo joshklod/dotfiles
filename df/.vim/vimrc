@@ -96,6 +96,16 @@ if has("cmdline_info")
 		set rulerformat=%5l,%v%=\ %P " Hide byte column number
 	endif
 endif
+if has("cursorshape") && &term =~ 'xterm'
+	" Cursor Shape Reference:
+	"                Blinking Solid
+	"          Block     1      2
+	"     Underscore     3      4
+	"            Bar     5      6
+	let &t_EI .= "\<Esc>[2 q" " Normal Mode
+	let &t_SI .= "\<Esc>[5 q" " Insert Mode
+	let &t_SR .= "\<Esc>[3 q" " Replace Mode
+endif
 
 " Spell checking
 if has("syntax")
