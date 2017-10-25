@@ -3,10 +3,16 @@ if has("multi_byte")
 	set encoding =utf-8
 endif
 
+" Recognize custom xterm-style terminals - Vim internally sets extra termcap
+" settings for terminals containing 'xterm'
+if &term =~ 'mintty\|hterm'
+	set term =xterm-truecolor
+endif
+
 " Source default vimrc
 if filereadable($VIMRUNTIME . "/defaults.vim")
 	unlet! skip_defaults_vim
-	source $VIMRUNTIME/defaults.vim
+	silent! source $VIMRUNTIME/defaults.vim
 endif
 
 if has("eval")
@@ -44,12 +50,12 @@ set background =dark
 if has("syntax")
 	if s:has_tgc
 		set termguicolors
-		let &t_8f         ="\<Esc>[38;2;%lu;%lu;%lum"
-		let &t_8b         ="\<Esc>[48;2;%lu;%lu;%lum"
 	endif
 	syntax enable
 	if s:ExistsRTP("colors/solarized.vim") && s:fancy_colors
-		let g:solarized_termcolors =256
+		if &t_Co >= 256
+			let g:solarized_termcolors =256
+		endif
 		let g:solarized_menu       =0
 		colorscheme solarized
 	else
@@ -79,6 +85,26 @@ if has("syntax")
 		set cursorline
 	endif
 	set colorcolumn =+2 " Always 2 columns right of textwidth
+endif
+set number norelativenumber
+if has("linebreak")
+	set numberwidth =3
+endif
+if has("cmdline_info")
+	set ruler " Show file position info on statusline
+	if has("statusline")
+		set rulerformat=%5l,%v%=\ %P " Hide byte column number
+	endif
+endif
+if has("cursorshape") && &term =~ 'xterm'
+	" Cursor Shape Reference:
+	"                Blinking Solid
+	"          Block     1      2
+	"     Underscore     3      4
+	"            Bar     5      6
+	let &t_EI .= "\<Esc>[2 q" " Normal Mode
+	let &t_SI .= "\<Esc>[5 q" " Insert Mode
+	let &t_SR .= "\<Esc>[3 q" " Replace Mode
 endif
 
 " Spell checking
@@ -119,7 +145,12 @@ if has("windows")
 	set laststatus =2 " Always show status line
 	if has("vertsplit")
 		set splitright
-		set winwidth    =80
+		" Leave extra space for line numbers
+		if has("linebreak")
+			let &winwidth = 80 + &numberwidth
+		else
+			set winwidth =83
+		endif
 		set winminwidth =20
 	endif
 endif
@@ -150,9 +181,15 @@ if has("extra_search")
 	set hlsearch
 endif
 
+" Folding
+set foldminlines =4
+
 " Macros
 " Change word
 nmap <silent> cc lbce
+" Search in all files
+nnoremap <Leader>* :let @/='\<'.expand("<cword>").'\>'<CR>
+                 \ :vimgrep /<C-R>// %:p:h/*<CR>
 
 " Delete trailing whitespace
 nmap <Leader>d <Plug>DelWhite
@@ -191,5 +228,10 @@ if has("user_commands")
 	command! -bar Topt       Taboptions
 
 	" Open scratchpad in new buffer
-	command! -bar Scratch new | setl bt=nofile bh=hide noswf
+	command! -bar Scratch  new  | setl bt=nofile bh=hide noswf
+	command! -bar Vscratch vnew | setl bt=nofile bh=hide noswf
+
+	" Open giti terminal in new window
+	command! -bar Giti  term giti
+	command! -bar Vgiti vert term giti
 endif
