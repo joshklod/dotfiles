@@ -53,7 +53,9 @@ if has("syntax")
 	endif
 	syntax enable
 	if s:ExistsRTP("colors/solarized.vim") && s:fancy_colors
-		let g:solarized_termcolors =256
+		if &t_Co >= 256
+			let g:solarized_termcolors =256
+		endif
 		let g:solarized_menu       =0
 		colorscheme solarized
 	else
