@@ -230,4 +230,8 @@ if has("user_commands")
 	" Open scratchpad in new buffer
 	command! -bar Scratch  new  | setl bt=nofile bh=hide noswf
 	command! -bar Vscratch vnew | setl bt=nofile bh=hide noswf
+
+	" Open giti terminal in new window
+	command! -bar Giti  term giti
+	command! -bar Vgiti vert term giti
 endif
