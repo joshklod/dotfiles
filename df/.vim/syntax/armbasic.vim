@@ -40,9 +40,10 @@ syntax	match	armbasicMain		/^\s*\zsMAIN:/ nextgroup=armbasicLabelError
 syntax	region	armbasicLabelError	excludenl start=/./ end=/$/ contained contains=armbasicComment,armbasicLineCont
 
 " Subs and Functions
-syntax	keyword	armbasicSub		SUB FUNCTION nextgroup=armbasicSubName skipwhite
-syntax	match	armbasicSub		/\<END \=\(SUB\|FUNCTION\)\>/
-syntax	match	armbasicSubName		/\<\h\w*\>:\=/ contained
+syntax	keyword	armbasicSubStart	SUB nextgroup=armbasicSubRegion skipwhite
+syntax	keyword	armbasicFuncStart	FUNCTION nextgroup=armbasicFuncRegion skipwhite
+syntax	region	armbasicSubRegion	matchgroup=armbasicSubName start=/\<\h\w*\>:\=/ matchgroup=armbasicSub end=/^\s*END \=SUB\>/ contained contains=TOP
+syntax	region	armbasicFuncRegion	matchgroup=armbasicSubName start=/\<\h\w*\>:\=/ matchgroup=armbasicSub end=/^\s*END \=FUNCTION\>/ contained contains=TOP
 
 " Statements
 syntax	keyword	armbasicStatement	GOSUB CALL EXIT GOTO RETURN __ASM__ CONST DIM
@@ -133,6 +134,8 @@ highlight link armbasicGotoLabel	armbasicFunction
 highlight link armbasicMain		armbasicUnderlined
 highlight link armbasicLabelError	armbasicError
 highlight link armbasicSub		armbasicType
+highlight link armbasicSubStart		armbasicSub
+highlight link armbasicFuncStart	armbasicSub
 highlight link armbasicSubName		armbasicFunction
 " Statements
 highlight link armbasicMapArgLine	armbasicNormal
