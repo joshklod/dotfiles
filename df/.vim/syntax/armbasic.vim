@@ -5,6 +5,20 @@ if exists("b:current_syntax")
     finish
 endif
 
+" Don't even try this without +eval.  Exit to avoid a bunch of errors.
+sil! while 0
+    finish
+sil! endwhile
+
+" Default options
+let s:fold = has("folding") ?
+	    \ (exists("g:armbasic_fold") ? g:armbasic_fold : 1)
+	    \ : 0
+
+if s:fold
+    set foldmethod=syntax
+endif
+
 syntax clear
 syntax case ignore
 syntax spell notoplevel
@@ -42,8 +56,14 @@ syntax	region	armbasicLabelError	excludenl start=/./ end=/$/ contained contains=
 " Subs and Functions
 syntax	keyword	armbasicSubStart	SUB nextgroup=armbasicSubRegion skipwhite
 syntax	keyword	armbasicFuncStart	FUNCTION nextgroup=armbasicFuncRegion skipwhite
-syntax	region	armbasicSubRegion	matchgroup=armbasicSubName start=/\<\h\w*\>:\=/ matchgroup=armbasicSub end=/^\s*END \=SUB\>/ contained contains=TOP
-syntax	region	armbasicFuncRegion	matchgroup=armbasicSubName start=/\<\h\w*\>:\=/ matchgroup=armbasicSub end=/^\s*END \=FUNCTION\>/ contained contains=TOP
+if s:fold
+    syntax region armbasicSubRegion	matchgroup=armbasicSubName start=/\<\h\w*\>:\=/ matchgroup=armbasicSub end=/^\s*END \=SUB\>/ contained contains=TOP fold
+    syntax region armbasicFuncRegion	matchgroup=armbasicSubName start=/\<\h\w*\>:\=/ matchgroup=armbasicSub end=/^\s*END \=FUNCTION\>/ contained contains=TOP fold
+else
+    syntax region armbasicSubRegion	matchgroup=armbasicSubName start=/\<\h\w*\>:\=/ matchgroup=armbasicSub end=/^\s*END \=SUB\>/ contained contains=TOP
+    syntax region armbasicFuncRegion	matchgroup=armbasicSubName start=/\<\h\w*\>:\=/ matchgroup=armbasicSub end=/^\s*END \=FUNCTION\>/ contained contains=TOP
+endif
+
 
 " Statements
 syntax	keyword	armbasicStatement	GOSUB CALL EXIT GOTO RETURN __ASM__ CONST DIM
@@ -93,8 +113,13 @@ syntax	region	armbasicPreIfLine	excludenl matchgroup=armbasicPreCondit start=/\<
 
 syntax	region	armbasicPreDiag		excludenl matchgroup=armbasicPreProc start=/\<\(warning\|error\)\>/ end=/$/ contained contains=armbasicComment,armbasicLineCont,@Spell
 
-syntax	region	armbasicIf0		matchgroup=armbasicPreCondit start="^\s*\zs#\s*if\s\+0\+\s*\ze\($\|//\|/\*\)" end=/^\s*#\s*endif\>/ end=/^\s*\ze#\s*\(elif\|else\)\>/ contains=armbasicIf0Skip nextgroup=armbasicIf0Else
-syntax	region	armbasicIf0		matchgroup=armbasicPreCondit start="^\s*\zs#\s*elif\s\+0\+\s*\ze\($\|//\|/\*\)" end=/^\ze\s*#\s*\(elif\|else\|endif\)\>/ contains=armbasicIf0Skip
+if s:fold
+    syntax region armbasicIf0		matchgroup=armbasicPreCondit start="^\s*\zs#\s*if\s\+0\+\s*\ze\($\|//\|/\*\)" end=/^\s*#\s*endif\>/ end=/^\s*\ze#\s*\(elif\|else\)\>/ contains=armbasicIf0Skip nextgroup=armbasicIf0Else fold
+    syntax region armbasicIf0		matchgroup=armbasicPreCondit start="^\s*\zs#\s*elif\s\+0\+\s*\ze\($\|//\|/\*\)" end=/^\ze\s*#\s*\(elif\|else\|endif\)\>/ contains=armbasicIf0Skip fold
+else
+    syntax region armbasicIf0		matchgroup=armbasicPreCondit start="^\s*\zs#\s*if\s\+0\+\s*\ze\($\|//\|/\*\)" end=/^\s*#\s*endif\>/ end=/^\s*\ze#\s*\(elif\|else\)\>/ contains=armbasicIf0Skip nextgroup=armbasicIf0Else
+    syntax region armbasicIf0		matchgroup=armbasicPreCondit start="^\s*\zs#\s*elif\s\+0\+\s*\ze\($\|//\|/\*\)" end=/^\ze\s*#\s*\(elif\|else\|endif\)\>/ contains=armbasicIf0Skip
+endif
 
 syntax	region	armbasicIf0Skip		start=/^\s*#\s*\(if\|ifdef\|ifndef\)\>/ end=/^\s*#\s*endif\>/ transparent contained contains=armbasicIf0Skip
 syntax	match	armbasicIf0Else		/\ze#\s*\(elif\|else\)\>/ contained nextgroup=armbasicPreConditBlock
@@ -121,7 +146,11 @@ syntax	keyword	armbasicTodo		TODO FIXME contained
 
 " Comments
 syntax	region	armbasicComment		excludenl start=/'/ start="//" end=/$/ contains=armbasicTodo,armbasicLineCont,@Spell
-syntax	region	armbasicComment		start="/\*" end="\*/" keepend contains=armbasicTodo,armbasicLineCont,@Spell
+if s:fold
+    syntax region armbasicComment	start="/\*" end="\*/" keepend contains=armbasicTodo,armbasicLineCont,@Spell fold
+else
+    syntax region armbasicComment	start="/\*" end="\*/" keepend contains=armbasicTodo,armbasicLineCont,@Spell
+endif
 
 " TODO Add default to all commands after testing
 " Comments
