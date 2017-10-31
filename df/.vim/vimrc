@@ -64,6 +64,11 @@ if has("syntax")
 	if s:ExistsRTP("autoload/togglebg.vim")
 		call togglebg#map("")
 	endif
+
+	" Color Overrides
+	if has("terminal")
+		highlight Terminal ctermbg=0 ctermfg=7 guibg=black guifg=lightgray
+	endif
 endif
 
 " Movement
