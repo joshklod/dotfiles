@@ -1,1 +1,1 @@
-au BufRead,BufNewFile *.minttyrc set filetype=minttyrc
+au BufNewFile,BufRead *.minttyrc setfiletype minttyrc
