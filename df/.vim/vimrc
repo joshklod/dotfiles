@@ -64,6 +64,11 @@ if has("syntax")
 	if s:ExistsRTP("autoload/togglebg.vim")
 		call togglebg#map("")
 	endif
+
+	" Color Overrides
+	if has("terminal")
+		highlight Terminal ctermbg=0 ctermfg=7 guibg=black guifg=lightgray
+	endif
 endif
 
 " Movement
@@ -102,9 +107,13 @@ if has("cursorshape") && &term =~ 'xterm'
 	"          Block     1      2
 	"     Underscore     3      4
 	"            Bar     5      6
+	"          Reset     0      0
 	let &t_EI .= "\<Esc>[2 q" " Normal Mode
 	let &t_SI .= "\<Esc>[5 q" " Insert Mode
 	let &t_SR .= "\<Esc>[3 q" " Replace Mode
+
+	let &t_ti .= "\<Esc>[2 q" " Vim Start
+	let &t_te .= "\<Esc>[0 q" " Vim Exit
 endif
 
 " Spell checking

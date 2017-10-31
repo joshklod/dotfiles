@@ -1,1 +1,1 @@
-au BufRead,BufNewFile *.mnu set filetype=idev
+au BufRead,BufNewFile *.mnu setfiletype idev
