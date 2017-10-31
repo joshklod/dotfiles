@@ -52,8 +52,8 @@ BellFile    =
 BellFlash   = no
 BellTaskbar = yes
 BellPopup   = no
-BellFreq    = 523
-BellLen     = 200
+BellFreq    = 0
+BellLen     = 0
 
 # Shortcuts
 ClipShortcuts      = yes
