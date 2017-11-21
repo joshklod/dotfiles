@@ -1,7 +1,7 @@
 " Vim indent file
 " Language:     ARMbasic
 " Maintainer:   Josh Klodnicki <joshklod@gmail.com>
-" Last Change:  2017 Aug 30
+" Last Change:  2017 Aug 31
 
 if exists("b:did_indent")
 	finish
@@ -37,6 +37,7 @@ function! GetArmbasicIndent()
 	let l:cline   = getline(v:lnum)
 	let l:pline   = getline(plnum)
 
+	" label endsub endfunction endif endselect elseif else
 	if l:cline =~ '\c^\s*\h\w*:'
 		" Goto Label
 		return 0
@@ -59,12 +60,14 @@ function! GetArmbasicIndent()
 		return l:pindent < sw ? 0 : l:pindent - sw
 	endif
 
+	if l:pline =~ '\c^\s*if\>.*\<then\>\(\(''\|//\|/\*\)\@!.\)*\w'
+		" One-line if statement
+		return l:pindent
+	endif
+
 	if l:pline =~ '\c^\s*\(sub\|function\)\>'
 		" Start of sub/function
 		return l:pindent + sw
-	elseif l:pline =~ '\c^\s*if\>.*\<then\>.*\w'
-		" One-line if statement
-		return l:pindent
 	elseif l:pline =~ '\c^\s*\(if\|elseif\|else\)\>'
 		" Multiline if statement
 		return l:pindent + sw
