@@ -1,3 +1,9 @@
+if has("eval")
+	" Handy shortcut for name of runtimepath directory in $HOME on current
+	" system (because Windows just has to be different...)
+	let s:homertp = $HOME . (has("win32") ? "/vimfiles" : "/.vim")
+endif
+
 " GUI-only settings
 set guioptions -=m
 set guioptions -=T
@@ -19,4 +25,9 @@ elseif has("gui_win32")
 	if has("directx")
 		set renderoptions =type:directx,level:1,geom:1,renmode:4,taamode:0
 	endif
+endif
+
+" Source local gvimrc
+if filereadable(s:homertp."/local.gvimrc")
+	execute 'source '.s:homertp."/local.gvimrc"
 endif
