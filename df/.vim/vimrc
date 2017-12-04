@@ -176,7 +176,24 @@ if has("mouse")
 	endif
 endif
 
-" Tags
+" Search paths
+if has("file_in_path")
+	" Current file and working directories first
+	set path =.,,
+	" Compiler headers
+	if has("path_extra")
+		set path +=/usr/lib/gcc/**2/include-fixed
+		set path +=/usr/lib/gcc/**2/include
+	endif
+	" Standard header files
+	set path +=/usr/local/include
+	set path +=/usr/include
+	" Cross-target headers
+	if has("path_extra")
+		set path +=/usr/local/**1/include
+		set path +=/usr/**1/include
+	endif
+endif
 set tags +=./.tags,.tags
 
 " Navigation
