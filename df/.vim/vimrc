@@ -249,3 +249,8 @@ if has("user_commands")
 				\ silent! <line1>,<line2>s/\%u2018\|\%u2019/'/g |
 				\ silent! <line1>,<line2>s/\%u201c\|\%u201d/"/g
 endif
+
+" Source local vimrc
+if filereadable(s:homertp."/local.vimrc")
+	execute 'source '.s:homertp."/local.vimrc"
+endif
