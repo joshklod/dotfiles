@@ -177,7 +177,7 @@ if has("mouse")
 endif
 
 " Tags
-set tags +=./.tags,.tags,/usr/local/lib/**/tags,/usr/local/lib/**/.tags
+set tags +=./.tags,.tags
 
 " Navigation
 nmap <X1Mouse> <C-O>
