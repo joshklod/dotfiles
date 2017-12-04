@@ -263,6 +263,9 @@ if has("user_commands")
 	command! -bar -range QuoteFix
 				\ silent! <line1>,<line2>s/\%u2018\|\%u2019/'/g |
 				\ silent! <line1>,<line2>s/\%u201c\|\%u201d/"/g
+
+	command! -nargs=1 -complete=shellcmd Run
+				\ <mods> new | setl bt=nofile bh=hide noswf | 0read !<args>
 endif
 
 " Source local vimrc
