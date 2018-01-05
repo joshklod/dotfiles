@@ -21,8 +21,10 @@ export COLORS
 
 ## Shell configuration
 # Shell options
-shopt -s extglob # Interpret extended glob syntax
-shopt -s dotglob # Include .* files in glob
+shopt -s extglob    # Interpret extended glob syntax
+shopt -s dotglob    # Include .* files in glob
+shopt -s globstar   # Enable 'dir/**/foo' syntax
+shopt -s histappend # Don't clobber history from parallel shell sessions
 
 # Environment variables
 export EDITOR=/usr/bin/vim    # Use Vim as default editor
