@@ -13,3 +13,9 @@
 [submodule "vim-template"]
 	path = submodules/vim-template
 	url = git://github.com/aperezdc/vim-template.git
+[submodule "vim-xtargets"]
+	path = submodules/vim-xtargets
+	url = git://github.com/joshklod/vim-xtargets.git
+[submodule "vim-indent-guides"]
+	path = submodules/vim-indent-guides
+	url = git://github.com/nathanaelkane/vim-indent-guides.git
