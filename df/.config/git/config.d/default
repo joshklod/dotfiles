@@ -24,6 +24,7 @@
 	algorithm = histogram
 	indentHeuristic = true
 	submodule = log
+	colorMoved = zebra
 [stash]
 	showPatch = true
 	showStat = false
