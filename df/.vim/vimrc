@@ -134,7 +134,7 @@ set autoindent     " Keep indent of previous line
 
 " Line wrapping
 set nowrap
-set formatoptions =croqlj " Hard wrapping behavior
+set formatoptions =cjloqr2 " Hard wrapping behavior
 if has("linebreak")
 	set linebreak
 	if exists("&breakindent")
