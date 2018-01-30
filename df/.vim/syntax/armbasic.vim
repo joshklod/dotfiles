@@ -114,15 +114,15 @@ syntax	region	armbasicPreIfLine	excludenl matchgroup=armbasicPreCondit start=/\<
 syntax	region	armbasicPreDiag		excludenl matchgroup=armbasicPreProc start=/\<\(warning\|error\)\>/ end=/$/ contained contains=armbasicComment,armbasicLineCont,@Spell
 
 if s:fold
-    syntax region armbasicIf0		matchgroup=armbasicPreCondit start="^\s*\zs#\s*if\s\+0\+\s*\ze\($\|//\|/\*\)" end=/^\s*#\s*endif\>/ end=/^\s*\ze#\s*\(elif\|else\)\>/ contains=armbasicIf0Skip nextgroup=armbasicIf0Else fold
+    syntax region armbasicIf0		matchgroup=armbasicPreCondit start="^\s*\zs#\s*if\s\+0\+\s*\ze\($\|//\|/\*\)" end=/^\s*#\s*endif\>/ end=/^\ze\s*#\s*\(elif\|else\)\>/ contains=armbasicIf0Skip nextgroup=armbasicIf0Else skipempty fold
     syntax region armbasicIf0		matchgroup=armbasicPreCondit start="^\s*\zs#\s*elif\s\+0\+\s*\ze\($\|//\|/\*\)" end=/^\ze\s*#\s*\(elif\|else\|endif\)\>/ contains=armbasicIf0Skip fold
 else
-    syntax region armbasicIf0		matchgroup=armbasicPreCondit start="^\s*\zs#\s*if\s\+0\+\s*\ze\($\|//\|/\*\)" end=/^\s*#\s*endif\>/ end=/^\s*\ze#\s*\(elif\|else\)\>/ contains=armbasicIf0Skip nextgroup=armbasicIf0Else
+    syntax region armbasicIf0		matchgroup=armbasicPreCondit start="^\s*\zs#\s*if\s\+0\+\s*\ze\($\|//\|/\*\)" end=/^\s*#\s*endif\>/ end=/^\ze\s*#\s*\(elif\|else\)\>/ contains=armbasicIf0Skip nextgroup=armbasicIf0Else skipempty
     syntax region armbasicIf0		matchgroup=armbasicPreCondit start="^\s*\zs#\s*elif\s\+0\+\s*\ze\($\|//\|/\*\)" end=/^\ze\s*#\s*\(elif\|else\|endif\)\>/ contains=armbasicIf0Skip
 endif
 
 syntax	region	armbasicIf0Skip		start=/^\s*#\s*\(if\|ifdef\|ifndef\)\>/ end=/^\s*#\s*endif\>/ transparent contained contains=armbasicIf0Skip
-syntax	match	armbasicIf0Else		/\ze#\s*\(elif\|else\)\>/ contained nextgroup=armbasicPreConditBlock
+syntax	match	armbasicIf0Else		/^\ze\s*#\s*\(elif\|else\)\>/ contained nextgroup=armbasicPreConditBlock
 
 syntax	region	armbasicPreConditBlock	start=/.\@=/ matchgroup=armbasicPreCondit end=/^\s*\zs#\s*endif\>/ contained contains=@armbasicTop
 
