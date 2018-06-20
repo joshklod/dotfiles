@@ -44,6 +44,9 @@ endif
 if has("autocmd")
 	filetype plugin indent on
 endif
+if s:ExistsRTP("plugin/templates.vim")
+	let g:templates_directory = s:homertp."/templates"
+endif
 
 " Syntax highlighting
 set background =dark
