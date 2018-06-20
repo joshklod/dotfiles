@@ -40,6 +40,9 @@ function! GetArmbasicIndent()
 	if l:cline =~ '\c^\s*\h\w*:'
 		" Goto Label
 		return 0
+	elseif l:cline =~ '\c^\s*#'
+		" Preprocessor line
+		return 0
 	elseif l:cline =~ '\c^\s*end \=\(su\|f\)'
 		" End of sub/function
 		return l:pindent < sw ? 0 : l:pindent - sw
