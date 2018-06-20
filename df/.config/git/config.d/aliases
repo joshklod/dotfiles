@@ -37,7 +37,6 @@
 	difff = diff
 
 [pager]
-	log3  = less -S
 	logp  = less -Sx 1,5
 	lgp   = less -Sx 1,5
 	lgs   = less -FRX
