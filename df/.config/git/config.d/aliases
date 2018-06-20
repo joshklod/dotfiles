@@ -28,6 +28,7 @@
 	cat    = !~/.config/git/scripts/cat.sh
 	page   = !~/.config/git/scripts/page.sh
 	mlog   = !~/.config/git/scripts/mlog.sh
+	revlog = !~/.config/git/scripts/revlog.sh
 
 	# Typo correction
 	dif   = diff
