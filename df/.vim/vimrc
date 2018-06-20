@@ -216,6 +216,16 @@ if has("eval")
 	let g:javaScript_fold = 1
 endif
 
+" Autocmds
+if has("autocmd")
+	augroup vimrc
+		" Remove all vimrc autocommands
+		autocmd!
+		" Node.js auto-formatted config file
+		autocmd BufNewFile,BufRead package.json setl sw=2 et
+	augroup END
+endif
+
 " Macros
 " Change word
 nmap <silent> cc lbce
