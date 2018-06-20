@@ -276,7 +276,7 @@ if has("user_commands")
 	command! -bar Scratch <mods> new | setl bt=nofile bh=hide noswf
 
 	" Open giti terminal in new window
-	command! -bar Giti <mods> term giti
+	command! -bar Giti <mods> term ++close giti
 
 	" Replace smart quotes with ASCII quotes
 	command! -bar -range QuoteFix
