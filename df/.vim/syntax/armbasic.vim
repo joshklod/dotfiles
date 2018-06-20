@@ -109,9 +109,9 @@ syntax	region	armbasicIncLine		excludenl matchgroup=armbasicInclude start=/\<inc
 syntax	region	armbasicIncluded	excludenl start=/"/ end=/"/ end=/$/ contained contains=armbasicLineCont
 syntax	region	armbasicIncluded	excludenl start=/</ end=/>/ end=/$/ contained contains=armbasicLineCont
 
-syntax	region	armbasicPreIfLine	excludenl matchgroup=armbasicPreCondit start=/\<if\>/ end=/$/ contained contains=armbasicDefined,armbasicLineCont nextgroup=armbasicPreConditBlock skipempty
+syntax	region	armbasicPreIfLine	excludenl matchgroup=armbasicPreCondit start=/\<if\>/ end=/$/ contained contains=armbasicDefined,armbasicPreBool,armbasicLineCont nextgroup=armbasicPreConditBlock skipempty
 syntax	region	armbasicPreIfLine	excludenl matchgroup=armbasicPreCondit start=/\<\(ifdef\|ifndef\)\>/ end=/$/ contained contains=armbasicLineCont nextgroup=armbasicPreConditBlock skipempty
-syntax	region	armbasicPreIfLine	excludenl matchgroup=armbasicPreCondit start=/\<elif\>/ end=/$/ contained contains=armbasicDefined,armbasicLineCont
+syntax	region	armbasicPreIfLine	excludenl matchgroup=armbasicPreCondit start=/\<elif\>/ end=/$/ contained contains=armbasicDefined,armbasicPreBool,armbasicLineCont
 
 syntax	region	armbasicPreDiag		excludenl matchgroup=armbasicPreProc start=/\<\(warning\|error\)\>/ end=/$/ contained contains=armbasicComment,armbasicLineCont,@Spell
 
@@ -129,6 +129,7 @@ syntax	match	armbasicIf0Else		/^\ze\s*#\s*\(elif\|else\)\>/ contained nextgroup=
 syntax	region	armbasicPreConditBlock	start=/.\@=/ matchgroup=armbasicPreCondit end=/^\s*\zs#\s*endif\>/ contained contains=@armbasicTop
 
 syntax	keyword	armbasicDefined		defined contained
+syntax	match	armbasicPreBool		/&&\|||\|!/ contained
 syntax case ignore
 
 " Types
@@ -185,6 +186,7 @@ highlight link armbasicIncLine		armbasicError
 highlight link armbasicIncluded		armbasicString
 highlight link armbasicPreIfLine	armbasicPreProc
 highlight link armbasicDefined		armbasicPreProc
+highlight link armbasicPreBool		armbasicPreProc
 highlight link armbasicPreDiag		armbasicString
 highlight link armbasicIf0		armbasicComment
 " Types
