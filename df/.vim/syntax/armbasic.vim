@@ -75,7 +75,8 @@ syntax	region	armbasicMapArgLine	excludenl start=/./ end=/$/ contained contains=
 syntax	keyword	armbasicMapArgs		CODE CONST DATA STRING contained nextgroup=@armbasicNumberGroup skipwhite
 
 " Conditionals and loops
-syntax	keyword	armbasicConditional	IF ELSEIF nextgroup=armbasicBoolLine
+syntax	match	armbasicConditional	/\<IF\>/ nextgroup=armbasicTernary skipwhite
+syntax	match	armbasicConditional	/^\s*\zs\(ELSE\)\?IF\>/ nextgroup=armbasicBoolLine
 syntax	keyword	armbasicConditional	THEN ELSE
 syntax	match	armbasicConditional	/\<SELECT\( CASE\)\?\>/
 syntax	match	armbasicConditional	/\<END \?\(IF\|SELECT\)\>/
@@ -84,6 +85,7 @@ syntax	keyword	armbasicRepeat		WHILE UNTIL nextgroup=armbasicBoolLine
 
 " Boolean Regions
 syntax	region	armbasicBoolLine	excludenl start=/./ end=/\ze\<THEN\>/ end=/$/ contained contains=@armbasicBoolGroup,armbasicComment,armbasicLineCont
+syntax	region	armbasicTernary		excludenl matchgroup=armbasicParen start=/(/ matchgroup=armbasicOperator end=/,/ end=/$/ contained contains=@armbasicBoolGroup,armbasicComment,armbasicLineCont
 syntax	cluster	armbasicBoolGroup	contains=armbasicString,armbasicChar,armbasicMath,armbasicBoolOp,@armbasicNumberGroup,armbasicComparison,armbasicBoolParens,armbasicBoolError
 syntax	match	armbasicComparison	/[<>=]\|<=\|<>\|>=/ contained
 syntax	region	armbasicBoolParens	excludenl matchgroup=armbasicParen start=/(/ end=/)/ end=/$/ contained contains=@armbasicBoolGroup,armbasicComment,armbasicLineCont
