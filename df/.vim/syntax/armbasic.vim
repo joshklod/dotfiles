@@ -57,11 +57,11 @@ syntax	region	armbasicLabelError	excludenl start=/./ end=/$/ contained contains=
 syntax	keyword	armbasicSubStart	SUB nextgroup=armbasicSubRegion skipwhite
 syntax	keyword	armbasicFuncStart	FUNCTION nextgroup=armbasicFuncRegion skipwhite
 if s:fold
-    syntax region armbasicSubRegion	matchgroup=armbasicSubName start=/\<\h\w*\>:\=/ matchgroup=armbasicSub end=/^\s*END \=SUB\>/ contained contains=TOP fold
-    syntax region armbasicFuncRegion	matchgroup=armbasicSubName start=/\<\h\w*\>:\=/ matchgroup=armbasicSub end=/^\s*END \=FUNCTION\>/ contained contains=TOP fold
+    syntax region armbasicSubRegion	matchgroup=armbasicSubName start=/\<\h\w*\>:\=/ matchgroup=armbasicSub end=/^\s*END \=SUB\>/ keepend contained contains=TOP fold
+    syntax region armbasicFuncRegion	matchgroup=armbasicSubName start=/\<\h\w*\>:\=/ matchgroup=armbasicSub end=/^\s*END \=FUNCTION\>/ keepend contained contains=TOP fold
 else
-    syntax region armbasicSubRegion	matchgroup=armbasicSubName start=/\<\h\w*\>:\=/ matchgroup=armbasicSub end=/^\s*END \=SUB\>/ contained contains=TOP
-    syntax region armbasicFuncRegion	matchgroup=armbasicSubName start=/\<\h\w*\>:\=/ matchgroup=armbasicSub end=/^\s*END \=FUNCTION\>/ contained contains=TOP
+    syntax region armbasicSubRegion	matchgroup=armbasicSubName start=/\<\h\w*\>:\=/ matchgroup=armbasicSub end=/^\s*END \=SUB\>/ keepend contained contains=TOP
+    syntax region armbasicFuncRegion	matchgroup=armbasicSubName start=/\<\h\w*\>:\=/ matchgroup=armbasicSub end=/^\s*END \=FUNCTION\>/ keepend contained contains=TOP
 endif
 
 
