@@ -212,6 +212,9 @@ endif
 
 " Folding
 set foldminlines =4
+if has("eval")
+	let g:javaScript_fold = 1
+endif
 
 " Macros
 " Change word
