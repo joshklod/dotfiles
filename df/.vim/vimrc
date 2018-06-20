@@ -230,6 +230,8 @@ endif
 " Search in all files
 nnoremap <Leader>* :let @/='\<'.expand("<cword>").'\>'<CR>
                  \ :vimgrep /<C-R>// %:p:h/*<CR>
+" Re-detect filetype
+nnoremap <Leader>fd :filetype detect<CR>
 
 " Delete trailing whitespace
 nmap <Leader>d <Plug>DelWhite
