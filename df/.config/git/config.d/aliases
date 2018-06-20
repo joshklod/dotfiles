@@ -5,7 +5,7 @@
 [alias]
 	# Not meant to be used
 	log2  = log --pretty=twoline
-	log2g = log --pretty=twolineg --graph
+	log2g = !git mlog --pretty=twolineg
 
 	# Log shortcuts
 	llog = log --author-date-order --show-linear-break
@@ -27,6 +27,7 @@
 	cptree = !~/.config/git/scripts/cptree.sh
 	cat    = !~/.config/git/scripts/cat.sh
 	page   = !~/.config/git/scripts/page.sh
+	mlog   = !~/.config/git/scripts/mlog.sh
 
 	# Typo correction
 	dif   = diff
@@ -38,5 +39,6 @@
 	lgp   = less -Sx 1,5
 	lgs   = less -FRX
 	diffs = less -FRX
+	mlog  = less -S
 
 # vim: ft=gitconfig
