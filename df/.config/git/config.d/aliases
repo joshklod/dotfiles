@@ -22,6 +22,7 @@
 	stl     = !"git status && git lgs"
 	diffs   = diff --stat
 	shows   = show --stat
+	stashes = log --cc --walk-reflogs refs/stash
 
 	# Custom commands
 	ctags  = !~/.config/git/scripts/ctags.sh
