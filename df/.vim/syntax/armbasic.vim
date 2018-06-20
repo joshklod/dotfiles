@@ -109,9 +109,9 @@ syntax	region	armbasicIncLine		excludenl matchgroup=armbasicInclude start=/\<inc
 syntax	region	armbasicIncluded	excludenl start=/"/ end=/"/ end=/$/ contained contains=armbasicLineCont
 syntax	region	armbasicIncluded	excludenl start=/</ end=/>/ end=/$/ contained contains=armbasicLineCont
 
-syntax	region	armbasicPreIfLine	excludenl matchgroup=armbasicPreCondit start=/\<if\>/ end=/$/ contained contains=@armbasicTop,armbasicDefined nextgroup=armbasicPreConditBlock skipempty
-syntax	region	armbasicPreIfLine	excludenl matchgroup=armbasicPreCondit start=/\<\(ifdef\|ifndef\)\>/ end=/$/ contained contains=@armbasicTop nextgroup=armbasicPreConditBlock skipempty
-syntax	region	armbasicPreIfLine	excludenl matchgroup=armbasicPreCondit start=/\<elif\>/ end=/$/ contained contains=@armbasicTop,armbasicDefined
+syntax	region	armbasicPreIfLine	excludenl matchgroup=armbasicPreCondit start=/\<if\>/ end=/$/ contained contains=armbasicDefined,armbasicLineCont nextgroup=armbasicPreConditBlock skipempty
+syntax	region	armbasicPreIfLine	excludenl matchgroup=armbasicPreCondit start=/\<\(ifdef\|ifndef\)\>/ end=/$/ contained contains=armbasicLineCont nextgroup=armbasicPreConditBlock skipempty
+syntax	region	armbasicPreIfLine	excludenl matchgroup=armbasicPreCondit start=/\<elif\>/ end=/$/ contained contains=armbasicDefined,armbasicLineCont
 
 syntax	region	armbasicPreDiag		excludenl matchgroup=armbasicPreProc start=/\<\(warning\|error\)\>/ end=/$/ contained contains=armbasicComment,armbasicLineCont,@Spell
 
@@ -183,6 +183,7 @@ highlight link armbasicLineCont		armbasicPreProc
 highlight link armbasicPreProcStart	armbasicPreProc
 highlight link armbasicIncLine		armbasicError
 highlight link armbasicIncluded		armbasicString
+highlight link armbasicPreIfLine	armbasicPreProc
 highlight link armbasicDefined		armbasicPreProc
 highlight link armbasicPreDiag		armbasicString
 highlight link armbasicIf0		armbasicComment
