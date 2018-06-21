@@ -92,7 +92,7 @@ cs() {
 	# Change directory
 	cd $cdargs "$path" || return 1
 	# Print new working directory
-	wdstr="$(pwd | sed "s/^${HOME//\//\\\/}\b/~/"):"
+	wdstr="$(pwd | sed "s:^${HOME//:/\\:}\b:~:"):"
 	[ $COLORS -ge 8 ] && wdstr="\e[1m$wdstr\e[0m" # Use color if available
 	echo -e "$wdstr"
 	# List new directory contents

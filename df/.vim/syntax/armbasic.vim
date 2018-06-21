@@ -57,11 +57,11 @@ syntax	region	armbasicLabelError	excludenl start=/./ end=/$/ contained contains=
 syntax	keyword	armbasicSubStart	SUB nextgroup=armbasicSubRegion skipwhite
 syntax	keyword	armbasicFuncStart	FUNCTION nextgroup=armbasicFuncRegion skipwhite
 if s:fold
-    syntax region armbasicSubRegion	matchgroup=armbasicSubName start=/\<\h\w*\>:\=/ matchgroup=armbasicSub end=/^\s*END \=SUB\>/ contained contains=TOP fold
-    syntax region armbasicFuncRegion	matchgroup=armbasicSubName start=/\<\h\w*\>:\=/ matchgroup=armbasicSub end=/^\s*END \=FUNCTION\>/ contained contains=TOP fold
+    syntax region armbasicSubRegion	matchgroup=armbasicSubName start=/\<\h\w*\>:\=/ matchgroup=armbasicSub end=/^\s*END \=SUB\>/ keepend contained contains=TOP fold
+    syntax region armbasicFuncRegion	matchgroup=armbasicSubName start=/\<\h\w*\>:\=/ matchgroup=armbasicSub end=/^\s*END \=FUNCTION\>/ keepend contained contains=TOP fold
 else
-    syntax region armbasicSubRegion	matchgroup=armbasicSubName start=/\<\h\w*\>:\=/ matchgroup=armbasicSub end=/^\s*END \=SUB\>/ contained contains=TOP
-    syntax region armbasicFuncRegion	matchgroup=armbasicSubName start=/\<\h\w*\>:\=/ matchgroup=armbasicSub end=/^\s*END \=FUNCTION\>/ contained contains=TOP
+    syntax region armbasicSubRegion	matchgroup=armbasicSubName start=/\<\h\w*\>:\=/ matchgroup=armbasicSub end=/^\s*END \=SUB\>/ keepend contained contains=TOP
+    syntax region armbasicFuncRegion	matchgroup=armbasicSubName start=/\<\h\w*\>:\=/ matchgroup=armbasicSub end=/^\s*END \=FUNCTION\>/ keepend contained contains=TOP
 endif
 
 
@@ -75,7 +75,8 @@ syntax	region	armbasicMapArgLine	excludenl start=/./ end=/$/ contained contains=
 syntax	keyword	armbasicMapArgs		CODE CONST DATA STRING contained nextgroup=@armbasicNumberGroup skipwhite
 
 " Conditionals and loops
-syntax	keyword	armbasicConditional	IF ELSEIF nextgroup=armbasicBoolLine
+syntax	match	armbasicConditional	/\<IF\>/ nextgroup=armbasicTernary skipwhite
+syntax	match	armbasicConditional	/^\s*\zs\(ELSE\)\?IF\>/ nextgroup=armbasicBoolLine
 syntax	keyword	armbasicConditional	THEN ELSE
 syntax	match	armbasicConditional	/\<SELECT\( CASE\)\?\>/
 syntax	match	armbasicConditional	/\<END \?\(IF\|SELECT\)\>/
@@ -84,6 +85,7 @@ syntax	keyword	armbasicRepeat		WHILE UNTIL nextgroup=armbasicBoolLine
 
 " Boolean Regions
 syntax	region	armbasicBoolLine	excludenl start=/./ end=/\ze\<THEN\>/ end=/$/ contained contains=@armbasicBoolGroup,armbasicComment,armbasicLineCont
+syntax	region	armbasicTernary		excludenl matchgroup=armbasicParen start=/(/ matchgroup=armbasicOperator end=/,/ end=/$/ contained contains=@armbasicBoolGroup,armbasicComment,armbasicLineCont
 syntax	cluster	armbasicBoolGroup	contains=armbasicString,armbasicChar,armbasicMath,armbasicBoolOp,@armbasicNumberGroup,armbasicComparison,armbasicBoolParens,armbasicBoolError
 syntax	match	armbasicComparison	/[<>=]\|<=\|<>\|>=/ contained
 syntax	region	armbasicBoolParens	excludenl matchgroup=armbasicParen start=/(/ end=/)/ end=/$/ contained contains=@armbasicBoolGroup,armbasicComment,armbasicLineCont
@@ -107,26 +109,27 @@ syntax	region	armbasicIncLine		excludenl matchgroup=armbasicInclude start=/\<inc
 syntax	region	armbasicIncluded	excludenl start=/"/ end=/"/ end=/$/ contained contains=armbasicLineCont
 syntax	region	armbasicIncluded	excludenl start=/</ end=/>/ end=/$/ contained contains=armbasicLineCont
 
-syntax	region	armbasicPreIfLine	excludenl matchgroup=armbasicPreCondit start=/\<if\>/ end=/$/ contained contains=@armbasicTop,armbasicDefined nextgroup=armbasicPreConditBlock skipempty
-syntax	region	armbasicPreIfLine	excludenl matchgroup=armbasicPreCondit start=/\<\(ifdef\|ifndef\)\>/ end=/$/ contained contains=@armbasicTop nextgroup=armbasicPreConditBlock skipempty
-syntax	region	armbasicPreIfLine	excludenl matchgroup=armbasicPreCondit start=/\<elif\>/ end=/$/ contained contains=@armbasicTop,armbasicDefined
+syntax	region	armbasicPreIfLine	excludenl matchgroup=armbasicPreCondit start=/\<if\>/ end=/$/ contained contains=armbasicDefined,armbasicPreBool,armbasicLineCont nextgroup=armbasicPreConditBlock skipempty
+syntax	region	armbasicPreIfLine	excludenl matchgroup=armbasicPreCondit start=/\<\(ifdef\|ifndef\)\>/ end=/$/ contained contains=armbasicLineCont nextgroup=armbasicPreConditBlock skipempty
+syntax	region	armbasicPreIfLine	excludenl matchgroup=armbasicPreCondit start=/\<elif\>/ end=/$/ contained contains=armbasicDefined,armbasicPreBool,armbasicLineCont
 
 syntax	region	armbasicPreDiag		excludenl matchgroup=armbasicPreProc start=/\<\(warning\|error\)\>/ end=/$/ contained contains=armbasicComment,armbasicLineCont,@Spell
 
 if s:fold
-    syntax region armbasicIf0		matchgroup=armbasicPreCondit start="^\s*\zs#\s*if\s\+0\+\s*\ze\($\|//\|/\*\)" end=/^\s*#\s*endif\>/ end=/^\s*\ze#\s*\(elif\|else\)\>/ contains=armbasicIf0Skip nextgroup=armbasicIf0Else fold
+    syntax region armbasicIf0		matchgroup=armbasicPreCondit start="^\s*\zs#\s*if\s\+0\+\s*\ze\($\|//\|/\*\)" end=/^\s*#\s*endif\>/ end=/^\ze\s*#\s*\(elif\|else\)\>/ contains=armbasicIf0Skip nextgroup=armbasicIf0Else skipempty fold
     syntax region armbasicIf0		matchgroup=armbasicPreCondit start="^\s*\zs#\s*elif\s\+0\+\s*\ze\($\|//\|/\*\)" end=/^\ze\s*#\s*\(elif\|else\|endif\)\>/ contains=armbasicIf0Skip fold
 else
-    syntax region armbasicIf0		matchgroup=armbasicPreCondit start="^\s*\zs#\s*if\s\+0\+\s*\ze\($\|//\|/\*\)" end=/^\s*#\s*endif\>/ end=/^\s*\ze#\s*\(elif\|else\)\>/ contains=armbasicIf0Skip nextgroup=armbasicIf0Else
+    syntax region armbasicIf0		matchgroup=armbasicPreCondit start="^\s*\zs#\s*if\s\+0\+\s*\ze\($\|//\|/\*\)" end=/^\s*#\s*endif\>/ end=/^\ze\s*#\s*\(elif\|else\)\>/ contains=armbasicIf0Skip nextgroup=armbasicIf0Else skipempty
     syntax region armbasicIf0		matchgroup=armbasicPreCondit start="^\s*\zs#\s*elif\s\+0\+\s*\ze\($\|//\|/\*\)" end=/^\ze\s*#\s*\(elif\|else\|endif\)\>/ contains=armbasicIf0Skip
 endif
 
 syntax	region	armbasicIf0Skip		start=/^\s*#\s*\(if\|ifdef\|ifndef\)\>/ end=/^\s*#\s*endif\>/ transparent contained contains=armbasicIf0Skip
-syntax	match	armbasicIf0Else		/\ze#\s*\(elif\|else\)\>/ contained nextgroup=armbasicPreConditBlock
+syntax	match	armbasicIf0Else		/^\ze\s*#\s*\(elif\|else\)\>/ contained nextgroup=armbasicPreConditBlock
 
 syntax	region	armbasicPreConditBlock	start=/.\@=/ matchgroup=armbasicPreCondit end=/^\s*\zs#\s*endif\>/ contained contains=@armbasicTop
 
 syntax	keyword	armbasicDefined		defined contained
+syntax	match	armbasicPreBool		/&&\|||\|!/ contained
 syntax case ignore
 
 " Types
@@ -181,7 +184,9 @@ highlight link armbasicLineCont		armbasicPreProc
 highlight link armbasicPreProcStart	armbasicPreProc
 highlight link armbasicIncLine		armbasicError
 highlight link armbasicIncluded		armbasicString
+highlight link armbasicPreIfLine	armbasicPreProc
 highlight link armbasicDefined		armbasicPreProc
+highlight link armbasicPreBool		armbasicPreProc
 highlight link armbasicPreDiag		armbasicString
 highlight link armbasicIf0		armbasicComment
 " Types

@@ -44,6 +44,9 @@ endif
 if has("autocmd")
 	filetype plugin indent on
 endif
+if s:ExistsRTP("plugin/templates.vim")
+	let g:templates_directory = s:homertp."/templates"
+endif
 
 " Syntax highlighting
 set background =dark
@@ -209,13 +212,29 @@ endif
 
 " Folding
 set foldminlines =4
+if has("eval")
+	let g:javaScript_fold = 1
+endif
+
+" Autocmds
+if has("autocmd")
+	augroup vimrc
+		" Remove all vimrc autocommands
+		autocmd!
+		" Node.js auto-formatted config file
+		autocmd BufNewFile,BufRead package.json setl sw=2 et
+	augroup END
+endif
 
 " Macros
-" Change word
-nmap <silent> cc lbce
 " Search in all files
 nnoremap <Leader>* :let @/='\<'.expand("<cword>").'\>'<CR>
                  \ :vimgrep /<C-R>// %:p:h/*<CR>
+" Re-detect filetype
+nnoremap <Leader>fd :filetype detect<CR>
+" :Kappa:
+nnoremap <Up><Up><Down><Down><Left><Right><Left><Right>ba<CR>
+			\ :topl Scratch<CR>iLives: 1<Esc>254@="\<C-A>\<C-L>"<CR>
 
 " Delete trailing whitespace
 nmap <Leader>d <Plug>DelWhite
@@ -257,7 +276,7 @@ if has("user_commands")
 	command! -bar Scratch <mods> new | setl bt=nofile bh=hide noswf
 
 	" Open giti terminal in new window
-	command! -bar Giti <mods> term giti
+	command! -bar Giti <mods> term ++close giti
 
 	" Replace smart quotes with ASCII quotes
 	command! -bar -range QuoteFix
