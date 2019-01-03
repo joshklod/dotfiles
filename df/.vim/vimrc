@@ -32,8 +32,10 @@ if has("eval")
 	" using a truecolor-capable terminal.
 	let s:has_tgc = has("termguicolors") && $COLORTERM == "truecolor"
 
+	" Some features only look good with truecolor
+	let s:truecolor = s:has_tgc || has("gui_running")
 	" Some features only look good with at least 256 colors
-	let s:fancy_colors = &t_Co >= 256 || s:has_tgc || has("gui_running")
+	let s:fancy_colors = &t_Co >= 256 || s:truecolor
 endif
 
 " Plugins
