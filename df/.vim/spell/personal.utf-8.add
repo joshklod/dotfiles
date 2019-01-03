@@ -6,4 +6,7 @@ PHP
 UART
 DAC
 Cygwin
-webpack
+TCP
+GPIO
+PID
+TTL
