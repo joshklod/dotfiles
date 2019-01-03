@@ -48,7 +48,7 @@ if [ $COLORS -ge 8 ]; then
 	
 	# [blue]user@host [cyan]path
 	# [cyan]$
-	PS1="\n$blue\u@\h $cyan\w\n\$ $reset"
+	PS1="\n$blue\u@\h $cyan\w$reset\n$cyan\$ $reset"
 	PS2="$cyan> $reset"
 	
 	unset blue cyan reset
