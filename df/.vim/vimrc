@@ -293,6 +293,9 @@ if has("user_commands")
 	" Open giti terminal in new window
 	command! -bar Giti <mods> term ++close giti
 
+	" Start Grip server in terminal window
+	command! -bar Grip <mods> term ++close grip %
+
 	" Replace smart quotes with ASCII quotes
 	command! -bar -range QuoteFix
 				\ silent! <line1>,<line2>s/\%u2018\|\%u2019/'/g |
