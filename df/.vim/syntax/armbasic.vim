@@ -137,7 +137,7 @@ syntax	keyword	armbasicType		INTEGER SINGLE BYTE STRING contained
 syntax	keyword	armbasicParamType	BYREF BYVAL PARAMARRAY
 
 " Special
-syntax	keyword	armbasicDebug		DEBUGIN PRINT STOP RUN
+syntax	keyword	armbasicDebug		DEBUGIN PRINT PRINTF STOP RUN
 
 " Memory Read/Write Debug Commands
 syntax	match	armbasicDebug		/@\x*\>/
