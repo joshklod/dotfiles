@@ -243,6 +243,8 @@ nnoremap <Leader>* :let @/='\<'.expand("<cword>").'\>'<CR>
                  \ :vimgrep /<C-R>// %:p:h/*<CR>
 " Re-detect filetype
 nnoremap <Leader>fd :filetype detect<CR>
+" Jump to git conflict markers
+nnoremap <Leader>gc /\%^/;/^\([<=>]\)\@=\1\{7}<CR>
 " :Kappa:
 nnoremap <Up><Up><Down><Down><Left><Right><Left><Right>ba<CR>
 			\ :topl Scratch<CR>iLives: 1<Esc>254@="\<C-A>\<C-L>"<CR>
