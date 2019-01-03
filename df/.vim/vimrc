@@ -247,7 +247,9 @@ nnoremap <Leader>fd :filetype detect<CR>
 nnoremap <Leader>gc /\%^/;/^\([<=>]\)\@=\1\{7}<CR>
 " :Kappa:
 nnoremap <Up><Up><Down><Down><Left><Right><Left><Right>ba<CR>
-			\ :topl Scratch<CR>iLives: 1<Esc>254@="\<C-A>\<C-L>"<CR>
+			\ :topl 1new<Bar>setl bt=nofile bh=hide noswf<CR>i  Lives:
+			\ 1<Esc>0254@=":sleep 20m\<lt>CR>$\<lt>C-A>0"<CR>:echo
+			\ 'Secret Bonus Unlocked!'<CR>
 
 " Delete trailing whitespace
 nmap <Leader>d <Plug>DelWhite
