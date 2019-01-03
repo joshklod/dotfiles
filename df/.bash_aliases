@@ -32,7 +32,7 @@ alias lall='ls -l --all'
 alias llal='lall'
 
 # One-line mathematical calculation
-alias calc='bc <<<'
+calc () { echo "$@" | bc; }
 
 # Go back to previous directory
 alias back='cd "$OLDPWD"'

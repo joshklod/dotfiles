@@ -32,8 +32,10 @@ if has("eval")
 	" using a truecolor-capable terminal.
 	let s:has_tgc = has("termguicolors") && $COLORTERM == "truecolor"
 
+	" Some features only look good with truecolor
+	let s:truecolor = s:has_tgc || has("gui_running")
 	" Some features only look good with at least 256 colors
-	let s:fancy_colors = &t_Co >= 256 || s:has_tgc || has("gui_running")
+	let s:fancy_colors = &t_Co >= 256 || s:truecolor
 endif
 
 " Plugins
@@ -70,7 +72,14 @@ if has("syntax")
 
 	" Color Overrides
 	if has("terminal")
-		highlight Terminal ctermbg=0 ctermfg=7 guibg=black guifg=lightgray
+		highlight Terminal ctermbg=0 ctermfg=7 guibg=#000000 guifg=#CDCDCD
+		if s:truecolor
+			let g:terminal_ansi_colors = [
+						\ '#000000', '#CD0000', '#00CD00', '#CDCD00',
+						\ '#007FFF', '#CD00CD', '#00CDCD', '#CDCDCD',
+						\ '#7F7F7F', '#FF0000', '#00FF00', '#FFFF00',
+						\ '#5CA0FF', '#FF00FF', '#00FFFF', '#FFFFFF']
+		endif
 	endif
 endif
 
@@ -227,14 +236,20 @@ if has("autocmd")
 endif
 
 " Macros
+" Redo search using vimgrep
+nnoremap <Leader>vg :vimgrep /<C-R>// 
 " Search in all files
 nnoremap <Leader>* :let @/='\<'.expand("<cword>").'\>'<CR>
                  \ :vimgrep /<C-R>// %:p:h/*<CR>
 " Re-detect filetype
 nnoremap <Leader>fd :filetype detect<CR>
+" Jump to git conflict markers
+nnoremap <Leader>gc /\%^/;/^\([<=>]\)\@=\1\{7}<CR>
 " :Kappa:
 nnoremap <Up><Up><Down><Down><Left><Right><Left><Right>ba<CR>
-			\ :topl Scratch<CR>iLives: 1<Esc>254@="\<C-A>\<C-L>"<CR>
+			\ :topl 1new<Bar>setl bt=nofile bh=hide noswf<CR>i  Lives:
+			\ 1<Esc>0254@=":sleep 20m\<lt>CR>$\<lt>C-A>0"<CR>:echo
+			\ 'Secret Bonus Unlocked!'<CR>
 
 " Delete trailing whitespace
 nmap <Leader>d <Plug>DelWhite
@@ -277,6 +292,9 @@ if has("user_commands")
 
 	" Open giti terminal in new window
 	command! -bar Giti <mods> term ++close giti
+
+	" Start Grip server in terminal window
+	command! -bar Grip <mods> term ++close grip %
 
 	" Replace smart quotes with ASCII quotes
 	command! -bar -range QuoteFix

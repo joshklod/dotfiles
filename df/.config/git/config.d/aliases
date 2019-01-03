@@ -31,6 +31,7 @@
 	page   = !~/.config/git/scripts/page.sh
 	mlog   = !~/.config/git/scripts/mlog.sh
 	revlog = !~/.config/git/scripts/revlog.sh
+	peek   = !~/.config/git/scripts/peek.bash
 
 	# Typo correction
 	dif   = diff

@@ -27,7 +27,7 @@ shopt -s globstar   # Enable 'dir/**/foo' syntax
 shopt -s histappend # Don't clobber history from parallel shell sessions
 
 # Environment variables
-export EDITOR=/usr/bin/vim    # Use Vim as default editor
+export EDITOR=$(command -v vim) # Use Vim as default editor
 export HISTCONTROL=ignoredups # Ignore duplicates in history
 export LESS='-R'              # Interpret ANSI escape sequences
 
@@ -48,7 +48,7 @@ if [ $COLORS -ge 8 ]; then
 	
 	# [blue]user@host [cyan]path
 	# [cyan]$
-	PS1="\n$blue\u@\h $cyan\w\n\$ $reset"
+	PS1="\n$blue\u@\h $cyan\w$reset\n$cyan\$ $reset"
 	PS2="$cyan> $reset"
 	
 	unset blue cyan reset

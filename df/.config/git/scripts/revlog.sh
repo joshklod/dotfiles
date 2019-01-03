@@ -6,9 +6,17 @@
 iscommand() { command -v "$@" >/dev/null 2>&1; }
 
 if iscommand unix2dos; then
-	eol=unix2dos
+	eol='unix2dos -f'
 else
 	eol=cat
 fi
 
-git mlog --date=short --pretty=tformat:'%x09%ad - %s' "$@" | $eol
+# Check whether git output should be colored
+if git config --get-colorbool color.ui; then
+	color=always
+else
+	color=never
+fi
+
+git -c color.ui=$color \
+	mlog --date=short --pretty=tformat:'%x09%ad - %s' "$@" | $eol
