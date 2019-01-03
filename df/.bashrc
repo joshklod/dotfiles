@@ -27,7 +27,7 @@ shopt -s globstar   # Enable 'dir/**/foo' syntax
 shopt -s histappend # Don't clobber history from parallel shell sessions
 
 # Environment variables
-export EDITOR=/usr/bin/vim    # Use Vim as default editor
+export EDITOR=$(command -v vim) # Use Vim as default editor
 export HISTCONTROL=ignoredups # Ignore duplicates in history
 export LESS='-R'              # Interpret ANSI escape sequences
 
