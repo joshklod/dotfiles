@@ -72,7 +72,14 @@ if has("syntax")
 
 	" Color Overrides
 	if has("terminal")
-		highlight Terminal ctermbg=0 ctermfg=7 guibg=black guifg=lightgray
+		highlight Terminal ctermbg=0 ctermfg=7 guibg=#000000 guifg=#CDCDCD
+		if s:truecolor
+			let g:terminal_ansi_colors = [
+						\ '#000000', '#CD0000', '#00CD00', '#CDCD00',
+						\ '#007FFF', '#CD00CD', '#00CDCD', '#CDCDCD',
+						\ '#7F7F7F', '#FF0000', '#00FF00', '#FFFF00',
+						\ '#5CA0FF', '#FF00FF', '#00FFFF', '#FFFFFF']
+		endif
 	endif
 endif
 
