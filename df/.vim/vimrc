@@ -236,6 +236,8 @@ if has("autocmd")
 endif
 
 " Macros
+" Redo search using vimgrep
+nnoremap <Leader>vg :vimgrep /<C-R>// 
 " Search in all files
 nnoremap <Leader>* :let @/='\<'.expand("<cword>").'\>'<CR>
                  \ :vimgrep /<C-R>// %:p:h/*<CR>
