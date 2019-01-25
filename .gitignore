@@ -1,7 +1,3 @@
-# Terminfo binary database files
-df/.terminfo/*/
-!df/.terminfo/src/
-
 # SSH system-specific generated files
 df/.ssh/id*
 df/.ssh/known_hosts
