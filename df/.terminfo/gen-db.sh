@@ -2,4 +2,7 @@
 #
 # gen-db.sh - Generate terminfo database
 
-tic -xo ~/.terminfo ~/.terminfo/src/xterm-truecolor.terminfo
+script_dir=$(dirname "$0")
+
+cd "$script_dir"
+tic -xo ~/.terminfo src/xterm-truecolor.terminfo
