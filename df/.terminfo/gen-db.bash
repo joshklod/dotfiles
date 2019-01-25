@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 #
-# gen-db.sh - Generate terminfo database
+# gen-db.bash - Generate terminfo database
 
 script_dir=$(dirname "$0")
 
