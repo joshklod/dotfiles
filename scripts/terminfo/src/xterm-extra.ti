@@ -1,7 +1,8 @@
-xterm-truecolor|hterm|An Xterm-Compatible Terminal Supporting True Color,
-# True Color
+xterm+truecolor|True Color using standalone setrgbx capabilities,
 	Tc,truecolor,
 	setrgbf=\E[38:2::%p1%d:%p2%d:%p3%dm,
 	setrgbb=\E[48:2::%p1%d:%p2%d:%p3%dm,
 
+xterm-truecolor|hterm|An Xterm-Compatible Terminal Supporting True Color,
+	use=xterm+truecolor,
 	use=xterm-256color,
