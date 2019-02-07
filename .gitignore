@@ -2,6 +2,9 @@
 df/.ssh/id*
 df/.ssh/known_hosts
 
+# Terminfo compiled database
+scripts/terminfo/out/
+
 # Vim system-local config
 df/.vim/local.vimrc
 df/.vim/local.gvimrc

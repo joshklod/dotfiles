@@ -1,0 +1,8 @@
+#!/bin/sh
+
+script_dir=$(dirname "$0")
+
+destination=${1:-~/.terminfo}
+
+"$script_dir/gen-db.bash"
+cp -RT --remove-destination "$script_dir/out" "$destination"
