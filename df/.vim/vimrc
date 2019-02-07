@@ -30,7 +30,8 @@ if has("eval")
 	" capable.  The environment variable $COLORTERM is usually not set
 	" automatically - this must be done manually (typically in .bashrc) when
 	" using a truecolor-capable terminal.
-	let s:has_tgc = has("termguicolors") && $COLORTERM == "truecolor"
+	let s:has_tgc = has("termguicolors") && $COLORTERM == "truecolor" &&
+				\ !empty(&t_8f) && !empty(&t_8b)
 
 	" Some features only look good with truecolor
 	let s:truecolor = s:has_tgc || has("gui_running")
