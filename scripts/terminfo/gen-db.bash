@@ -9,5 +9,5 @@ rm -rf out
 
 while IFS= read -rd $'\0'; do
 	printf "Compiling '%s'...\n" "$script_dir/$REPLY"
-	tic -xo out "$REPLY"
+	tic -sxo out "$REPLY"
 done < <(find src -name '*.ti' -print0)
