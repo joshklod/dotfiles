@@ -1,4 +1,4 @@
-xterm-truecolor|hterm|An Xterm-Compatible Terminal Supporting True Color,
+mintty|The Cygwin Terminal Emulator,
 # True Color
 	Tc,truecolor,
 	setrgbf=\E[38:2::%p1%d:%p2%d:%p3%dm,
