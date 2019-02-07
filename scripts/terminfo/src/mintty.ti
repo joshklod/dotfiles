@@ -1,6 +1,12 @@
-mintty|The Cygwin Terminal Emulator,
+mintty-2.0|The Cygwin Terminal Emulator (v2.0),
 # True Color
 	Tc,truecolor,
+	setrgbf=\E[38;2;%p1%d;%p2%d;%p3%dm,
+	setrgbb=\E[48;2;%p1%d;%p2%d;%p3%dm,
+	use=xterm-256color,
+
+mintty-2.9|The Cygwin Terminal Emulator (v2.9),
+# Better true color sequences
 	setrgbf=\E[38:2::%p1%d:%p2%d:%p3%dm,
 	setrgbb=\E[48:2::%p1%d:%p2%d:%p3%dm,
 # Styled Underline
@@ -13,8 +19,10 @@ mintty|The Cygwin Terminal Emulator,
 	setrgbu=\E[58:2::%p1%d:%p2%d:%p3%dm,
 	nouc=\E[59m,
 	op=\E[39;49;59m,
+	use=mintty-2.0,
 
-	use=xterm-256color,
+mintty|The Cygwin Terminal Emulator,
+	use=mintty-2.9,
 
 mintty-idxdirect|The Cygwin Terminal Emulator (indexed direct color mode),
 	setau=\E[58\:
