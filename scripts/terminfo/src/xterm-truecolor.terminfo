@@ -1,4 +1,7 @@
 xterm-truecolor|mintty|hterm|An Xterm-Compatible Terminal Supporting True Color,
+# True Color
+	Tc,truecolor,
+	setrgbf=\E[38:2::%p1%d:%p2%d:%p3%dm,
+	setrgbb=\E[48:2::%p1%d:%p2%d:%p3%dm,
+
 	use=xterm-256color,
-# Custom entry for true color
-	truecolor,
