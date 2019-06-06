@@ -10,3 +10,5 @@ TCP
 GPIO
 PID
 TTL
+inductor
+SPI
