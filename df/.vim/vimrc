@@ -301,7 +301,7 @@ imap <F8> <Plug>ToggleSpell
 
 noremap  <silent>  <SID>ToggleSpell :set spell! <Bar> set spell?<CR>
 nnoremap <script> <Plug>ToggleSpell      <SID>ToggleSpell
-vnoremap <script> <Plug>ToggleSpell <Esc><SID>ToggleSpell<Esc>gv
+vnoremap <script> <Plug>ToggleSpell <C-C><SID>ToggleSpellgv
 inoremap <script> <Plug>ToggleSpell <C-O><SID>ToggleSpell
 
 " Custom commands
