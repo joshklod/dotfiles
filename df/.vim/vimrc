@@ -276,7 +276,7 @@ nnoremap <Up><Up><Down><Down><Left><Right><Left><Right>ba<CR>
 
 " Delete trailing whitespace
 nmap <Leader>d <Plug>DelWhite
-vmap <Leader>d <Plug>DelWhite
+xmap <Leader>d <Plug>DelWhite
 
 if has("eval")
 	" Using a function preserves search history and hlsearch
@@ -299,7 +299,7 @@ nmap <F8> <Plug>ToggleSpell
 vmap <F8> <Plug>ToggleSpell
 imap <F8> <Plug>ToggleSpell
 
-nnoremap <silent>  <SID>ToggleSpell :set spell! <Bar> set spell?<CR>
+noremap  <silent>  <SID>ToggleSpell :set spell! <Bar> set spell?<CR>
 nnoremap <script> <Plug>ToggleSpell      <SID>ToggleSpell
 vnoremap <script> <Plug>ToggleSpell <Esc><SID>ToggleSpell<Esc>gv
 inoremap <script> <Plug>ToggleSpell <C-O><SID>ToggleSpell
