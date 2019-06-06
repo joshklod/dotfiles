@@ -9,6 +9,27 @@ if &term =~ 'mintty\|hterm'
 	set term =xterm-truecolor
 endif
 
+" Get extra termcap entries
+if executable('tput') == 1
+	for [s:varname, s:capname, s:trust_default] in [
+				\ ['&t_Cs', 'smwul',   0],
+				\ ['&t_Ce', 'rmul',    0],
+				\ ['&t_8f', 'setrgbf', 1],
+				\ ['&t_8b', 'setrgbb', 1]]
+		let s:capstr = system('tput '.s:capname)
+		if v:shell_error | let s:capstr = '' | endif
+
+		if empty(s:capstr) && s:trust_default | continue | endif
+
+		" Vim interprets these as printf() format strings
+		if s:varname =~# 't_8[fb]'
+			let s:capstr = substitute(s:capstr, '%p\d%d', '%lu', 'g')
+		endif
+
+		execute 'let' s:varname '=' string(s:capstr)
+	endfor
+endif
+
 " Source default vimrc
 if filereadable($VIMRUNTIME . "/defaults.vim")
 	unlet! skip_defaults_vim
