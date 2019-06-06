@@ -61,9 +61,14 @@ if has("eval")
 endif
 
 " Plugins
-if s:ExistsRTP("autoload/pathogen.vim")
-	" Start plugin manager
-	execute pathogen#infect()
+if has('packages')
+	packloadall
+else
+	" Use Pathogen to load packages anyway
+	if s:ExistsRTP("pack/main/start/vim-pathogen/autoload/pathogen.vim")
+		runtime pack/main/start/vim-pathogen/autoload/pathogen.vim
+		execute pathogen#infect()
+	endif
 endif
 if has("autocmd")
 	filetype plugin indent on
