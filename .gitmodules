@@ -19,3 +19,6 @@
 [submodule "vim-indent-guides"]
 	path = submodules/vim-indent-guides
 	url = git://github.com/nathanaelkane/vim-indent-guides.git
+[submodule "vim-markdown"]
+	path = submodules/vim-markdown
+	url = git://github.com/plasticboy/vim-markdown.git
