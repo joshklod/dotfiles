@@ -9,6 +9,27 @@ if &term =~ 'mintty\|hterm'
 	set term =xterm-truecolor
 endif
 
+" Get extra termcap entries
+if executable('tput') == 1
+	for [s:varname, s:capname, s:trust_default] in [
+				\ ['&t_Cs', 'smwul',   0],
+				\ ['&t_Ce', 'rmul',    0],
+				\ ['&t_8f', 'setrgbf', 1],
+				\ ['&t_8b', 'setrgbb', 1]]
+		let s:capstr = system('tput '.s:capname)
+		if v:shell_error | let s:capstr = '' | endif
+
+		if empty(s:capstr) && s:trust_default | continue | endif
+
+		" Vim interprets these as printf() format strings
+		if s:varname =~# 't_8[fb]'
+			let s:capstr = substitute(s:capstr, '%p\d%d', '%lu', 'g')
+		endif
+
+		execute 'let' s:varname '=' string(s:capstr)
+	endfor
+endif
+
 " Source default vimrc
 if filereadable($VIMRUNTIME . "/defaults.vim")
 	unlet! skip_defaults_vim
@@ -30,7 +51,8 @@ if has("eval")
 	" capable.  The environment variable $COLORTERM is usually not set
 	" automatically - this must be done manually (typically in .bashrc) when
 	" using a truecolor-capable terminal.
-	let s:has_tgc = has("termguicolors") && $COLORTERM == "truecolor"
+	let s:has_tgc = has("termguicolors") && $COLORTERM == "truecolor" &&
+				\ !empty(&t_8f) && !empty(&t_8b)
 
 	" Some features only look good with truecolor
 	let s:truecolor = s:has_tgc || has("gui_running")
@@ -39,9 +61,14 @@ if has("eval")
 endif
 
 " Plugins
-if s:ExistsRTP("autoload/pathogen.vim")
-	" Start plugin manager
-	execute pathogen#infect()
+if has('packages')
+	packloadall
+else
+	" Use Pathogen to load packages anyway
+	if s:ExistsRTP("pack/main/start/vim-pathogen/autoload/pathogen.vim")
+		runtime pack/main/start/vim-pathogen/autoload/pathogen.vim
+		execute pathogen#infect()
+	endif
 endif
 if has("autocmd")
 	filetype plugin indent on
@@ -103,7 +130,7 @@ if has("syntax")
 	endif
 	set colorcolumn =+2 " Always 2 columns right of textwidth
 endif
-set number norelativenumber
+set number relativenumber
 if has("linebreak")
 	set numberwidth =3
 endif
@@ -113,20 +140,21 @@ if has("cmdline_info")
 		set rulerformat=%5l,%v%=\ %P " Hide byte column number
 	endif
 endif
-if has("cursorshape") && &term =~ 'xterm'
+if has("cursorshape") && !empty(&t_SH)
 	" Cursor Shape Reference:
 	"                Blinking Solid
 	"          Block     1      2
 	"     Underscore     3      4
 	"            Bar     5      6
 	"          Reset     0      0
-	let &t_EI .= "\<Esc>[2 q" " Normal Mode
-	let &t_SI .= "\<Esc>[5 q" " Insert Mode
-	let &t_SR .= "\<Esc>[3 q" " Replace Mode
+	let &t_EI .= substitute(&t_SH, '%p1%d', '2', '') " Normal Mode
+	let &t_SI .= substitute(&t_SH, '%p1%d', '5', '') " Insert Mode
+	let &t_SR .= substitute(&t_SH, '%p1%d', '3', '') " Replace Mode
 
-	let &t_ti .= "\<Esc>[2 q" " Vim Start
-	let &t_te .= "\<Esc>[0 q" " Vim Exit
+	let &t_ti .= substitute(&t_SH, '%p1%d', '2', '') " Vim Start
+	let &t_te .= substitute(&t_SH, '%p1%d', '0', '') " Vim Exit
 endif
+set title
 
 " Spell checking
 if has("syntax")
@@ -253,7 +281,7 @@ nnoremap <Up><Up><Down><Down><Left><Right><Left><Right>ba<CR>
 
 " Delete trailing whitespace
 nmap <Leader>d <Plug>DelWhite
-vmap <Leader>d <Plug>DelWhite
+xmap <Leader>d <Plug>DelWhite
 
 if has("eval")
 	" Using a function preserves search history and hlsearch
@@ -276,9 +304,9 @@ nmap <F8> <Plug>ToggleSpell
 vmap <F8> <Plug>ToggleSpell
 imap <F8> <Plug>ToggleSpell
 
-nnoremap <silent>  <SID>ToggleSpell :set spell! <Bar> set spell?<CR>
+noremap  <silent>  <SID>ToggleSpell :set spell! <Bar> set spell?<CR>
 nnoremap <script> <Plug>ToggleSpell      <SID>ToggleSpell
-vnoremap <script> <Plug>ToggleSpell <Esc><SID>ToggleSpell<Esc>gv
+vnoremap <script> <Plug>ToggleSpell <C-C><SID>ToggleSpellgv
 inoremap <script> <Plug>ToggleSpell <C-O><SID>ToggleSpell
 
 " Custom commands

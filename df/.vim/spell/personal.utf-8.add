@@ -10,3 +10,7 @@ TCP
 GPIO
 PID
 TTL
+inductor
+SPI
+KiCad
+VSWR

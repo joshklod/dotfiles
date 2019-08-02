@@ -1,10 +1,9 @@
-# Terminfo binary database files
-df/.terminfo/*/
-!df/.terminfo/src/
-
 # SSH system-specific generated files
 df/.ssh/id*
 df/.ssh/known_hosts
+
+# Terminfo compiled database
+scripts/terminfo/out/
 
 # Vim system-local config
 df/.vim/local.vimrc

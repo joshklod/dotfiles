@@ -1,0 +1,27 @@
+xterm+truecolor|True Color using standalone setrgbx capabilities,
+	Tc,truecolor,
+	setrgbf=\E[38:2::%p1%d:%p2%d:%p3%dm,
+	setrgbb=\E[48:2::%p1%d:%p2%d:%p3%dm,
+
+xterm-truecolor|hterm|An Xterm-Compatible Terminal Supporting True Color,
+	use=xterm+truecolor,
+	use=xterm-256color,
+
+# The stupid, nonsensical version included with terminfo
+xterm+direct|True Color using indexed setax capabilities,
+	RGB,
+	colors#0x1000000,
+	pairs#0x10000,
+	setaf=\E[%?%p1%{8}%<%t3%p1%d%e38\:2\:\:
+	      %p1%{65536}%/%d\:%p1%{256}%/%{255}%&%d\:%p1%{255}%&%d%;m,
+	setab=\E[%?%p1%{8}%<%t4%p1%d%e48\:2\:\:
+	      %p1%{65536}%/%d\:%p1%{256}%/%{255}%&%d\:%p1%{255}%&%d%;m,
+	op=\E[39;49m,
+	setf@,
+	setb@,
+	ccc@,
+	initc@,
+
+xterm-direct|xterm with direct-color indexing,
+	use=xterm+direct,
+	use=xterm,
