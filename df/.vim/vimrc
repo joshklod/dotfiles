@@ -140,19 +140,19 @@ if has("cmdline_info")
 		set rulerformat=%5l,%v%=\ %P " Hide byte column number
 	endif
 endif
-if has("cursorshape") && &term =~ 'xterm'
+if has("cursorshape") && !empty(&t_SH)
 	" Cursor Shape Reference:
 	"                Blinking Solid
 	"          Block     1      2
 	"     Underscore     3      4
 	"            Bar     5      6
 	"          Reset     0      0
-	let &t_EI .= "\<Esc>[2 q" " Normal Mode
-	let &t_SI .= "\<Esc>[5 q" " Insert Mode
-	let &t_SR .= "\<Esc>[3 q" " Replace Mode
+	let &t_EI .= substitute(&t_SH, '%p1%d', '2', '') " Normal Mode
+	let &t_SI .= substitute(&t_SH, '%p1%d', '5', '') " Insert Mode
+	let &t_SR .= substitute(&t_SH, '%p1%d', '3', '') " Replace Mode
 
-	let &t_ti .= "\<Esc>[2 q" " Vim Start
-	let &t_te .= "\<Esc>[0 q" " Vim Exit
+	let &t_ti .= substitute(&t_SH, '%p1%d', '2', '') " Vim Start
+	let &t_te .= substitute(&t_SH, '%p1%d', '0', '') " Vim Exit
 endif
 set title
 
