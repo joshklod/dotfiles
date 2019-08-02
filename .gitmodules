@@ -28,3 +28,6 @@
 [submodule "vim-surround"]
 	path = df/.vim/pack/main/start/vim-surround
 	url = https://github.com/tpope/vim-surround.git
+[submodule "vim-repeat"]
+	path = df/.vim/pack/main/start/vim-repeat
+	url = https://github.com/tpope/vim-repeat.git
