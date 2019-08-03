@@ -42,6 +42,17 @@ if has("eval")
 		return !empty(globpath(&rtp, a:path))
 	endfunction
 
+	" Check whether optional package is installed
+	function! s:haveOptPack(path)
+		return has('packages') && !empty(globpath(&pp, 'pack/*/opt/'.a:path))
+	endfunction
+
+	" Check whether color scheme is installed
+	function! s:haveColors(name)
+		let rtpPath = 'colors/'.a:name.'.vim'
+		return s:ExistsRTP(rtpPath) || s:haveOptPack('*/'.rtpPath)
+	endfunction
+
 	" Handy shortcut for name of runtimepath directory in $HOME on current
 	" system (because Windows just has to be different...)
 	let s:homertp = $HOME . (has("win32") ? "/vimfiles" : "/.vim")
@@ -84,7 +95,7 @@ if has("syntax")
 		set termguicolors
 	endif
 	syntax enable
-	if s:ExistsRTP("colors/solarized.vim") && s:fancy_colors
+	if s:haveColors('solarized') && s:fancy_colors
 		if &t_Co >= 256
 			let g:solarized_termcolors =256
 		endif
