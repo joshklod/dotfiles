@@ -100,9 +100,6 @@ if has("syntax")
 	else
 		colorscheme industry
 	endif
-	if s:ExistsRTP("autoload/togglebg.vim")
-		call togglebg#map("")
-	endif
 
 	" Color Overrides
 	if has("terminal")
