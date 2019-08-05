@@ -34,3 +34,6 @@
 [submodule "vim-sensible"]
 	path = df/.vim/pack/main/start/vim-sensible
 	url = https://github.com/tpope/vim-sensible.git
+[submodule "vim-commentary"]
+	path = df/.vim/pack/main/start/vim-commentary
+	url = https://github.com/tpope/vim-commentary.git
