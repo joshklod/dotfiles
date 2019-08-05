@@ -95,12 +95,8 @@ if has("syntax")
 		set termguicolors
 	endif
 	syntax enable
-	if s:haveColors('solarized') && s:fancy_colors
-		if &t_Co >= 256
-			let g:solarized_termcolors =256
-		endif
-		let g:solarized_menu       =0
-		colorscheme solarized
+	if s:haveColors('solarized8') && s:fancy_colors
+		colorscheme solarized8
 	else
 		colorscheme industry
 	endif
