@@ -31,3 +31,6 @@
 [submodule "vim-solarized8"]
 	path = df/.vim/pack/main/opt/vim-solarized8
 	url = https://github.com/lifepillar/vim-solarized8.git
+[submodule "vim-sensible"]
+	path = df/.vim/pack/main/start/vim-sensible
+	url = https://github.com/tpope/vim-sensible.git
