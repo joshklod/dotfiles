@@ -1,6 +1,6 @@
 [submodule "vim-pathogen"]
 	path = df/.vim/pack/main/start/vim-pathogen
-	url = https://github.com/tpope/vim-pathogen.git
+	url = https://github.com/joshklod/vim-pathogen.git
 [submodule "vim-colors-solarized"]
 	path = df/.vim/pack/main/start/vim-colors-solarized
 	url = https://github.com/joshklod/vim-colors-solarized.git
