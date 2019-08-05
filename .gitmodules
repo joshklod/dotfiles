@@ -37,3 +37,6 @@
 [submodule "vim-commentary"]
 	path = df/.vim/pack/main/start/vim-commentary
 	url = https://github.com/tpope/vim-commentary.git
+[submodule "vim-vinegar"]
+	path = df/.vim/pack/main/start/vim-vinegar
+	url = https://github.com/tpope/vim-vinegar.git
