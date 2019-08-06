@@ -16,6 +16,8 @@ if executable('tput') == 1
 				\ ['&t_Ce', 'rmul',    0],
 				\ ['&t_8f', 'setrgbf', 1],
 				\ ['&t_8b', 'setrgbb', 1]]
+		if !exists(s:varname) | continue | endif
+
 		let s:capstr = system('tput '.s:capname)
 		if v:shell_error | let s:capstr = '' | endif
 
@@ -148,7 +150,7 @@ if has("cmdline_info")
 		set rulerformat=%5l,%v%=\ %P " Hide byte column number
 	endif
 endif
-if has("cursorshape") && !empty(&t_SH)
+if has("cursorshape") && exists('+t_SH') && !empty(&t_SH)
 	" Cursor Shape Reference:
 	"                Blinking Solid
 	"          Block     1      2
