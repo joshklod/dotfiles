@@ -30,16 +30,21 @@ if executable('tput') == 1
 	endfor
 endif
 
-" Source default vimrc
-if filereadable($VIMRUNTIME . "/defaults.vim")
-	unlet! skip_defaults_vim
-	silent! source $VIMRUNTIME/defaults.vim
-endif
-
 if has("eval")
 	" Check whether file exists in 'runtimepath'
 	function! s:ExistsRTP(path)
 		return !empty(globpath(&rtp, a:path))
+	endfunction
+
+	" Check whether optional package is installed
+	function! s:haveOptPack(path)
+		return has('packages') && !empty(globpath(&pp, 'pack/*/opt/'.a:path))
+	endfunction
+
+	" Check whether color scheme is installed
+	function! s:haveColors(name)
+		let rtpPath = 'colors/'.a:name.'.vim'
+		return s:ExistsRTP(rtpPath) || s:haveOptPack('*/'.rtpPath)
 	endfunction
 
 	" Handy shortcut for name of runtimepath directory in $HOME on current
@@ -60,7 +65,7 @@ if has("eval")
 	let s:fancy_colors = &t_Co >= 256 || s:truecolor
 endif
 
-" Plugins
+" Load Packages
 if has('packages')
 	packloadall
 else
@@ -70,6 +75,16 @@ else
 		execute pathogen#infect()
 	endif
 endif
+
+" Set sensible defaults
+if s:ExistsRTP('plugin/sensible.vim')
+	runtime! plugin/sensible.vim
+elseif filereadable($VIMRUNTIME . "/defaults.vim")
+	unlet! skip_defaults_vim
+	silent! source $VIMRUNTIME/defaults.vim
+endif
+
+" Plugins
 if has("autocmd")
 	filetype plugin indent on
 endif
@@ -84,17 +99,10 @@ if has("syntax")
 		set termguicolors
 	endif
 	syntax enable
-	if s:ExistsRTP("colors/solarized.vim") && s:fancy_colors
-		if &t_Co >= 256
-			let g:solarized_termcolors =256
-		endif
-		let g:solarized_menu       =0
-		colorscheme solarized
+	if s:haveColors('solarized8') && s:fancy_colors
+		colorscheme solarized8
 	else
 		colorscheme industry
-	endif
-	if s:ExistsRTP("autoload/togglebg.vim")
-		call togglebg#map("")
 	endif
 
 	" Color Overrides
