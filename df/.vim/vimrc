@@ -34,7 +34,7 @@ endif
 
 if has("eval")
 	" Check whether file exists in 'runtimepath'
-	function! s:ExistsRTP(path)
+	function! s:fileInRTP(path)
 		for fname in globpath(&rtp, a:path, 0, 1)
 			if filereadable(fname) || isdirectory(fname)
 				return 1
@@ -43,8 +43,8 @@ if has("eval")
 		return 0
 	endfunction
 
-	" Check whether optional package is installed
-	function! s:haveOptPack(path)
+	" Check whether optional plugin is installed
+	function! s:haveOptPlug(path)
 		if !has('packages') | return 0 | endif
 		for fname in globpath(&pp, 'pack/*/opt/'.a:path, 0, 1)
 			if isdirectory(fname) || filereadable(fname)
@@ -57,7 +57,7 @@ if has("eval")
 	" Check whether color scheme is installed
 	function! s:haveColors(name)
 		let rtpPath = 'colors/'.a:name.'.vim'
-		return s:ExistsRTP(rtpPath) || s:haveOptPack('*/'.rtpPath)
+		return s:fileInRTP(rtpPath) || s:haveOptPlug('*/'.rtpPath)
 	endfunction
 
 	" Handy shortcut for name of runtimepath directory in $HOME on current
@@ -83,14 +83,14 @@ if has('packages')
 	packloadall
 else
 	" Use Pathogen to load packages anyway
-	if s:ExistsRTP("pack/main/start/vim-pathogen/autoload/pathogen.vim")
+	if s:fileInRTP("pack/main/start/vim-pathogen/autoload/pathogen.vim")
 		runtime pack/main/start/vim-pathogen/autoload/pathogen.vim
 		execute pathogen#infect()
 	endif
 endif
 
 " Set sensible defaults
-if s:ExistsRTP('plugin/sensible.vim')
+if s:fileInRTP('plugin/sensible.vim')
 	runtime! plugin/sensible.vim
 elseif filereadable($VIMRUNTIME . "/defaults.vim")
 	unlet! skip_defaults_vim
@@ -101,7 +101,7 @@ endif
 if has("autocmd")
 	filetype plugin indent on
 endif
-if s:ExistsRTP("plugin/templates.vim")
+if s:fileInRTP("plugin/templates.vim")
 	let g:templates_directory = s:homertp."/templates"
 endif
 
