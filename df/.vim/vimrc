@@ -165,7 +165,9 @@ if has("cursorshape") && exists('+t_SH') && !empty(&t_SH)
 	let &t_ti .= substitute(&t_SH, '%p1%d', '2', '') " Vim Start
 	let &t_te .= substitute(&t_SH, '%p1%d', '0', '') " Vim Exit
 endif
-set title
+if has('title')
+	set title
+endif
 
 " Spell checking
 if has("syntax")
