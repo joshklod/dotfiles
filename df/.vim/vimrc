@@ -33,9 +33,9 @@ if executable('tput') == 1
 endif
 
 if has("eval")
-	" Check whether file exists in 'runtimepath'
-	function! s:fileInRTP(path)
-		for fname in globpath(&rtp, a:path, 0, 1)
+	" Check whether file exists anywhere in path
+	function! s:fileInPath(path, glob)
+		for fname in globpath(a:path, a:glob, 0, 1)
 			if filereadable(fname) || isdirectory(fname)
 				return 1
 			endif
@@ -43,15 +43,14 @@ if has("eval")
 		return 0
 	endfunction
 
+	" Check whether file exists in 'runtimepath'
+	function! s:fileInRTP(path)
+		return s:fileInPath(&rtp, a:path)
+	endfunction
+
 	" Check whether optional plugin is installed
 	function! s:haveOptPlug(path)
-		if !has('packages') | return 0 | endif
-		for fname in globpath(&pp, 'pack/*/opt/'.a:path, 0, 1)
-			if isdirectory(fname) || filereadable(fname)
-				return 1
-			endif
-		endfor
-		return 0
+		return has('packages') && s:fileInPath(&pp, 'pack/*/opt/'.a:path)
 	endfunction
 
 	" Check whether color scheme is installed
