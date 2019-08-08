@@ -48,9 +48,24 @@ if has("eval")
 		return s:fileInPath(&rtp, a:path)
 	endfunction
 
+	" Check whether package is installed
+	function! s:havePack(path)
+		return has('packages') && s:fileInPath(&pp, 'pack/'.a:path)
+	endfunction
+
+	" Check whether package plugin is installed
+	function! s:havePackPlug(path)
+		return s:havePack('*/start/'.a:path)
+	endfunction
+
+	" Check whether plugin is installed
+	function! s:havePlug(path)
+		return s:fileInRTP(a:path) || s:havePackPlug('*/'.a:path)
+	endfunction
+
 	" Check whether optional plugin is installed
 	function! s:haveOptPlug(path)
-		return has('packages') && s:fileInPath(&pp, 'pack/*/opt/'.a:path)
+		return s:havePack('*/opt/'.a:path)
 	endfunction
 
 	" Check whether color scheme is installed
