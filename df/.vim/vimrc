@@ -149,6 +149,7 @@ if has("cmdline_info")
 	if has("statusline")
 		set rulerformat=%5l,%v%=\ %P " Hide byte column number
 	endif
+	set showcmd
 endif
 if has("cursorshape") && exists('+t_SH') && !empty(&t_SH)
 	" Cursor Shape Reference:
