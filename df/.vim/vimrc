@@ -103,6 +103,8 @@ if has("syntax")
 	syntax enable
 	if s:haveColors('solarized8') && s:fancy_colors
 		colorscheme solarized8
+
+		highlight SpellBad ctermfg=160 guifg=#dc322f guisp=#dc322f " Red
 	else
 		colorscheme industry
 	endif
