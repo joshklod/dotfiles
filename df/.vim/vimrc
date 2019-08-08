@@ -71,7 +71,7 @@ if has("eval")
 	" Check whether color scheme is installed
 	function! s:haveColors(name)
 		let rtpPath = 'colors/'.a:name.'.vim'
-		return s:fileInRTP(rtpPath) || s:haveOptPlug('*/'.rtpPath)
+		return s:havePlug(rtpPath) || s:haveOptPlug('*/'.rtpPath)
 	endfunction
 
 	" Handy shortcut for name of runtimepath directory in $HOME on current
