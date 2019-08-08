@@ -35,12 +35,23 @@ endif
 if has("eval")
 	" Check whether file exists in 'runtimepath'
 	function! s:ExistsRTP(path)
-		return !empty(globpath(&rtp, a:path))
+		for fname in globpath(&rtp, a:path, 0, 1)
+			if filereadable(fname) || isdirectory(fname)
+				return 1
+			endif
+		endfor
+		return 0
 	endfunction
 
 	" Check whether optional package is installed
 	function! s:haveOptPack(path)
-		return has('packages') && !empty(globpath(&pp, 'pack/*/opt/'.a:path))
+		if !has('packages') | return 0 | endif
+		for fname in globpath(&pp, 'pack/*/opt/'.a:path, 0, 1)
+			if isdirectory(fname) || filereadable(fname)
+				return 1
+			endif
+		endfor
+		return 0
 	endfunction
 
 	" Check whether color scheme is installed
