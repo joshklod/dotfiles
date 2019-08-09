@@ -1,3 +1,6 @@
+mintty|xterm-mintty|The Cygwin Terminal Emulator,
+	use=mintty-3.0,
+
 mintty-2.0|The Cygwin Terminal Emulator (v2.0),
 # True Color
 	Tc,truecolor,
@@ -54,9 +57,6 @@ mintty-3.0|The Cygwin Terminal Emulator (v3.0),
 	rsupm=\E[75m,
 	rsubm=\E[75m,
 	use=mintty-2.9,
-
-mintty|xterm-mintty|The Cygwin Terminal Emulator,
-	use=mintty-3.0,
 
 mintty-direct|The Cygwin Terminal Emulator (indexed direct color mode),
 	setal=\E[58\:
