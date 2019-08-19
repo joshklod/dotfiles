@@ -182,7 +182,6 @@ highlight link armbasicAssignment	armbasicOperator
 " PreProc
 highlight link armbasicLineCont		armbasicPreProc
 highlight link armbasicPreProcStart	armbasicPreProc
-highlight link armbasicIncLine		armbasicError
 highlight link armbasicIncluded		armbasicString
 highlight link armbasicPreIfLine	armbasicPreProc
 highlight link armbasicDefined		armbasicPreProc
