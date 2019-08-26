@@ -303,6 +303,9 @@ endif
 " Navigate with Mouse Buttons
 nmap <X1Mouse> <C-O>
 nmap <X2Mouse> <C-I>
+" Faster Horizontal Scroll
+nnoremap H zH
+nnoremap L zL
 " Redo search using vimgrep
 nnoremap <Leader>vg :vimgrep /<C-R>// 
 " Search in all files
