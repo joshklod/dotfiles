@@ -104,8 +104,8 @@ else
 endif
 
 " Set sensible defaults
-if s:fileInRTP('plugin/sensible.vim')
-	runtime! plugin/sensible.vim
+if s:havePlug('plugin/sensible.vim')
+	runtime! ALL plugin/sensible.vim
 elseif filereadable($VIMRUNTIME . "/defaults.vim")
 	unlet! skip_defaults_vim
 	silent! source $VIMRUNTIME/defaults.vim
@@ -115,7 +115,7 @@ endif
 if has("autocmd")
 	filetype plugin indent on
 endif
-if s:fileInRTP("plugin/templates.vim")
+if s:havePlug("plugin/templates.vim")
 	let g:templates_directory = s:homertp."/templates"
 endif
 
