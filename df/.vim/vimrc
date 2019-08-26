@@ -276,10 +276,6 @@ if has("file_in_path")
 endif
 set tags +=./.tags,.tags
 
-" Navigation
-nmap <X1Mouse> <C-O>
-nmap <X2Mouse> <C-I>
-
 " Searching
 set ignorecase
 set smartcase  " Ignore case only when all lowercase
@@ -303,7 +299,10 @@ if has("autocmd")
 	augroup END
 endif
 
-" Macros
+" Maps
+" Navigate with Mouse Buttons
+nmap <X1Mouse> <C-O>
+nmap <X2Mouse> <C-I>
 " Redo search using vimgrep
 nnoremap <Leader>vg :vimgrep /<C-R>// 
 " Search in all files
