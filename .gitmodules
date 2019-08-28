@@ -43,3 +43,6 @@
 [submodule "vim-speeddating"]
 	path = df/.vim/pack/main/start/vim-speeddating
 	url = https://github.com/tpope/vim-speeddating.git
+[submodule "vim-unimpaired"]
+	path = df/.vim/pack/main/start/vim-unimpaired
+	url = https://github.com/tpope/vim-unimpaired.git

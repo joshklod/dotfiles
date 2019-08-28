@@ -6,13 +6,13 @@ endif
 " Recognize custom xterm-style terminals - Vim internally sets extra termcap
 " settings for terminals containing 'xterm'
 if &term =~ 'mintty\|hterm'
-	set term =xterm-truecolor
+	set term =xterm-semitruecolor
 endif
 
 " Get extra termcap entries
 if executable('tput') == 1
 	for [s:varname, s:capname, s:trust_default] in [
-				\ ['&t_Cs', 'smwul',   0],
+				\ ['&t_Cs', 'swavl',   0],
 				\ ['&t_Ce', 'rmul',    0],
 				\ ['&t_8f', 'setrgbf', 1],
 				\ ['&t_8b', 'setrgbb', 1]]
@@ -33,20 +33,45 @@ if executable('tput') == 1
 endif
 
 if has("eval")
-	" Check whether file exists in 'runtimepath'
-	function! s:ExistsRTP(path)
-		return !empty(globpath(&rtp, a:path))
+	" Check whether file exists anywhere in path
+	function! s:fileInPath(path, glob)
+		for fname in globpath(a:path, a:glob, 0, 1)
+			if filereadable(fname) || isdirectory(fname)
+				return 1
+			endif
+		endfor
+		return 0
 	endfunction
 
-	" Check whether optional package is installed
-	function! s:haveOptPack(path)
-		return has('packages') && !empty(globpath(&pp, 'pack/*/opt/'.a:path))
+	" Check whether file exists in 'runtimepath'
+	function! s:fileInRTP(path)
+		return s:fileInPath(&rtp, a:path)
+	endfunction
+
+	" Check whether package is installed
+	function! s:havePack(path)
+		return has('packages') && s:fileInPath(&pp, 'pack/'.a:path)
+	endfunction
+
+	" Check whether package plugin is installed
+	function! s:havePackPlug(path)
+		return s:havePack('*/start/'.a:path)
+	endfunction
+
+	" Check whether plugin is installed
+	function! s:havePlug(path)
+		return s:fileInRTP(a:path) || s:havePackPlug('*/'.a:path)
+	endfunction
+
+	" Check whether optional plugin is installed
+	function! s:haveOptPlug(path)
+		return s:havePack('*/opt/'.a:path)
 	endfunction
 
 	" Check whether color scheme is installed
 	function! s:haveColors(name)
 		let rtpPath = 'colors/'.a:name.'.vim'
-		return s:ExistsRTP(rtpPath) || s:haveOptPack('*/'.rtpPath)
+		return s:havePlug(rtpPath) || s:haveOptPlug('*/'.rtpPath)
 	endfunction
 
 	" Handy shortcut for name of runtimepath directory in $HOME on current
@@ -68,19 +93,17 @@ if has("eval")
 endif
 
 " Load Packages
-if has('packages')
-	packloadall
-else
+if !has('packages')
 	" Use Pathogen to load packages anyway
-	if s:ExistsRTP("pack/main/start/vim-pathogen/autoload/pathogen.vim")
+	if s:fileInRTP("pack/main/start/vim-pathogen/autoload/pathogen.vim")
 		runtime pack/main/start/vim-pathogen/autoload/pathogen.vim
 		execute pathogen#infect()
 	endif
 endif
 
 " Set sensible defaults
-if s:ExistsRTP('plugin/sensible.vim')
-	runtime! plugin/sensible.vim
+if s:havePlug('plugin/sensible.vim')
+	runtime! ALL plugin/sensible.vim
 elseif filereadable($VIMRUNTIME . "/defaults.vim")
 	unlet! skip_defaults_vim
 	silent! source $VIMRUNTIME/defaults.vim
@@ -90,7 +113,7 @@ endif
 if has("autocmd")
 	filetype plugin indent on
 endif
-if s:ExistsRTP("plugin/templates.vim")
+if s:havePlug("plugin/templates.vim")
 	let g:templates_directory = s:homertp."/templates"
 endif
 
@@ -103,6 +126,8 @@ if has("syntax")
 	syntax enable
 	if s:haveColors('solarized8') && s:fancy_colors
 		colorscheme solarized8
+
+		highlight SpellBad ctermfg=160 guifg=#dc322f guisp=#dc322f " Red
 	else
 		colorscheme industry
 	endif
@@ -149,6 +174,7 @@ if has("cmdline_info")
 	if has("statusline")
 		set rulerformat=%5l,%v%=\ %P " Hide byte column number
 	endif
+	set showcmd
 endif
 if has("cursorshape") && exists('+t_SH') && !empty(&t_SH)
 	" Cursor Shape Reference:
@@ -164,7 +190,9 @@ if has("cursorshape") && exists('+t_SH') && !empty(&t_SH)
 	let &t_ti .= substitute(&t_SH, '%p1%d', '2', '') " Vim Start
 	let &t_te .= substitute(&t_SH, '%p1%d', '0', '') " Vim Exit
 endif
-set title
+if has('title')
+	set title
+endif
 
 " Spell checking
 if has("syntax")
@@ -246,10 +274,6 @@ if has("file_in_path")
 endif
 set tags +=./.tags,.tags
 
-" Navigation
-nmap <X1Mouse> <C-O>
-nmap <X2Mouse> <C-I>
-
 " Searching
 set ignorecase
 set smartcase  " Ignore case only when all lowercase
@@ -273,7 +297,13 @@ if has("autocmd")
 	augroup END
 endif
 
-" Macros
+" Maps
+" Navigate with Mouse Buttons
+nmap <X1Mouse> <C-O>
+nmap <X2Mouse> <C-I>
+" Faster Horizontal Scroll
+nnoremap H zH
+nnoremap L zL
 " Redo search using vimgrep
 nnoremap <Leader>vg :vimgrep /<C-R>// 
 " Search in all files
