@@ -1,3 +1,8 @@
+
+if exists(':SpeedDatingFormat') != 2
+	finish
+endif
+
 SpeedDatingFormat %m%[/-]%d%1%y          " US Format
 SpeedDatingFormat %m%[/-]%d%1%Y
 SpeedDatingFormat %d%[/-]%m%1%y          " European Format
