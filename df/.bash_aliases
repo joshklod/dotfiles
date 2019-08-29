@@ -83,3 +83,26 @@ cs() {
 	# List new directory contents
 	ls $lsargs
 }
+
+case "$(uname -s)" in
+	CYGWIN*)
+		# Open Explorer window in current directory
+		alias exp='explorer .'
+
+		# Start X Server in the background silently
+		alias silentx='log --stderr startxwin'
+
+		# Automatically set $DISPLAY if unset
+		alias auto-disp='[ -z "$DISPLAY" ] && export DISPLAY=:0.0'
+		# Start X programs with default DISPLAY
+		alias x='auto-disp; silentx'
+		alias gvim='auto-disp; gvim'
+
+		# Executes command in a separate window
+		win () { mintty "$@" & }
+
+		# Windows GUI for updating Cygwin
+		alias cygupdate='curl -o "/proc/cygdrive/c/applications/cygwin-setup.exe" https://cygwin.com/setup-x86_64.exe'
+		alias cygupgrade='cygsetup --quiet-mode'
+		;;
+esac

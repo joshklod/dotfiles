@@ -16,3 +16,10 @@
 
 # Add ~/scripts to $PATH if it exists
 [ -d "$HOME/scripts" ] && PATH="$HOME/scripts:$PATH"
+
+case "$(uname -s)" in
+	CYGWIN*)
+		# Include Windows Applications folder in PATH
+		[ -d "/proc/cygdrive/c/Applications" ] && PATH="$PATH:/proc/cygdrive/c/Applications"
+		;;
+esac
