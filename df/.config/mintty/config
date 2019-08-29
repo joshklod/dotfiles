@@ -1,0 +1,103 @@
+# Miscellaneous
+Language = en_US
+
+# Terminal
+Term              = mintty
+Answerback        =
+Locale            = en_US
+Charset           = UTF-8
+NoAltScreen       = false
+OldWrapModes      = false
+AllowSetSelection = true
+
+# Font
+Font       = Consolas
+FontHeight = 10
+FontIsBold = no
+
+# Rendering
+FontSmoothing   = default
+FontRender      = uniscribe
+UnderlineManual = false
+
+# Text Attributes
+BoldAsFont    = no
+BoldAsColour  = yes
+AllowBlinking = yes
+
+# Window
+Columns         = 100
+Rows            = 48
+RowSpacing      = 0
+ColSpacing      = 0
+Padding         = 1
+Transparency    = off
+Scrollbar       = none
+ScrollMod       = shift
+PgUpDnScroll    = no
+ScrollbackLines = 10000
+ConfirmExit     = yes
+Hold            = error
+Window          = normal
+
+# Keys
+BackspaceSendsBS = no
+DeleteSendsDEL   = no
+CtrlAltIsAltGr   = no
+ComposeKey       = off
+
+# Bell
+BellType    = 1
+BellFile    =
+BellFlash   = no
+BellTaskbar = yes
+BellPopup   = no
+BellFreq    = 0
+BellLen     = 0
+
+# Shortcuts
+ClipShortcuts      = yes
+WindowShortcuts    = no
+SwitchShortcuts    = yes
+ZoomShortcuts      = yes
+AltFnShortcuts     = no
+CtrlShiftShortcuts = no
+
+# Mouse
+CopyOnSelect      = yes
+CopyAsRTF         = yes
+ClicksPlaceCursor = no
+RightClickAction  = menu
+MiddleClickAction = paste
+ClicksTargetApp   = yes
+ClickTargetMod    = shift
+HideMouse         = yes
+
+# Cursor
+CursorType   = block
+CursorBlinks = yes
+
+# Colors
+ForegroundColour = 205,205,205
+BackgroundColour =   0,  0,  0
+BoldColour       = 255,255,255
+CursorColour     = 205,205,205
+#UnderlineColour = (No way to explicitly disable this, as far as I'm aware)
+
+Black       =   0,  0,  0
+Red         = 205,  0,  0
+Green       =   0,205,  0
+Yellow      = 205,205,  0
+Blue        =   0,127,255
+Magenta     = 205,  0,205
+Cyan        =   0,205,205
+White       = 205,205,205
+
+BoldBlack   = 127,127,127
+BoldRed     = 255,  0,  0
+BoldGreen   =   0,255,  0
+BoldYellow  = 255,255,  0
+BoldBlue    =  92,160,255
+BoldMagenta = 255,  0,255
+BoldCyan    =   0,255,255
+BoldWhite   = 255,255,255
