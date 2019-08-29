@@ -40,21 +40,6 @@ alias back='cd "$OLDPWD"'
 # Print $PATH in a human-readable format
 alias path='echo $PATH | tr : \\n'
 
-# Open Explorer window in current directory
-alias exp='explorer .'
-
-# Start X Server in the background silently
-alias silentx='log --stderr startxwin'
-
-# Automatically set $DISPLAY if unset
-alias auto-disp='[ -z "$DISPLAY" ] && export DISPLAY=:0.0'
-# Start X programs with default DISPLAY
-alias x='auto-disp; silentx'
-alias gvim='auto-disp; gvim'
-
-# Executes command in a separate window
-win () { mintty "$@" & }
-
 # Enjoy!
 alias lulz='cat /dev/urandom | hexdump -C |
             GREP_COLORS="mt=1;32" grep -E "[[:xdigit:]]{4}0000"'
@@ -98,6 +83,21 @@ cs() {
 	# List new directory contents
 	ls $lsargs
 }
+
+# Open Explorer window in current directory
+alias exp='explorer .'
+
+# Start X Server in the background silently
+alias silentx='log --stderr startxwin'
+
+# Automatically set $DISPLAY if unset
+alias auto-disp='[ -z "$DISPLAY" ] && export DISPLAY=:0.0'
+# Start X programs with default DISPLAY
+alias x='auto-disp; silentx'
+alias gvim='auto-disp; gvim'
+
+# Executes command in a separate window
+win () { mintty "$@" & }
 
 # Windows GUI for updating Cygwin
 alias cygupdate='curl -o "/proc/cygdrive/c/applications/cygwin-setup.exe" https://cygwin.com/setup-x86_64.exe'
