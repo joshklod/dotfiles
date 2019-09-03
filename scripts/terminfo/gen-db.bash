@@ -9,9 +9,9 @@ script_dir=$(dirname "$0")
 cd "$script_dir"
 rm -rf out
 
-find src -name '*.ti' -print0 \
-	| while IFS= read -rd $'\0'; do
-		printf "Compiling '%s'...\n" "$script_dir/$REPLY"
-		cat "$REPLY" >&4
-	done 4>&1 1>&3 \
-	| tic -sxo out -
+printf 'Compiling:'
+files=`find src -name '*.ti' -print0 | tee >(xargs -0 printf " '%s'" >&3) \
+		| tr '\0' '\n'`
+printf '\n'
+
+echo "$files" | tr '\n' '\0' | xargs -0 cat | tic -sxo out -
