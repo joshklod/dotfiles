@@ -2,12 +2,16 @@
 #
 # gen-db.bash - Generate terminfo database
 
+exec 3>&1
+
 script_dir=$(dirname "$0")
 
 cd "$script_dir"
 rm -rf out
 
-while IFS= read -rd $'\0'; do
-	printf "Compiling '%s'...\n" "$script_dir/$REPLY" >/dev/stderr
-	cat "$REPLY"
-done < <(find src -name '*.ti' -print0) | tic -sxo out -
+find src -name '*.ti' -print0 \
+	| while IFS= read -rd $'\0'; do
+		printf "Compiling '%s'...\n" "$script_dir/$REPLY"
+		cat "$REPLY" >&4
+	done 4>&1 1>&3 \
+	| tic -sxo out -
