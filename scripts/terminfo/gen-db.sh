@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/sh
 #
-# gen-db.bash - Generate terminfo database
+# gen-db.sh - Generate terminfo database
 
 xargs_n () {
 	tr '\n' '\0' | xargs -0 "$@"
