@@ -4,5 +4,5 @@ script_dir=$(dirname "$0")
 
 destination=${1:-~/.terminfo}
 
-"$script_dir/gen-db.bash"
+"$script_dir/gen-db.sh"
 cp -RTv --remove-destination "$script_dir/out" "$destination"
