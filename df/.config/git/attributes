@@ -1,3 +1,8 @@
 *.docx diff=word
+
+# Always use LF for shell scripts, regardless of EOL config setting
+*.bash   eol=lf
+*.sh     eol=lf
+
 package-lock.json -diff
 npm-shrinkwrap.json -diff
