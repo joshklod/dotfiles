@@ -128,6 +128,8 @@ if has("syntax")
 		let g:solarized_extra_hi_groups = 1
 		colorscheme solarized8
 
+		" Color Overrides
+		highlight Special  ctermfg=160 guifg=#dc322f               " Red
 		highlight SpellBad ctermfg=160 guifg=#dc322f guisp=#dc322f " Red
 	else
 		colorscheme industry
