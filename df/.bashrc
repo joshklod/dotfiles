@@ -42,14 +42,14 @@ fi
 
 ## Set prompt
 if [ $COLORS -ge 8 ]; then
-	blue='\[\e[34;22m\]'
-	cyan='\[\e[36;22m\]'
-	reset='\[\e[0m\]'
+	blue="\[$(tput setaf 4 || tput setf 1)\]"
+	cyan="\[$(tput setaf 6 || tput setf 3)\]"
+	reset="\[$(tput sgr0)\]"
 	
 	# [blue]user@host [cyan]path
 	# [cyan]$
-	PS1="\n$blue\u@\h $cyan\w$reset\n$cyan\$ $reset"
-	PS2="$cyan> $reset"
+	PS1="$reset\n$blue\u@\h $cyan\w$reset\n$cyan\$ $reset"
+	PS2="$reset$cyan> $reset"
 	
 	unset blue cyan reset
 else
