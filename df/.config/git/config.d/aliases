@@ -21,6 +21,7 @@
 	# Other shortcuts
 	stl     = !"git status && git lgs"
 	diffs   = diff --stat
+	ls-refs = for-each-ref --format='%(refname)'
 	shows   = show --stat
 	stashes = log --cc --walk-reflogs refs/stash
 
