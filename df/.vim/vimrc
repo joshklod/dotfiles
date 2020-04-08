@@ -277,7 +277,7 @@ if has("file_in_path")
 		set path +=/usr/**1/include
 	endif
 endif
-set tags +=./.tags,.tags
+set tags =./tags,./.tags,tags,.tags
 
 " Searching
 set ignorecase
