@@ -78,7 +78,8 @@ cs() {
 	cd $cdargs "$path" || return 1
 	# Print new working directory
 	wdstr="$(pwd | sed "s:^${HOME//:/\\:}\b:~:"):"
-	[ $COLORS -ge 8 ] && wdstr="\e[1m$wdstr\e[0m" # Use color if available
+	# Use color if available
+	[ $COLORS -ge 8 ] && wdstr="$(tput bold)$wdstr$(tput sgr0)"
 	printf '%s\n' "$wdstr"
 	# List new directory contents
 	ls $lsargs
