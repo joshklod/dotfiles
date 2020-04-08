@@ -125,6 +125,7 @@ if has("syntax")
 	endif
 	syntax enable
 	if s:haveColors('solarized8') && s:fancy_colors
+		let g:solarized_extra_hi_groups = 1
 		colorscheme solarized8
 
 		highlight SpellBad ctermfg=160 guifg=#dc322f guisp=#dc322f " Red
