@@ -53,6 +53,7 @@ cs() {
 	local path
 	local cdargs
 	local lsargs
+	local home_esc
 	local wdstr
 	
 	# Parse command line parameters
@@ -77,7 +78,8 @@ cs() {
 	# Change directory
 	cd $cdargs "$path" || return 1
 	# Print new working directory
-	wdstr="$(pwd | sed "s:^${HOME//:/\\:}\b:~:"):"
+	home_esc=$(sed -e 's/[]\/$*.^[]/\\&/g' <<< "$HOME")
+	wdstr="$(pwd | sed "s/^$home_esc\b/~/"):"
 	# Use color if available
 	[ $COLORS -ge 8 ] && wdstr="$(tput bold)$wdstr$(tput sgr0)"
 	printf '%s\n' "$wdstr"
