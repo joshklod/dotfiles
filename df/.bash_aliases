@@ -32,7 +32,7 @@ alias lall='ls -l --all'
 alias llal='lall'
 
 # One-line mathematical calculation
-calc () { echo "$@" | bc; }
+calc () { bc <<< "$*"; }
 
 # Go back to previous directory
 alias back='cd "$OLDPWD"'
@@ -79,7 +79,7 @@ cs() {
 	# Print new working directory
 	wdstr="$(pwd | sed "s:^${HOME//:/\\:}\b:~:"):"
 	[ $COLORS -ge 8 ] && wdstr="\e[1m$wdstr\e[0m" # Use color if available
-	echo -e "$wdstr"
+	printf '%s\n' "$wdstr"
 	# List new directory contents
 	ls $lsargs
 }
