@@ -125,8 +125,11 @@ if has("syntax")
 	endif
 	syntax enable
 	if s:haveColors('solarized8') && s:fancy_colors
+		let g:solarized_extra_hi_groups = 1
 		colorscheme solarized8
 
+		" Color Overrides
+		highlight Special  ctermfg=160 guifg=#dc322f               " Red
 		highlight SpellBad ctermfg=160 guifg=#dc322f guisp=#dc322f " Red
 	else
 		colorscheme industry
@@ -260,7 +263,9 @@ if has("file_in_path")
 	set path =.,,
 	" Compiler headers
 	if has("path_extra")
+		set path +=/usr/local/lib/gcc/**2/include-fixed
 		set path +=/usr/lib/gcc/**2/include-fixed
+		set path +=/usr/local/lib/gcc/**2/include
 		set path +=/usr/lib/gcc/**2/include
 	endif
 	" Standard header files
@@ -272,7 +277,12 @@ if has("file_in_path")
 		set path +=/usr/**1/include
 	endif
 endif
-set tags +=./.tags,.tags
+" Set this first, then reset it in case we don't have +eval
+set tags =./tags,./.tags,tags,.tags
+if has('path_extra')
+	set tags-=./tags tags-=./.tags
+	set tags ^=./tags;,./.tags;
+endif
 
 " Searching
 set ignorecase
