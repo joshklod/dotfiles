@@ -46,3 +46,6 @@
 [submodule "vim-unimpaired"]
 	path = df/.vim/pack/main/start/vim-unimpaired
 	url = https://github.com/tpope/vim-unimpaired.git
+[submodule "editorconfig-vim"]
+	path = df/.vim/pack/main/start/editorconfig-vim
+	url = https://github.com/editorconfig/editorconfig-vim.git
