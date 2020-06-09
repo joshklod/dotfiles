@@ -37,6 +37,11 @@ function! GetArmbasicIndent()
 	let l:cline   = getline(v:lnum)
 	let l:pline   = getline(plnum)
 
+	" Middle or end of C-style comment
+	if l:cline =~ '^\s*\*'
+		return cindent(v:lnum)
+	endif
+
 	" label endsub endfunction endif endselect elseif else
 	if l:cline =~ '\c^\s*\h\w*:'
 		" Goto Label
