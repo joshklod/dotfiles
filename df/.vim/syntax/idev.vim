@@ -6,6 +6,7 @@ if exists("b:current_syntax")
 endif
 
 syntax case ignore
+syntax spell notoplevel
 
 syntax	cluster	idevFuncGroup	contains=idevFunction,idevType,idevStructure,idevInclude
 syntax	keyword	idevFunction	SETUP INT RESET DEL POSN TEXT DRAW IMG KEY LOOP SHOW HIDE LOAD FILE CALC RUN IF EXIT WAIT contained
@@ -16,7 +17,7 @@ syntax	keyword	idevInclude	INC contained
 
 syntax	keyword	idevPreProc	FPROG FEND
 
-syntax	match	idevString	/"[^"]*"/ contains=idevHexChar
+syntax	match	idevString	/"[^"]*"/ contains=idevHexChar,@Spell
 syntax	match	idevNumber	/-\=\<\d\+\>\|\\\\\x\+/
 syntax	match	idevHexChar	/\\\\\x\{2}/ contained
 
@@ -28,8 +29,8 @@ syntax	match	idevRefresh	/;;/
 
 syntax	match	idevFuncZone	/\(^\|[[]\|;;\=\)\s*\ze\h\w*\s*(/ transparent nextgroup=@idevFuncGroup
 
-syntax	match	idevComment	"//.*" contains=idevTodo
-syntax	region	idevComment	start="/\*" end="\*/" contains=idevTodo
+syntax	match	idevComment	"//.*" contains=idevTodo,@Spell
+syntax	region	idevComment	start="/\*" end="\*/" contains=idevTodo,@Spell
 syntax	keyword	idevTodo	TODO
 
 
