@@ -1,7 +1,7 @@
 " Vim indent file
 " Language:     ARMbasic
 " Maintainer:   Josh Klodnicki <joshklod@gmail.com>
-" Last Change:  2018 Jun 20
+" Last Change:  2020 Jun 09
 
 if exists("b:did_indent")
 	finish
@@ -36,6 +36,11 @@ function! GetArmbasicIndent()
 	let l:pindent = indent(plnum)
 	let l:cline   = getline(v:lnum)
 	let l:pline   = getline(plnum)
+
+	" Middle or end of C-style comment
+	if l:cline =~ '^\s*\*'
+		return cindent(v:lnum)
+	endif
 
 	" label endsub endfunction endif endselect elseif else
 	if l:cline =~ '\c^\s*\h\w*:'
