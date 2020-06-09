@@ -309,6 +309,8 @@ if has("autocmd")
 		autocmd!
 		" Node.js auto-formatted config file
 		autocmd BufNewFile,BufRead package.json setl sw=2 et
+		" Reset editing options when viewing files
+		autocmd BufRead * if (&readonly == 1) | setl nospell | endif
 	augroup END
 endif
 
