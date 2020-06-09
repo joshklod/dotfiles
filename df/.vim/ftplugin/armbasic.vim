@@ -6,8 +6,9 @@ let b:did_ftplugin = 1
 let s:cpo_save = &cpo
 set cpo&vim
 
-setlocal iskeyword +=$
-setlocal comments   =sr:/*,m:*,ex:*/,://,:'
+setlocal iskeyword      +=$
+setlocal comments        =sr:/*,m:*,ex:*/,://,:'
+setlocal commentstring   =//%s
 
 " Function start/end jump commands
 nnoremap <silent><buffer> ]] :     call <SID>FuncJump(0, 0, 0)<CR>
@@ -48,7 +49,7 @@ function! s:undo_ftplugin()
 	let l:cpo_save = &cpo
 	set cpo&vim
 
-	setlocal iskeyword< comments<
+	setlocal iskeyword< comments< commentstring<
 	silent unmap <buffer> ]]
 	silent unmap <buffer> [[
 	silent unmap <buffer> ][
