@@ -142,6 +142,12 @@ if has("syntax")
 		highlight Special  ctermfg=160 guifg=#dc322f               " Red
 		highlight SpellBad ctermfg=160 guifg=#dc322f guisp=#dc322f " Red
 
+		" Use cterm=undercurl regardless of &termguicolors setting
+		highlight SpellBad   cterm=undercurl
+		highlight SpellCap   cterm=undercurl
+		highlight SpellLocal cterm=undercurl
+		highlight SpellRare  cterm=undercurl
+
 		" Use `ctermul` attribute if available
 		if s:term_ulcolor
 			highlight SpellBad   ctermul=160 " Red
