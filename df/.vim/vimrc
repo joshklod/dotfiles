@@ -149,6 +149,14 @@ if has("syntax")
 			highlight SpellLocal ctermul=136 " Yellow
 			highlight SpellRare  ctermul=37  " Cyan
 		endif
+
+		" Highlight spelling w/ underline color only, if possible
+		if has('gui_running') || s:term_ulcolor
+			highlig SpellBad   ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE
+			highlig SpellCap   ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE
+			highlig SpellLocal ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE
+			highlig SpellRare  ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE
+		endif
 	else
 		colorscheme industry
 	endif
