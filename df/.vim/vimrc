@@ -348,6 +348,8 @@ nmap <X2Mouse> <C-I>
 " Faster Horizontal Scroll
 nnoremap H zH
 nnoremap L zL
+" Disable dangerous "ZZ" command
+nnoremap ZZ <Nop>
 " Redo search using vimgrep
 nnoremap <Leader>vg :vimgrep /<C-R>// 
 " Search in all files
