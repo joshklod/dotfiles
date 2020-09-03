@@ -37,6 +37,41 @@ function! s:FuncJump(backward, visual)
 	call search(l:search_str, l:flags)
 endfunction
 
+function! IdevTagFunc(pattern, flags, info)
+	let l:cfile   = a:info.buf_ffname
+	let l:cdir    = fnamemodify(l:cfile, ':h')
+
+	let l:magic        = &magic ? '\m' : '\M'
+	let l:search_pat   =
+				\ '\v\c<(FUNC|LIB|VAR|STYLE|PAGE|STRUCT)\s*'
+				\.'\(\s*('.l:magic.a:pattern.'\v)'
+
+	let l:taglist = []
+	for l:file in glob(l:cdir.'/*.mnu', 0, 1)
+				\ ->filter({ i,f -> f != l:cfile })
+				\ ->insert(l:cfile)
+				\ ->filter({ i,f -> filereadable(f) })
+				\ ->map({ i,f -> fnamemodify(f, ':.') })
+		let l:lines   = readfile(l:file)
+		let l:idx     = 0
+		while l:idx < len(l:lines)
+			let l:match = matchlist(l:lines[l:idx], l:search_pat)
+			if !empty(l:match)
+				eval l:taglist->add(#{
+						\ name:     l:match[2],
+						\ filename: l:file,
+						\ cmd:      string(l:idx+1),
+						\ type:     tolower(l:match[1])
+					\ })
+			endif
+			let l:idx += 1
+		endwhile
+	endfor
+
+	return l:taglist
+endfunc
+setlocal tagfunc =IdevTagFunc
+
 " Footer
 function! s:undo_ftplugin()
 	setlocal expandtab<
