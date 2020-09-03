@@ -351,10 +351,10 @@ nnoremap L zL
 " Disable dangerous "ZZ" command
 nnoremap ZZ <Nop>
 " Redo search using vimgrep
-nnoremap <Leader>vg :vimgrep /<C-R>// 
+nnoremap <Leader>vg :lvimgrep /<C-R>// 
 " Search in all files
 nnoremap <Leader>* :let @/='\<'.expand("<cword>").'\>'<CR>
-                 \ :vimgrep /<C-R>// %:p:h/*<CR>
+                 \ :lvimgrep /<C-R>// %:p:h/*<CR>
 " Re-detect filetype
 nnoremap <Leader>fd :filetype detect<CR>
 " Jump to git conflict markers
