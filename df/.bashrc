@@ -43,16 +43,28 @@ fi
 
 ## Set prompt
 if [ $COLORS -ge 8 ]; then
-	blue="\[$(tput setaf 4 || tput setf 1)\]"
-	cyan="\[$(tput setaf 6 || tput setf 3)\]"
-	reset="\[$(tput sgr0)\]"
+	octal_escape () (
+		LC_ALL=C
+		while IFS='' read -r -d '' -n 1 char; do
+			ord=$(printf '%d' "'$char")
+			if [ 32 -le "$ord" ] && [ "$ord" -lt 127 ]; then
+				printf '%c' "$char"
+			else
+				printf '\\%03o' "$ord"
+			fi
+		done
+	)
+
+	blue="\[$({ tput setaf 4 || tput setf 1; } | octal_escape)\]"
+	cyan="\[$({ tput setaf 6 || tput setf 3; } | octal_escape)\]"
+	reset="\[$(tput sgr0 | octal_escape)\]"
 	
 	# [blue]user@host [cyan]path
 	# [cyan]$
 	PS1="$reset\n$blue\u@\h $cyan\w$reset\n$cyan\$ $reset"
 	PS2="$reset$cyan> $reset"
 	
-	unset blue cyan reset
+	unset octal_escape blue cyan reset
 else
 	# user@host path
 	# $
