@@ -295,10 +295,10 @@ if has("file_in_path")
 	set path =.,,
 	" Compiler headers
 	if has("path_extra")
-		set path +=/usr/local/lib/gcc/**2/include-fixed
-		set path +=/usr/lib/gcc/**2/include-fixed
 		set path +=/usr/local/lib/gcc/**2/include
 		set path +=/usr/lib/gcc/**2/include
+		set path +=/usr/local/lib/gcc/**2/include-fixed
+		set path +=/usr/lib/gcc/**2/include-fixed
 	endif
 	" Standard header files
 	set path +=/usr/local/include
