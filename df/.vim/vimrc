@@ -295,10 +295,10 @@ if has("file_in_path")
 	set path =.,,
 	" Compiler headers
 	if has("path_extra")
-		set path +=/usr/local/lib/gcc/**2/include-fixed
-		set path +=/usr/lib/gcc/**2/include-fixed
 		set path +=/usr/local/lib/gcc/**2/include
 		set path +=/usr/lib/gcc/**2/include
+		set path +=/usr/local/lib/gcc/**2/include-fixed
+		set path +=/usr/lib/gcc/**2/include-fixed
 	endif
 	" Standard header files
 	set path +=/usr/local/include
@@ -348,11 +348,13 @@ nmap <X2Mouse> <C-I>
 " Faster Horizontal Scroll
 nnoremap H zH
 nnoremap L zL
+" Disable dangerous "ZZ" command
+nnoremap ZZ <Nop>
 " Redo search using vimgrep
-nnoremap <Leader>vg :vimgrep /<C-R>// 
+nnoremap <Leader>vg :lvimgrep /<C-R>// 
 " Search in all files
 nnoremap <Leader>* :let @/='\<'.expand("<cword>").'\>'<CR>
-                 \ :vimgrep /<C-R>// %:p:h/*<CR>
+                 \ :lvimgrep /<C-R>// %:p:h/*<CR>
 " Re-detect filetype
 nnoremap <Leader>fd :filetype detect<CR>
 " Jump to git conflict markers
