@@ -21,6 +21,7 @@ export COLORS
 
 ## Shell configuration
 # Shell options
+shopt -s checkjobs  # Don't exit if there are running jobs
 shopt -s extglob    # Interpret extended glob syntax
 shopt -s dotglob    # Include .* files in glob
 shopt -s globstar   # Enable 'dir/**/foo' syntax
