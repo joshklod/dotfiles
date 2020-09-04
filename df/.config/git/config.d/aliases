@@ -51,7 +51,7 @@
 	cat      = false
 	cptree   = false
 	ctags    = false
-	mlog     = less -S
+	mlog     = true
 	page     = true
 	peek     = false
 	revlog   = true

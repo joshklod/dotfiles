@@ -3,7 +3,7 @@
 	email = joshklod@gmail.com
 [core]
 	editor = vim
-	pager = less -+FX
+	pager = less -+FX -RS
 	whitespace = cr-at-eol,tabwidth=4
 [pull]
 	ff = only
@@ -14,7 +14,6 @@
 [pager]
 	diff   = less -Sx 5,9
 	show   = less -Sx 5,9
-	log    = less -S
 	branch = less -FRX
 [log]
 	date = iso
