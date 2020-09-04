@@ -82,5 +82,8 @@ fi
 ## Source aliases file
 [ -f "$HOME/.bash_aliases" ] && source "$HOME/.bash_aliases"
 
+## Source local .bashrc if it exists
+[ -f "$HOME/.local.bashrc" ] && source "$HOME/.local.bashrc"
+
 ## Cleanup
 unset iscommand
