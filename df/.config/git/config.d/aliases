@@ -41,11 +41,11 @@
 
 [pager]
 	# Shortcuts
-	logp  = less -Sx 1,5
-	lgp   = less -Sx 1,5
-	lgs   = less -FRX
-	diffs = less -FRX
-	shows = less -FRX
+	logp  = less -+FX -RS -x 1,5
+	lgp   = less -+FX -RS -x 1,5
+	lgs   = less -RS -FX
+	diffs = less -RS -FX
+	shows = less -RS -FX
 
 	# Custom commands
 	cat      = false
