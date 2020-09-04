@@ -19,20 +19,20 @@
 	lgs  = !git log2g --all --simplify-by-decoration
 
 	# Other shortcuts
+	cat     = !git -P
 	stl     = !"git status && git lgs"
 	diffs   = diff --stat
 	ls-refs = for-each-ref --format='%(refname)'
+	page    = !git -p
+	peek    = !bash -c '$(git var GIT_EDITOR) <(git show \"$1:$2\")' git-peek
 	shows   = show --stat
 	stashes = log --cc --walk-reflogs refs/stash
 
 	# Custom commands
 	ctags  = !~/.config/git/scripts/ctags.sh
 	cptree = !~/.config/git/scripts/cptree.sh
-	cat    = !~/.config/git/scripts/cat.sh
-	page   = !~/.config/git/scripts/page.sh
 	mlog   = !~/.config/git/scripts/mlog.sh
 	revlog = !~/.config/git/scripts/revlog.sh
-	peek   = !~/.config/git/scripts/peek.bash
 
 	# Typo correction
 	dif      = diff
@@ -48,12 +48,9 @@
 	shows = less -RS -FX
 
 	# Custom commands
-	cat      = false
 	cptree   = false
 	ctags    = false
 	mlog     = true
-	page     = true
-	peek     = false
 	revlog   = true
 
 # vim: ft=gitconfig
