@@ -23,3 +23,6 @@ case "$(uname -s)" in
 		[ -d "/proc/cygdrive/c/Applications" ] && PATH="$PATH:/proc/cygdrive/c/Applications"
 		;;
 esac
+
+# Source local .bash_profile if it exists
+[ -f "$HOME/.local.bash_profile" ] && source "$HOME/.local.bash_profile"
