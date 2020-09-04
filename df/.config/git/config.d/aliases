@@ -40,11 +40,20 @@
 	statsu   = status
 
 [pager]
+	# Shortcuts
 	logp  = less -Sx 1,5
 	lgp   = less -Sx 1,5
 	lgs   = less -FRX
 	diffs = less -FRX
 	shows = less -FRX
-	mlog  = less -S
+
+	# Custom commands
+	cat      = false
+	cptree   = false
+	ctags    = false
+	mlog     = less -S
+	page     = true
+	peek     = false
+	revlog   = true
 
 # vim: ft=gitconfig
