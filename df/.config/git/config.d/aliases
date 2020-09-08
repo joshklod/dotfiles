@@ -20,7 +20,7 @@
 
 	# Other shortcuts
 	cat     = !git -P
-	stl     = !"git status && git lgs"
+	stl     = !git status && git lgs
 	diffs   = diff --stat
 	ls-refs = for-each-ref --format='%(refname)'
 	page    = !git -p
