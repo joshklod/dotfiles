@@ -22,6 +22,7 @@
 	cat     = !git -P
 	stl     = !git status && git lgs
 	diffs   = diff --stat
+	fuge    = !vim -c \"if !exists(':Gedit') | cq | endif | Gedit $1:$2\" && :
 	ls-refs = for-each-ref --format='%(refname)'
 	page    = !git -p
 	peek    = !bash -c '$(git var GIT_EDITOR) <(git show \"$1:$2\")' git-peek
