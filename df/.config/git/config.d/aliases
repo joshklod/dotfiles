@@ -4,8 +4,11 @@
 
 [alias]
 	# Not meant to be used
-	log2  = log --pretty=twoline
-	log2g = !git mlog --pretty=twolineg
+	have-fugitive   = !sh -c \
+		\"vim -esN <<EOF\nexec 'cq' (exists(':Git') ? 0 : 1)\nEOF\" \
+		git-have-fugitive
+	log2            = log --pretty=twoline
+	log2g           = !git mlog --pretty=twolineg
 
 	# Log shortcuts
 	llog = log --author-date-order --show-linear-break
@@ -22,13 +25,15 @@
 	cat     = !git -P
 	stl     = !git status && git lgs
 	diffs   = diff --stat
-	fuge    = !vim -c \"if !exists(':Gedit') | cq | endif | Gedit $1:$2\" && :
+	fuge    = !git have-fugitive && vim -c \"Gedit $1:$2\" && :
 	ls-refs = for-each-ref --format='%(refname)'
 	page    = !git -p
 	peek    = !bash -c '$(git var GIT_EDITOR) <(git show \"$1:$2\")' git-peek
 	shows   = show --stat
 	stashes = log --cc --walk-reflogs refs/stash
-	view    = !git fuge \"$@\" || git peek
+	view    = "!if git have-fugitive; \
+		then git fuge \"$@\"; \
+		else git peek \"$@\"; fi" && :
 
 	# Custom commands
 	ctags  = !~/.config/git/scripts/ctags.sh
