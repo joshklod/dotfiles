@@ -5,6 +5,8 @@
 	editor = vim
 	pager = less -+FX
 	whitespace = cr-at-eol,tabwidth=4
+[pull]
+	ff = only
 [push]
 	default = simple
 	followTags = true
