@@ -200,7 +200,7 @@ if has("syntax")
 	endif
 	set colorcolumn =+2 " Always 2 columns right of textwidth
 endif
-set number relativenumber
+set nonumber relativenumber
 if has("linebreak")
 	set numberwidth =3
 endif
@@ -262,16 +262,18 @@ if has("linebreak")
 endif
 
 " Window behavior
+set hidden
 if has("windows")
 	set splitbelow
 	set laststatus =2 " Always show status line
 	if has("vertsplit")
 		set splitright
+		set winwidth =80
 		" Leave extra space for line numbers
-		if has("linebreak")
-			let &winwidth = 80 + &numberwidth
+		if has("linebreak") && (&numberwidth > 3)
+			let &winwidth += &numberwidth
 		else
-			set winwidth =83
+			let &winwidth += 3
 		endif
 		set winminwidth =20
 	endif
@@ -294,20 +296,16 @@ if has("file_in_path")
 	" Current file and working directories first
 	set path =.,,
 	" Compiler headers
-	if has("path_extra")
-		set path +=/usr/local/lib/gcc/**2/include
-		set path +=/usr/lib/gcc/**2/include
-		set path +=/usr/local/lib/gcc/**2/include-fixed
-		set path +=/usr/lib/gcc/**2/include-fixed
-	endif
+	set path +=/usr/local/lib/gcc/*/*/include
+	set path +=/usr/lib/gcc/*/*/include
+	set path +=/usr/local/lib/gcc/*/*/include-fixed
+	set path +=/usr/lib/gcc/*/*/include-fixed
 	" Standard header files
 	set path +=/usr/local/include
 	set path +=/usr/include
 	" Cross-target headers
-	if has("path_extra")
-		set path +=/usr/local/**1/include
-		set path +=/usr/**1/include
-	endif
+	set path +=/usr/local/*/include
+	set path +=/usr/*/include
 endif
 " Set this first, then reset it in case we don't have +eval
 set tags =./tags,./.tags,tags,.tags
@@ -338,6 +336,8 @@ if has("autocmd")
 		autocmd BufNewFile,BufRead package.json setl sw=2 et
 		" Reset editing options when viewing files
 		autocmd BufRead * if (&readonly == 1) | setl nospell | endif
+		" Don't use line numbers in terminal windows
+		autocmd TerminalWinOpen * setl nonu nornu
 	augroup END
 endif
 
