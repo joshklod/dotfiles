@@ -268,11 +268,12 @@ if has("windows")
 	set laststatus =2 " Always show status line
 	if has("vertsplit")
 		set splitright
+		set winwidth =80
 		" Leave extra space for line numbers
-		if has("linebreak")
-			let &winwidth = 80 + &numberwidth
+		if has("linebreak") && (&numberwidth > 3)
+			let &winwidth += &numberwidth
 		else
-			set winwidth =83
+			let &winwidth += 3
 		endif
 		set winminwidth =20
 	endif
