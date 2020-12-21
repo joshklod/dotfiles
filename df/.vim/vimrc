@@ -200,7 +200,7 @@ if has("syntax")
 	endif
 	set colorcolumn =+2 " Always 2 columns right of textwidth
 endif
-set number relativenumber
+set nonumber relativenumber
 if has("linebreak")
 	set numberwidth =3
 endif
