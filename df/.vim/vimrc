@@ -336,6 +336,8 @@ if has("autocmd")
 		autocmd BufNewFile,BufRead package.json setl sw=2 et
 		" Reset editing options when viewing files
 		autocmd BufRead * if (&readonly == 1) | setl nospell | endif
+		" Don't use line numbers in terminal windows
+		autocmd TerminalWinOpen * setl nonu nornu
 	augroup END
 endif
 
