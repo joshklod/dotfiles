@@ -262,6 +262,7 @@ if has("linebreak")
 endif
 
 " Window behavior
+set hidden
 if has("windows")
 	set splitbelow
 	set laststatus =2 " Always show status line
