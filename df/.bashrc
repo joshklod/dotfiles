@@ -29,6 +29,7 @@ shopt -s histappend # Don't clobber history from parallel shell sessions
 
 # Environment variables
 export EDITOR=$(command -v vim) # Use Vim as default editor
+export GNUMAKEFLAGS='--output-sync=target'
 export HISTCONTROL=ignoredups # Ignore duplicates in history
 export LESS='-iR'               # Interpret ANSI escape sequences
 export MAKEFLAGS='--jobs=4'
