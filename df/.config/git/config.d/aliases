@@ -21,7 +21,8 @@
 	lgp  = !git log2 --patch --reverse
 	lg   = !git log2g
 	lga  = !git log2g --all
-	lgs  = !git log2g --all --simplify-by-decoration
+	lgs  = !git log2g --all --simplify-by-decoration \
+	       --decorate-refs-exclude='refs/tags/v[0-9]*'
 
 	# Other shortcuts
 	cat     = !git -P
