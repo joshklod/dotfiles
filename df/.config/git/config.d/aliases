@@ -55,6 +55,7 @@
 	# Shortcuts
 	logp  = autopage -RS -x 1,5
 	lgp   = autopage -RS -x 1,5
+	stl   = true
 
 	# Custom commands
 	cptree   = false
