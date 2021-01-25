@@ -8,7 +8,7 @@
 		\"vim -esN <<EOF\nexec 'cq' (exists(':Git') ? 0 : 1)\nEOF\" \
 		git-have-fugitive
 	log2            = log --pretty=twoline
-	log2g           = !git mlog --pretty=twolineg
+	log2g           = log --graph --pretty=twolineg
 
 	# Log shortcuts
 	llog = log --author-date-order --show-linear-break
