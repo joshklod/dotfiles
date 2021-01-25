@@ -53,12 +53,8 @@
 
 [pager]
 	# Shortcuts
-	logp  = less -+FX -RS -x 1,5
-	lgp   = less -+FX -RS -x 1,5
-	lgs   = less -RS -FX
-	lgss  = less -RS -FX
-	diffs = less -RS -FX
-	shows = less -RS -FX
+	logp  = autopage -RS -x 1,5
+	lgp   = autopage -RS -x 1,5
 
 	# Custom commands
 	cptree   = false
