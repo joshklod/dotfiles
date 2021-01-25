@@ -1,6 +1,8 @@
 [pretty]
 	twoline  = tformat:%C(auto)%h %C(auto,blue)%<(16)%an%C(auto)%d%n  %s
-	twolineg = tformat:\t%C(auto)%h %C(auto,blue)%<(16)%an%C(auto)%d%n\t  %s
+	twolineg = tformat:%<|(12)%x20%C(auto)%h %C(auto,blue)%<(16)%an%C(auto)%d%n %<|(12)%x20 %s
+	tldate   = tformat:%C(auto)%h %C(auto,cyan)%<(12)%ad%C(auto)%d%n  %s
+	tldateg  = tformat:%<|(12)%x20%C(auto)%h %C(auto,cyan)%<(12)%ad%C(auto)%d%n %<|(12)%x20 %s
 
 [alias]
 	# Not meant to be used
@@ -8,7 +10,7 @@
 		\"vim -esN <<EOF\nexec 'cq' (exists(':Git') ? 0 : 1)\nEOF\" \
 		git-have-fugitive
 	log2            = log --pretty=twoline
-	log2g           = !git mlog --pretty=twolineg
+	log2g           = log --graph --pretty=twolineg
 
 	# Log shortcuts
 	llog = log --author-date-order --show-linear-break
@@ -19,7 +21,10 @@
 	lgp  = !git log2 --patch --reverse
 	lg   = !git log2g
 	lga  = !git log2g --all
-	lgs  = !git log2g --all --simplify-by-decoration
+	lgss = !git log2g --simplify-by-decoration \
+	       --decorate-refs-exclude='refs/tags/v[0-9]*'
+	lgs  = !git log2g --all --simplify-by-decoration \
+	       --decorate-refs-exclude='refs/tags/v[0-9]*'
 
 	# Other shortcuts
 	cat     = !git -P
@@ -51,6 +56,7 @@
 	logp  = less -+FX -RS -x 1,5
 	lgp   = less -+FX -RS -x 1,5
 	lgs   = less -RS -FX
+	lgss  = less -RS -FX
 	diffs = less -RS -FX
 	shows = less -RS -FX
 
