@@ -42,5 +42,7 @@
 	keepBackup = false
 [status]
 	showStash = true
+[advice]
+	detachedHead = false
 
 # vim: ft=gitconfig
