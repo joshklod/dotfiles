@@ -1,0 +1,4 @@
+#!/bin/sh
+#
+# .git/hooks/dry/post-head-update
+

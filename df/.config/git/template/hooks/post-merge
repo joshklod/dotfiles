@@ -2,4 +2,6 @@
 #
 # .git/hooks/post-merge
 
+"$(git rev-parse --git-path hooks/dry/post-head-update)"
+
 ~/.config/git/scripts/ctags.sh &
