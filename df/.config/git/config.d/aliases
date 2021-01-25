@@ -21,6 +21,8 @@
 	lgp  = !git log2 --patch --reverse
 	lg   = !git log2g
 	lga  = !git log2g --all
+	lgss = !git log2g --simplify-by-decoration \
+	       --decorate-refs-exclude='refs/tags/v[0-9]*'
 	lgs  = !git log2g --all --simplify-by-decoration \
 	       --decorate-refs-exclude='refs/tags/v[0-9]*'
 
@@ -54,6 +56,7 @@
 	logp  = less -+FX -RS -x 1,5
 	lgp   = less -+FX -RS -x 1,5
 	lgs   = less -RS -FX
+	lgss  = less -RS -FX
 	diffs = less -RS -FX
 	shows = less -RS -FX
 
