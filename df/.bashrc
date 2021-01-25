@@ -28,6 +28,7 @@ shopt -s globstar   # Enable 'dir/**/foo' syntax
 shopt -s histappend # Don't clobber history from parallel shell sessions
 
 # Environment variables
+export AUTOPAGE_CUTOFF='50%'
 export EDITOR=$(command -v vim) # Use Vim as default editor
 export GNUMAKEFLAGS='--output-sync=target'
 export HISTCONTROL=ignoredups # Ignore duplicates in history
