@@ -126,6 +126,9 @@ if s:havePlug('plugin/editorconfig.vim')
 	let g:EditorConfig_max_line_indicator       = 'none'
 	let g:EditorConfig_exclude_patterns         = ['fugitive://.*']
 endif
+if s:havePlug('syntax/sh.vim')
+	let g:is_posix = 1 " Treat `#!/bin/sh` as POSIX instead of Bourne
+endif
 
 " Syntax highlighting
 set background =dark
