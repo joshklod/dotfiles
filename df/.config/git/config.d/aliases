@@ -1,3 +1,5 @@
+# vim: ft=gitconfig
+
 [pretty]
 	twoline  = tformat:%C(auto)%h %C(auto,blue)%<(16)%an%C(auto)%d%n  %s
 	twolineg = tformat:%<|(12)%x20%C(auto)%h %C(auto,blue)%<(16)%an%C(auto)%d%n %<|(12)%x20 %s
@@ -64,5 +66,3 @@
 	ctags    = false
 	mlog     = true
 	revlog   = true
-
-# vim: ft=gitconfig
