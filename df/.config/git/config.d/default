@@ -1,3 +1,5 @@
+# vim: ft=gitconfig
+
 [user]
 	name = Josh Klodnicki
 	email = joshklod@gmail.com
@@ -43,5 +45,3 @@
 	showStash = true
 [advice]
 	detachedHead = false
-
-# vim: ft=gitconfig
