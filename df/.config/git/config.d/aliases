@@ -28,6 +28,8 @@
 
 	# Other shortcuts
 	cat     = !git -P
+	cfg     = !sh -c 'f=\"$1\" && shift && git config -f \
+		\"${XDG_CONFIG_HOME:-$HOME/.config}/git/config.d/$f\" \"$@\"' git-cfg
 	stl     = !git status && git lgs
 	diffs   = diff --stat
 	fuge    = !git have-fugitive && vim -c \"Gedit $1:$2\" && :
