@@ -340,7 +340,9 @@ if has("autocmd")
 		" Reset editing options when viewing files
 		autocmd BufRead * if (&readonly == 1) | setl nospell | endif
 		" Don't use line numbers in terminal windows
-		autocmd TerminalWinOpen * setl nonu nornu
+		if exists('##TerminalWinOpen')
+			autocmd TerminalWinOpen * setl nonu nornu
+		endif
 	augroup END
 endif
 
