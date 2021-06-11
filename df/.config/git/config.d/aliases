@@ -38,6 +38,7 @@
 	ls-refs = for-each-ref --format='%(refname)'
 	page    = !git -p
 	peek    = !bash -c '$(git var GIT_EDITOR) <(git show \"$1:$2\")' git-peek
+	show-date = log --no-walk=unsorted --pretty='%ad'
 	shows   = show --stat
 	stashes = log --cc --walk-reflogs refs/stash
 	view    = "!if git have-fugitive; \
