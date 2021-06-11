@@ -45,3 +45,4 @@
 	showStash = true
 [advice]
 	detachedHead = false
+	addIgnoredFile = false
