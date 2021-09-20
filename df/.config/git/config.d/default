@@ -1,9 +1,11 @@
+# vim: ft=gitconfig
+
 [user]
 	name = Josh Klodnicki
 	email = joshklod@gmail.com
 [core]
 	editor = vim
-	pager = less -+FX
+	pager = autopage -RS
 	whitespace = cr-at-eol,tabwidth=4
 [pull]
 	ff = only
@@ -12,10 +14,8 @@
 	followTags = true
 	recurseSubmodules = check
 [pager]
-	diff   = less -Sx 5,9
-	show   = less -Sx 5,9
-	log    = less -S
-	branch = less -FRX
+	diff   = autopage -RS -x 1,5
+	show   = autopage -RS -x 1,5
 [log]
 	date = iso
 	graphColors = 160,40,184,63,165,45,172,43,112,99,163,33
@@ -43,5 +43,6 @@
 	keepBackup = false
 [status]
 	showStash = true
-
-# vim: ft=gitconfig
+[advice]
+	detachedHead = false
+	addIgnoredFile = false

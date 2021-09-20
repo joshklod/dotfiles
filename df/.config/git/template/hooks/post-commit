@@ -2,4 +2,4 @@
 #
 # .git/hooks/post-commit
 
-~/.config/git/scripts/ctags.sh &
+"$(git rev-parse --git-path hooks/dry/post-head-update)"

@@ -1,11 +1,18 @@
+# vim: ft=gitconfig
+
 [pretty]
 	twoline  = tformat:%C(auto)%h %C(auto,blue)%<(16)%an%C(auto)%d%n  %s
-	twolineg = tformat:\t%C(auto)%h %C(auto,blue)%<(16)%an%C(auto)%d%n\t  %s
+	twolineg = tformat:%<|(12)%x20%C(auto)%h %C(auto,blue)%<(16)%an%C(auto)%d%n %<|(12)%x20 %s
+	tldate   = tformat:%C(auto)%h %C(auto,cyan)%<(12)%ad%C(auto)%d%n  %s
+	tldateg  = tformat:%<|(12)%x20%C(auto)%h %C(auto,cyan)%<(12)%ad%C(auto)%d%n %<|(12)%x20 %s
 
 [alias]
 	# Not meant to be used
-	log2  = log --pretty=twoline
-	log2g = !git mlog --pretty=twolineg
+	have-fugitive   = !sh -c \
+		\"vim -esN <<EOF\nexec 'cq' (exists(':Git') ? 0 : 1)\nEOF\" \
+		git-have-fugitive
+	log2            = log --pretty=twoline
+	log2g           = log --graph --pretty=twolineg
 
 	# Log shortcuts
 	llog = log --author-date-order --show-linear-break
@@ -16,23 +23,33 @@
 	lgp  = !git log2 --patch --reverse
 	lg   = !git log2g
 	lga  = !git log2g --all
-	lgs  = !git log2g --all --simplify-by-decoration
+	lgss = !git log2g --simplify-by-decoration \
+	       --decorate-refs-exclude='refs/tags/v[0-9]*'
+	lgs  = !git log2g --all --simplify-by-decoration \
+	       --decorate-refs-exclude='refs/tags/v[0-9]*'
 
 	# Other shortcuts
-	stl     = !"git status && git lgs"
+	cat     = !git -P
+	cfg     = !sh -c 'f=\"$1\" && shift && git config -f \
+		\"${XDG_CONFIG_HOME:-$HOME/.config}/git/config.d/$f\" \"$@\"' git-cfg
+	stl     = !git status && git lgs -8
 	diffs   = diff --stat
+	fuge    = !git have-fugitive && vim -c \"Gedit $1:$2\" && :
 	ls-refs = for-each-ref --format='%(refname)'
+	page    = !git -p
+	peek    = !bash -c '$(git var GIT_EDITOR) <(git show \"$1:$2\")' git-peek
+	show-date = log --no-walk=unsorted --pretty='%ad'
 	shows   = show --stat
 	stashes = log --cc --walk-reflogs refs/stash
+	view    = "!if git have-fugitive; \
+		then git fuge \"$@\"; \
+		else git peek \"$@\"; fi" && :
 
 	# Custom commands
 	ctags  = !~/.config/git/scripts/ctags.sh
 	cptree = !~/.config/git/scripts/cptree.sh
-	cat    = !~/.config/git/scripts/cat.sh
-	page   = !~/.config/git/scripts/page.sh
 	mlog   = !~/.config/git/scripts/mlog.sh
 	revlog = !~/.config/git/scripts/revlog.sh
-	peek   = !~/.config/git/scripts/peek.bash
 
 	# Typo correction
 	dif      = diff
@@ -40,11 +57,13 @@
 	statsu   = status
 
 [pager]
-	logp  = less -Sx 1,5
-	lgp   = less -Sx 1,5
-	lgs   = less -FRX
-	diffs = less -FRX
-	shows = less -FRX
-	mlog  = less -S
+	# Shortcuts
+	logp  = autopage -RS -x 1,5
+	lgp   = autopage -RS -x 1,5
+	stl   = true
 
-# vim: ft=gitconfig
+	# Custom commands
+	cptree   = false
+	ctags    = false
+	mlog     = true
+	revlog   = true

@@ -18,5 +18,4 @@ else
 	color=never
 fi
 
-git -c color.ui=$color \
-	mlog --date=short --pretty=tformat:'%x09%ad - %s' "$@" | $eol
+git -c color.ui=$color mlog --pretty=tformat:'%x09%as - %s' "$@" | $eol

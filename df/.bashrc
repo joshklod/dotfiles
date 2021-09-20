@@ -21,15 +21,19 @@ export COLORS
 
 ## Shell configuration
 # Shell options
+shopt -s checkjobs  # Don't exit if there are running jobs
 shopt -s extglob    # Interpret extended glob syntax
 shopt -s dotglob    # Include .* files in glob
 shopt -s globstar   # Enable 'dir/**/foo' syntax
 shopt -s histappend # Don't clobber history from parallel shell sessions
 
 # Environment variables
+export AUTOPAGE_CUTOFF='50%'
 export EDITOR=$(command -v vim) # Use Vim as default editor
+export GNUMAKEFLAGS='--output-sync=target'
 export HISTCONTROL=ignoredups # Ignore duplicates in history
-export LESS='-R'              # Interpret ANSI escape sequences
+export LESS='-iR'               # Interpret ANSI escape sequences
+export MAKEFLAGS='--jobs=4'
 
 # LS Colors
 if [ $COLORS -ge 8 ] && iscommand dircolors; then
@@ -42,16 +46,28 @@ fi
 
 ## Set prompt
 if [ $COLORS -ge 8 ]; then
-	blue="\[$(tput setaf 4 || tput setf 1)\]"
-	cyan="\[$(tput setaf 6 || tput setf 3)\]"
-	reset="\[$(tput sgr0)\]"
+	octal_escape () (
+		LC_ALL=C
+		while IFS='' read -r -d '' -n 1 char; do
+			ord=$(printf '%d' "'$char")
+			if [ 32 -le "$ord" ] && [ "$ord" -lt 127 ]; then
+				printf '%c' "$char"
+			else
+				printf '\\%03o' "$ord"
+			fi
+		done
+	)
+
+	blue="\[$({ tput setaf 4 || tput setf 1; } | octal_escape)\]"
+	cyan="\[$({ tput setaf 6 || tput setf 3; } | octal_escape)\]"
+	reset="\[$(tput sgr0 | octal_escape)\]"
 	
 	# [blue]user@host [cyan]path
 	# [cyan]$
 	PS1="$reset\n$blue\u@\h $cyan\w$reset\n$cyan\$ $reset"
 	PS2="$reset$cyan> $reset"
 	
-	unset blue cyan reset
+	unset octal_escape blue cyan reset
 else
 	# user@host path
 	# $
@@ -68,6 +84,9 @@ fi
 
 ## Source aliases file
 [ -f "$HOME/.bash_aliases" ] && source "$HOME/.bash_aliases"
+
+## Source local .bashrc if it exists
+[ -f "$HOME/.local.bashrc" ] && source "$HOME/.local.bashrc"
 
 ## Cleanup
 unset iscommand
