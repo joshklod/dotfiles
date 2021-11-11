@@ -5,8 +5,8 @@ endif
 
 " Recognize custom xterm-style terminals - Vim internally sets extra termcap
 " settings for terminals containing 'xterm'
-if     &term =~ 'mintty'
-	set term =xterm-mintty
+if     &term =~ '^mintty'
+	let &term = 'xterm-'.&term
 elseif &term =~ 'hterm'
 	set term =xterm-truecolor
 endif
