@@ -60,7 +60,7 @@ function! s:undo_ftplugin()
 endfunction
 
 function! s:SID()
-	return matchstr(expand("<sfile>"), '<SNR>\d\+_')
+	return matchstr(expand("<sfile>"), '<SNR>\d\+_\zeSID$')
 endfunction
 
 let b:undo_ftplugin = "call ".s:SID()."undo_ftplugin()"

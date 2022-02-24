@@ -46,7 +46,7 @@ syntax	cluster	armbasicNumberGroup	contains=armbasicDecimal,armbasicHex,armbasic
 syntax	match	armbasicDecimal		/\(\<\|\(\W\&\S\&[^).]\|\<\(AND\|OR\|XOR\|NOT\|MOD\|RETURN\|CASE\)\>\)\@<=\s*\zs-\)\d\+\>/
 syntax	match	armbasicHex		/\(\$\|&H\)\x\+\>/
 syntax	match	armbasicBinary		/%[01]\+\>/
-syntax	match	armbasicFloat		/\(\<\|\(\W\&\S\&[^).]\|\<\(AND\|OR\|XOR\|NOT\|MOD\|RETURN\|CASE\)\>\)\@<=\s*\zs-\)\d\+\.\(\d\+\>\)\?/
+syntax	match	armbasicFloat		/\(\(\W\&\S\&[^).]\|\<\(AND\|OR\|XOR\|NOT\|MOD\|RETURN\|CASE\)\>\)\@<=\s*\zs-\)\?\(\(\<\d\+\(\.\d*\)\?\|\.\d\+\)e[+-]\?\d\+\>\|\<\d\+\.\(\d\+\>\)\?\|\.\d\+\>\)/
 
 " Goto Labels
 syntax	match	armbasicGotoLabel	/^\s*\zs\h\w*:/ nextgroup=armbasicLabelError

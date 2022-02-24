@@ -1,14 +1,14 @@
 mintty|xterm-mintty|The Cygwin Terminal Emulator,
 	use=mintty-3.0,
 
-mintty-2.0|The Cygwin Terminal Emulator (v2.0),
+mintty-2.0|xterm-mintty-2.0|The Cygwin Terminal Emulator (v2.0),
 # True Color
 	Tc,truecolor,
 	setrgbf=\E[38;2;%p1%d;%p2%d;%p3%dm,
 	setrgbb=\E[48;2;%p1%d;%p2%d;%p3%dm,
 	use=xterm-256color,
 
-mintty-2.9|The Cygwin Terminal Emulator (v2.9),
+mintty-2.9|xterm-mintty-2.9|The Cygwin Terminal Emulator (v2.9),
 # Use colon-delimited subparameters
 	setaf=\E[
 	    %?%p1%{8}%<%t
@@ -41,7 +41,7 @@ mintty-2.9|The Cygwin Terminal Emulator (v2.9),
 	op=\E[39;49;59m,
 	use=mintty-2.0,
 
-mintty-3.0|The Cygwin Terminal Emulator (v3.0),
+mintty-3.0|xterm-mintty-3.0|The Cygwin Terminal Emulator (v3.0),
 # Shadow Mode
 	sshm=\E[1:2m,
 	rshm=\E[22m,
@@ -55,7 +55,7 @@ mintty-3.0|The Cygwin Terminal Emulator (v3.0),
 	rsubm=\E[75m,
 	use=mintty-2.9,
 
-mintty-direct|The Cygwin Terminal Emulator (indexed direct color mode),
+mintty-direct|xterm-mintty-direct|The Cygwin Terminal Emulator (indexed direct color mode),
 	setal=\E[58\:
 	    %?%p1%{8}%<%t
 		5\:%p1%d
