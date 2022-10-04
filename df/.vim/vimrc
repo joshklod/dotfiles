@@ -23,8 +23,8 @@ if executable('tput') == 1
 				\ ['&t_Cs', 'swavl',   0],
 				\ ['&t_Ce', 'rmul',    0],
 				\ ['&t_AU', 'setal',   0],
-				\ ['&t_8f', 'setrgbf', 1],
-				\ ['&t_8b', 'setrgbb', 1],
+				\ ['&t_8f', 'setrgbf', 0],
+				\ ['&t_8b', 'setrgbb', 0],
 				\ ['&t_8u', 'setrgbl', 0]]
 		if !exists(s:varname) | continue | endif
 
@@ -89,12 +89,7 @@ if has("eval")
 	let s:homertp = $HOME . (has("win32") ? "/vimfiles" : "/.vim")
 
 	" Compatible with termguicolors
-	" Termguicolors requires that both the terminal and Vim are truecolor
-	" capable.  The environment variable $COLORTERM is usually not set
-	" automatically - this must be done manually (typically in .bashrc) when
-	" using a truecolor-capable terminal.
-	let s:has_tgc = has("termguicolors") && $COLORTERM == "truecolor" &&
-				\ !empty(&t_8f) && !empty(&t_8b)
+	let s:has_tgc = has("termguicolors") && !empty(&t_8f) && !empty(&t_8b)
 	" Capable of setting underline color in terminal
 	let s:term_ulcolor = has('patch-8.2.863') &&
 				\ (s:has_tgc ? !empty(&t_8u) : !empty(&t_AU))
