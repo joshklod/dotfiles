@@ -9,11 +9,8 @@
 [ -d "$HOME/bin" ]       && export PATH="$HOME/bin:$PATH"
 [ -d "$HOME/scripts" ]   && export PATH="$HOME/scripts:$PATH"
 
-# Set MANPATH so it includes users' private man if it exists
-[ -d "$HOME/man" ] && export MANPATH="$HOME/man:$MANPATH"
-
-# Set INFOPATH so it includes users' private info if it exists
-[ -d "$HOME/info" ] && export INFOPATH="$HOME/info:$INFOPATH"
+# Override INFOPATH to use automatic resolution
+export INFOPATH='PATH:'
 
 case "$(uname -s)" in
 	CYGWIN*)
