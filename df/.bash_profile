@@ -3,7 +3,7 @@
 # .bash_profile: Sourced in login shells
 
 # source the users bashrc if it exists
-[ -f "$HOME/.bashrc" ] && source "$HOME/.bashrc"
+[ -f "$HOME/.bashrc" ] && . "$HOME/.bashrc"
 
 # Prepend personal bin directories to $PATH
 [ -d "$HOME/bin" ]       && export PATH="$HOME/bin:$PATH"
@@ -11,9 +11,12 @@
 
 # Append portable tree bin directories to $PATH
 if [ -d "$HOME/opt/tree" ]; then
-	while IFS= read -rd '' tree; do
+	while IFS= read -r tree; do
+		[ -z "$tree" ] && continue
 		[ -d "$tree/bin" ] && export PATH="$PATH:$tree/bin"
-	done < <(find -L "$HOME/opt/tree" -mindepth 1 -maxdepth 1 -type d -print0)
+	done <<-EOF
+		$(find -L "$HOME/opt/tree" -mindepth 1 -maxdepth 1 -type d)
+	EOF
 fi
 
 # Override INFOPATH to use automatic resolution
@@ -28,4 +31,4 @@ case "$(uname -s)" in
 esac
 
 # Source local .bash_profile if it exists
-[ -f "$HOME/.local.bash_profile" ] && source "$HOME/.local.bash_profile"
+[ -f "$HOME/.local.bash_profile" ] && . "$HOME/.local.bash_profile"
