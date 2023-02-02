@@ -24,7 +24,11 @@ fi
 # Check terminal for color support
 if iscommand tput; then
 	COLORS=$(tput colors) || COLORS=-1
-	tput truecolor 2>/dev/null && export COLORTERM=truecolor
+	if tput truecolor 2>/dev/null; then
+		export COLORTERM=truecolor
+	else
+		unset COLORTERM
+	fi
 else
 	COLORS=-1
 fi
