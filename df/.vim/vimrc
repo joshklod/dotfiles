@@ -11,12 +11,6 @@ elseif &term =~ 'hterm'
 	set term =xterm-truecolor
 endif
 
-" Vim's terminal emulator behaves like xterm-semitruecolor.  Since we can't
-" override $TERM within terminal sessions, we have to change it globally.
-if has('terminal') && &term =~ 'xterm' && $COLORTERM == 'truecolor'
-	set term =xterm-semitruecolor
-endif
-
 " Get extra termcap entries
 if executable('tput') == 1
 	for [s:varname, s:capname, s:trust_default] in [
