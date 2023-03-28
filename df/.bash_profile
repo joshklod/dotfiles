@@ -27,6 +27,18 @@ case "$(uname -s)" in
 		# Include Windows Applications folder in PATH
 		[ -d "/proc/cygdrive/c/Applications" ] &&
 			export PATH="$PATH:/proc/cygdrive/c/Applications"
+
+		# Ensure Cygwin paths precede all Windows paths
+		unset first last
+		OIFS="$IFS"; IFS=':'
+		for dir in ${PATH}; do
+			case "$dir" in
+				/mnt/*|/cygdrive/*|/proc/cygdrive/*)   last="$last:$dir" ;;
+				*)                                     first="$first:$dir" ;;
+			esac
+		done
+		IFS="$OIFS"; unset OIFS
+		PATH="${first:1}$last"
 		;;
 esac
 
