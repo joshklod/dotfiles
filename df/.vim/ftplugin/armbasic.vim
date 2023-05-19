@@ -11,16 +11,18 @@ setlocal comments        =sr:/*,m:*,ex:*/,://,:'
 setlocal commentstring   =//%s
 
 " Function start/end jump commands
-nnoremap <silent><buffer> ]] :     call <SID>FuncJump(0, 0, 0)<CR>
-nnoremap <silent><buffer> [[ :     call <SID>FuncJump(0, 1, 0)<CR>
-nnoremap <silent><buffer> ][ :     call <SID>FuncJump(1, 0, 0)<CR>
-nnoremap <silent><buffer> [] :     call <SID>FuncJump(1, 1, 0)<CR>
+nnoremap <silent><buffer> ]] :<C-U>call <SID>FuncJump(0, 0, 0)<CR>
+nnoremap <silent><buffer> [[ :<C-U>call <SID>FuncJump(0, 1, 0)<CR>
+nnoremap <silent><buffer> ][ :<C-U>call <SID>FuncJump(1, 0, 0)<CR>
+nnoremap <silent><buffer> [] :<C-U>call <SID>FuncJump(1, 1, 0)<CR>
 xnoremap <silent><buffer> ]] :<C-U>call <SID>FuncJump(0, 0, 1)<CR>
 xnoremap <silent><buffer> [[ :<C-U>call <SID>FuncJump(0, 1, 1)<CR>
 xnoremap <silent><buffer> ][ :<C-U>call <SID>FuncJump(1, 0, 1)<CR>
 xnoremap <silent><buffer> [] :<C-U>call <SID>FuncJump(1, 1, 1)<CR>
 
 function! s:FuncJump(side, backward, visual)
+	let l:count = v:count1
+
 	" When invoked from visual mode, reselect the visual area
 	if a:visual
 		normal! gv
@@ -34,12 +36,24 @@ function! s:FuncJump(side, backward, visual)
 		let l:search_str = '\v\c^\s*END =(SUB|FUNCTION)>'
 	endif
 
-	let l:flags = 'Ws'
+	let l:flags = 'W'
 	if a:backward
 		let l:flags .= 'b'
 	endif
 
-	call search(l:search_str, l:flags)
+	let l:startpos = getcurpos()[1:]
+
+	for l:i in range(l:count)
+		let l:matchpos = searchpos(l:search_str, l:flags)
+		if l:matchpos == [0, 0] " No match found
+			call cursor(l:startpos) " Restore original cursor position
+			return
+		endif
+	endfor
+
+	call cursor(l:startpos) " Restore original cursor position
+	normal! m`
+	call cursor(l:matchpos)
 endfunction
 
 " Footer
