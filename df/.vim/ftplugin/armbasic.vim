@@ -19,6 +19,10 @@ xnoremap <silent><buffer> ]] :<C-U>call <SID>FuncJump(0, 0, 1)<CR>
 xnoremap <silent><buffer> [[ :<C-U>call <SID>FuncJump(0, 1, 1)<CR>
 xnoremap <silent><buffer> ][ :<C-U>call <SID>FuncJump(1, 0, 1)<CR>
 xnoremap <silent><buffer> [] :<C-U>call <SID>FuncJump(1, 1, 1)<CR>
+onoremap <silent><buffer> ]] :<C-U>call <SID>FuncJump(0, 0, 0)<CR>
+onoremap <silent><buffer> [[ :<C-U>call <SID>FuncJump(0, 1, 0)<CR>
+onoremap <silent><buffer> ][ :<C-U>call <SID>FuncJump(1, 0, 0)<CR>
+onoremap <silent><buffer> [] :<C-U>call <SID>FuncJump(1, 1, 0)<CR>
 
 function! s:FuncJump(side, backward, visual)
 	let l:count = v:count1

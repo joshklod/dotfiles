@@ -18,6 +18,8 @@ nnoremap <silent><buffer> ]] :<C-U>call <SID>FuncJump(0, 0)<CR>
 nnoremap <silent><buffer> [[ :<C-U>call <SID>FuncJump(1, 0)<CR>
 xnoremap <silent><buffer> ]] :<C-U>call <SID>FuncJump(0, 1)<CR>
 xnoremap <silent><buffer> [[ :<C-U>call <SID>FuncJump(1, 1)<CR>
+onoremap <silent><buffer> ]] :<C-U>call <SID>FuncJump(0, 0)<CR>
+onoremap <silent><buffer> [[ :<C-U>call <SID>FuncJump(1, 0)<CR>
 
 " Match '{' at the end of a line instead of column 0
 function! s:FuncJump(backward, visual)
@@ -94,10 +96,8 @@ function! s:undo_ftplugin()
 		setlocal smartindent<
 	endif
 
-	silent nunmap <buffer> ]]
-	silent nunmap <buffer> [[
-	silent xunmap <buffer> ]]
-	silent xunmap <buffer> [[
+	silent unmap <buffer> ]]
+	silent unmap <buffer> [[
 endfunction
 
 function! s:SID()
