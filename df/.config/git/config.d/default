@@ -28,6 +28,7 @@
 	indentHeuristic = true
 	submodule = log
 	colorMoved = zebra
+	colorMovedWS = allow-indentation-change
 [stash]
 	showPatch = true
 	showStat = false
