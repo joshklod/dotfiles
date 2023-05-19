@@ -15,12 +15,17 @@ nnoremap <silent><buffer> ]] :     call <SID>FuncJump(0, 0, 0)<CR>
 nnoremap <silent><buffer> [[ :     call <SID>FuncJump(0, 1, 0)<CR>
 nnoremap <silent><buffer> ][ :     call <SID>FuncJump(1, 0, 0)<CR>
 nnoremap <silent><buffer> [] :     call <SID>FuncJump(1, 1, 0)<CR>
-vnoremap <silent><buffer> ]] :<C-U>call <SID>FuncJump(0, 0, 1)<CR>
-vnoremap <silent><buffer> [[ :<C-U>call <SID>FuncJump(0, 1, 1)<CR>
-vnoremap <silent><buffer> ][ :<C-U>call <SID>FuncJump(1, 0, 1)<CR>
-vnoremap <silent><buffer> [] :<C-U>call <SID>FuncJump(1, 1, 1)<CR>
+xnoremap <silent><buffer> ]] :<C-U>call <SID>FuncJump(0, 0, 1)<CR>
+xnoremap <silent><buffer> [[ :<C-U>call <SID>FuncJump(0, 1, 1)<CR>
+xnoremap <silent><buffer> ][ :<C-U>call <SID>FuncJump(1, 0, 1)<CR>
+xnoremap <silent><buffer> [] :<C-U>call <SID>FuncJump(1, 1, 1)<CR>
 
-function! s:FuncJump(side, dir, visual)
+function! s:FuncJump(side, backward, visual)
+	" When invoked from visual mode, reselect the visual area
+	if a:visual
+		normal! gv
+	endif
+
 	" side == 0: Beginning of function
 	" side == 1: End of function
 	if a:side == 0
@@ -28,19 +33,12 @@ function! s:FuncJump(side, dir, visual)
 	else
 		let l:search_str = '\c^\s*END \=\(SUB\|FUNCTION\)\>'
 	endif
-	" dir == 0: Forward search
-	" dir == 1: Backward search
-	if a:dir == 0
-		let l:flags = "Ws"
-	else
-		let l:flags = "bWs"
+
+	let l:flags = 'Ws'
+	if a:backward
+		let l:flags .= 'b'
 	endif
 
-	" When invoked from visual mode, reselect the visual area before moving
-	" cursor
-	if a:visual
-		normal! gv
-	endif
 	call search(l:search_str, l:flags)
 endfunction
 
