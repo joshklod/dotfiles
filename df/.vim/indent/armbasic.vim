@@ -62,7 +62,7 @@ function! GetArmbasicIndent()
 		endif
 	elseif l:cline =~ '\c^\s*end \=se'
 		" End of select block
-		return l:pindent < sw ? 0 : l:pindent - 2*sw
+		return l:pindent < 2*sw ? 0 : l:pindent - 2*sw
 	elseif l:cline =~ '\c^\s*\(elseif\|else\)'
 		" Middle of if block
 		return l:pindent < sw ? 0 : l:pindent - sw
