@@ -1,7 +1,7 @@
 " Vim indent file
 " Language:     ARMbasic
 " Maintainer:   Josh Klodnicki <joshklod@gmail.com>
-" Last Change:  2020 Jun 09
+" Last Change:  2023 May 18
 
 if exists("b:did_indent")
 	finish
@@ -45,7 +45,7 @@ function! GetArmbasicIndent()
 	" label endsub endfunction endif endselect elseif else
 	if l:cline =~ '\c^\s*\h\w*:'
 		" Goto Label
-		return 0
+		return l:pindent < sw ? 0 : l:pindent - sw
 	elseif l:cline =~ '\c^\s*#'
 		" Preprocessor line
 		return 0
