@@ -18,14 +18,17 @@
 	llog = log --author-date-order --show-linear-break
 	logp = log --patch --reverse
 	logg = log --graph
-	loga = log --graph --all
+	loga = log --graph --exclude='refs/archive/*' --all
 	lgg  = !git log2 --author-date-order --show-linear-break
 	lgp  = !git log2 --patch --reverse
 	lg   = !git log2g
-	lga  = !git log2g --all
+	lga  = !git log2g --exclude='refs/archive/*' --all
 	lgss = !git log2g --simplify-by-decoration \
+	       --decorate-refs-exclude='refs/archive/*' \
 	       --decorate-refs-exclude='refs/tags/v[0-9]*'
-	lgs  = !git log2g --all --simplify-by-decoration \
+	lgs  = !git log2g --exclude='refs/archive/*' --all \
+	       --simplify-by-decoration \
+	       --decorate-refs-exclude='refs/archive/*' \
 	       --decorate-refs-exclude='refs/tags/v[0-9]*'
 
 	# Other shortcuts
