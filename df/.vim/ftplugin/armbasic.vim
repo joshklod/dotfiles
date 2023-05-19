@@ -29,9 +29,9 @@ function! s:FuncJump(side, backward, visual)
 	" side == 0: Beginning of function
 	" side == 1: End of function
 	if a:side == 0
-		let l:search_str = '\c^\s*\(SUB\|FUNCTION\)\>'
+		let l:search_str = '\v\c^\s*(SUB|FUNCTION)>'
 	else
-		let l:search_str = '\c^\s*END \=\(SUB\|FUNCTION\)\>'
+		let l:search_str = '\v\c^\s*END =(SUB|FUNCTION)>'
 	endif
 
 	let l:flags = 'Ws'
