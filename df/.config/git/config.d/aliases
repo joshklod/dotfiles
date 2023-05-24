@@ -11,15 +11,16 @@
 	have-fugitive   = !sh -c \
 		\"vim -esN <<EOF\nexec 'cq' (exists(':Git') ? 0 : 1)\nEOF\" \
 		git-have-fugitive
-	log2            = log --pretty=twoline
-	log2g           = log --graph --pretty=twolineg
+	log1            = log --date-order
+	log2            = log --date-order --pretty=twoline
+	log2g           = log --date-order --graph --pretty=twolineg
 
 	# Log shortcuts
-	llog = log --author-date-order --show-linear-break
-	logp = log --patch --reverse
-	logg = log --graph
-	loga = log --graph --exclude='refs/archive/*' --all
-	lgg  = !git log2 --author-date-order --show-linear-break
+	llog = !git log1 --show-linear-break
+	logp = !git log1 --patch --reverse
+	logg = !git log1 --graph
+	loga = !git log1 --graph --exclude='refs/archive/*' --all
+	lgg  = !git log2 --show-linear-break
 	lgp  = !git log2 --patch --reverse
 	lg   = !git log2g
 	lga  = !git log2g --exclude='refs/archive/*' --all
