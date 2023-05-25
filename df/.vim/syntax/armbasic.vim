@@ -109,9 +109,9 @@ syntax	region	armbasicIncLine		excludenl matchgroup=armbasicInclude start=/\<inc
 syntax	region	armbasicIncluded	excludenl start=/"/ end=/"/ end=/$/ contained contains=armbasicLineCont
 syntax	region	armbasicIncluded	excludenl start=/</ end=/>/ end=/$/ contained contains=armbasicLineCont
 
-syntax	region	armbasicPreIfLine	excludenl matchgroup=armbasicPreCondit start=/\<if\>/ end=/$/ contained contains=armbasicDefined,armbasicPreBool,armbasicLineCont nextgroup=armbasicPreConditBlock skipempty
-syntax	region	armbasicPreIfLine	excludenl matchgroup=armbasicPreCondit start=/\<\(ifdef\|ifndef\)\>/ end=/$/ contained contains=armbasicLineCont nextgroup=armbasicPreConditBlock skipempty
-syntax	region	armbasicPreIfLine	excludenl matchgroup=armbasicPreCondit start=/\<elif\>/ end=/$/ contained contains=armbasicDefined,armbasicPreBool,armbasicLineCont
+syntax	region	armbasicPreIfLine	excludenl matchgroup=armbasicPreCondit start=/\<if\>/ end=/$/ contained contains=armbasicDefined,armbasicPreBool,armbasicComment,armbasicLineCont nextgroup=armbasicPreConditBlock skipempty
+syntax	region	armbasicPreIfLine	excludenl matchgroup=armbasicPreCondit start=/\<\(ifdef\|ifndef\)\>/ end=/$/ contained contains=armbasicComment,armbasicLineCont nextgroup=armbasicPreConditBlock skipempty
+syntax	region	armbasicPreIfLine	excludenl matchgroup=armbasicPreCondit start=/\<elif\>/ end=/$/ contained contains=armbasicDefined,armbasicPreBool,armbasicComment,armbasicLineCont
 
 syntax	region	armbasicPreDiag		excludenl matchgroup=armbasicPreProc start=/\<\(warning\|error\)\>/ end=/$/ contained contains=armbasicComment,armbasicLineCont,@Spell
 
