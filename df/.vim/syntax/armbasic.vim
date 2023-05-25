@@ -49,9 +49,9 @@ syntax	match	armbasicBinary		/%[01]\+\>/
 syntax	match	armbasicFloat		/\(\(\W\&\S\&[^).]\|\<\(AND\|OR\|XOR\|NOT\|MOD\|RETURN\|CASE\)\>\)\@<=\s*\zs-\)\?\(\(\<\d\+\(\.\d*\)\?\|\.\d\+\)e[+-]\?\d\+\>\|\<\d\+\.\(\d\+\>\)\?\|\.\d\+\>\)/
 
 " Goto Labels
-syntax	match	armbasicGotoLabel	/^\s*\zs\h\w*:/ nextgroup=armbasicLabelError
-syntax	match	armbasicMain		/^\s*\zsMAIN:/ nextgroup=armbasicLabelError
-syntax	region	armbasicLabelError	excludenl start=/./ end=/$/ contained contains=armbasicComment,armbasicLineCont
+syntax	match	armbasicGotoLabel	/^\s*\zs\h\w*:/ nextgroup=armbasicLabelError skipwhite
+syntax	match	armbasicMain		/^\s*\zsMAIN:/ nextgroup=armbasicLabelError skipwhite
+syntax	region	armbasicLabelError	excludenl start=/\S/ end=/$/ contained contains=armbasicComment,armbasicLineCont
 
 " Subs and Functions
 syntax	keyword	armbasicSubStart	SUB nextgroup=armbasicSubRegion skipwhite
