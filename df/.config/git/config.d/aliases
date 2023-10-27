@@ -52,6 +52,7 @@
 	# Custom commands
 	ctags  = !~/.config/git/scripts/ctags.sh
 	cptree = !~/.config/git/scripts/cptree.sh
+	egrem  = !~/.config/git/scripts/egrem.sh
 	mlog   = !~/.config/git/scripts/mlog.sh
 	revlog = !~/.config/git/scripts/revlog.sh
 
@@ -69,5 +70,6 @@
 	# Custom commands
 	cptree   = false
 	ctags    = false
+	egrem    = false
 	mlog     = true
 	revlog   = true
