@@ -327,6 +327,13 @@ if has("eval")
 	let g:javaScript_fold = 1
 endif
 
+" Quickfix List
+set errorformat^=
+			\%-G%*\\a[%*\\d]:\ ***\ [%f:%l:\ %o]\ %m,
+			\%-G%*\\a[%*\\d]:\ [%f:%l:\ %o]\ %m,
+			\%-G%*\\a:\ ***\ [%f:%l:\ %o]\ %m,
+			\%-G%*\\a:\ [%f:%l:\ %o]\ %m
+
 " Misc Options
 set modeline
 
