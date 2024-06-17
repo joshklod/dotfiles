@@ -322,8 +322,8 @@ if has("extra_search")
 endif
 
 " Folding
-set foldminlines =4
-if has("eval")
+if has('folding')
+	set foldminlines =4
 	let g:javaScript_fold = 1
 endif
 
