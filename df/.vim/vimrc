@@ -323,6 +323,7 @@ endif
 
 " Folding
 if has('folding')
+	set foldmethod   =syntax
 	set foldminlines =4
 	let g:javaScript_fold = 1
 endif
