@@ -16,7 +16,7 @@ let s:fold = has("folding") ?
 	    \ : 0
 
 if s:fold
-    set foldmethod=syntax
+    setlocal foldmethod=syntax
 endif
 
 syntax clear
