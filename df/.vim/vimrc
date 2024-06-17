@@ -371,7 +371,7 @@ nnoremap <Leader>* :let @/='\<'.expand("<cword>").'\>'<CR>
 " Re-detect filetype
 nnoremap <Leader>fd :filetype detect<CR>
 " Jump to git conflict markers
-nnoremap <Leader>gc /\%^/;/^\([<=>]\)\@=\1\{7}<CR>
+nnoremap <Leader>gc /\%^/;/^\([<<Bar>=>]\)\@=\1\{7}<CR>
 " :Kappa:
 nnoremap <Up><Up><Down><Down><Left><Right><Left><Right>ba<CR>
 			\ :topl 1new<Bar>setl bt=nofile bh=hide noswf<CR>i  Lives:
