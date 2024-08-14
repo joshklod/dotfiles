@@ -246,6 +246,11 @@ set noexpandtab
 " Indenting
 set shiftwidth  =0 " Use value of tabstop
 set autoindent     " Keep indent of previous line
+set cinoptions  =Lsl1(0Wsk2s   " Ls:   Deindent labels
+                               " l1:   Align block with case label
+                               " (0:   Align just inside unclosed parentheses
+                               " Ws:   Fixed 1*sw indent after ( at EOL
+                               " k2s:  Fixed 2*sw indent in if, etc. condition
 
 " Line wrapping
 set nowrap
