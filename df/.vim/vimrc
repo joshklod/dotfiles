@@ -332,7 +332,8 @@ endif
 if has('folding')
 	set foldmethod   =syntax
 	set foldminlines =4
-	let g:javaScript_fold = 1
+	let g:javaScript_fold      = 1
+	let g:xml_syntax_folding   = 1
 endif
 
 " Quickfix List
