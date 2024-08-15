@@ -338,6 +338,9 @@ if has("eval")
 	let g:javaScript_fold = 1
 endif
 
+" Misc Options
+set modeline
+
 " Autocmds
 if has("autocmd")
 	augroup vimrc
