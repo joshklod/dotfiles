@@ -11,37 +11,53 @@ setlocal comments        =sr:/*,m:*,ex:*/,://,:'
 setlocal commentstring   =//%s
 
 " Function start/end jump commands
-nnoremap <silent><buffer> ]] :     call <SID>FuncJump(0, 0, 0)<CR>
-nnoremap <silent><buffer> [[ :     call <SID>FuncJump(0, 1, 0)<CR>
-nnoremap <silent><buffer> ][ :     call <SID>FuncJump(1, 0, 0)<CR>
-nnoremap <silent><buffer> [] :     call <SID>FuncJump(1, 1, 0)<CR>
-vnoremap <silent><buffer> ]] :<C-U>call <SID>FuncJump(0, 0, 1)<CR>
-vnoremap <silent><buffer> [[ :<C-U>call <SID>FuncJump(0, 1, 1)<CR>
-vnoremap <silent><buffer> ][ :<C-U>call <SID>FuncJump(1, 0, 1)<CR>
-vnoremap <silent><buffer> [] :<C-U>call <SID>FuncJump(1, 1, 1)<CR>
+nnoremap <silent><buffer> ]] :<C-U>call <SID>FuncJump(0, 0, 0)<CR>
+nnoremap <silent><buffer> [[ :<C-U>call <SID>FuncJump(0, 1, 0)<CR>
+nnoremap <silent><buffer> ][ :<C-U>call <SID>FuncJump(1, 0, 0)<CR>
+nnoremap <silent><buffer> [] :<C-U>call <SID>FuncJump(1, 1, 0)<CR>
+xnoremap <silent><buffer> ]] :<C-U>call <SID>FuncJump(0, 0, 1)<CR>
+xnoremap <silent><buffer> [[ :<C-U>call <SID>FuncJump(0, 1, 1)<CR>
+xnoremap <silent><buffer> ][ :<C-U>call <SID>FuncJump(1, 0, 1)<CR>
+xnoremap <silent><buffer> [] :<C-U>call <SID>FuncJump(1, 1, 1)<CR>
+onoremap <silent><buffer> ]] :<C-U>call <SID>FuncJump(0, 0, 0)<CR>
+onoremap <silent><buffer> [[ :<C-U>call <SID>FuncJump(0, 1, 0)<CR>
+onoremap <silent><buffer> ][ :<C-U>call <SID>FuncJump(1, 0, 0)<CR>
+onoremap <silent><buffer> [] :<C-U>call <SID>FuncJump(1, 1, 0)<CR>
 
-function! s:FuncJump(side, dir, visual)
-	" side == 0: Beginning of function
-	" side == 1: End of function
-	if a:side == 0
-		let l:search_str = '\c^\s*\(\(SUB\|FUNCTION\)\>\|\h\w*:\)'
-	else
-		let l:search_str = '\c^\s*END \=\(SUB\|FUNCTION\)\>'
-	endif
-	" dir == 0: Forward search
-	" dir == 1: Backward search
-	if a:dir == 0
-		let l:flags = "Ws"
-	else
-		let l:flags = "bWs"
-	endif
+function! s:FuncJump(side, backward, visual)
+	let l:count = v:count1
 
-	" When invoked from visual mode, reselect the visual area before moving
-	" cursor
+	" When invoked from visual mode, reselect the visual area
 	if a:visual
 		normal! gv
 	endif
-	call search(l:search_str, l:flags)
+
+	" side == 0: Beginning of function
+	" side == 1: End of function
+	if a:side == 0
+		let l:search_str = '\v\c^\s*(SUB|FUNCTION)>'
+	else
+		let l:search_str = '\v\c^\s*END =(SUB|FUNCTION)>'
+	endif
+
+	let l:flags = 'W'
+	if a:backward
+		let l:flags .= 'b'
+	endif
+
+	let l:startpos = getcurpos()[1:]
+
+	for l:i in range(l:count)
+		let l:matchpos = searchpos(l:search_str, l:flags)
+		if l:matchpos == [0, 0] " No match found
+			call cursor(l:startpos) " Restore original cursor position
+			return
+		endif
+	endfor
+
+	call cursor(l:startpos) " Restore original cursor position
+	normal! m`
+	call cursor(l:matchpos)
 endfunction
 
 " Footer

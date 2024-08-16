@@ -21,6 +21,7 @@
 	graphColors = 160,40,184,63,165,45,172,43,112,99,163,33
 	abbrevCommit = true
 	decorate = auto # When output is a terminal
+	initialDecorationSet = all
 [diff "word"]
 	textconv = ~/.config/git/scripts/word-textconv.sh
 [diff]
@@ -28,6 +29,7 @@
 	indentHeuristic = true
 	submodule = log
 	colorMoved = zebra
+	colorMovedWS = allow-indentation-change
 [stash]
 	showPatch = true
 	showStat = false

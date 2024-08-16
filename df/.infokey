@@ -1,0 +1,14 @@
+#var
+cursor-movement-scrolls=Off
+mouse=normal-tracking
+scroll-behavior=Page Only
+
+#info
+\ 		scroll-half-screen-down
+\kx		scroll-half-screen-up
+j		down-line
+e		down-line
+^e		down-line
+k		up-line
+y		up-line
+^y		up-line

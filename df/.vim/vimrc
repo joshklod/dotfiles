@@ -11,20 +11,14 @@ elseif &term =~ 'hterm'
 	set term =xterm-truecolor
 endif
 
-" Vim's terminal emulator behaves like xterm-semitruecolor.  Since we can't
-" override $TERM within terminal sessions, we have to change it globally.
-if has('terminal') && &term =~ 'xterm' && $COLORTERM == 'truecolor'
-	set term =xterm-semitruecolor
-endif
-
 " Get extra termcap entries
 if executable('tput') == 1
 	for [s:varname, s:capname, s:trust_default] in [
 				\ ['&t_Cs', 'swavl',   0],
 				\ ['&t_Ce', 'rmul',    0],
 				\ ['&t_AU', 'setal',   0],
-				\ ['&t_8f', 'setrgbf', 1],
-				\ ['&t_8b', 'setrgbb', 1],
+				\ ['&t_8f', 'setrgbf', 0],
+				\ ['&t_8b', 'setrgbb', 0],
 				\ ['&t_8u', 'setrgbl', 0]]
 		if !exists(s:varname) | continue | endif
 
@@ -89,12 +83,7 @@ if has("eval")
 	let s:homertp = $HOME . (has("win32") ? "/vimfiles" : "/.vim")
 
 	" Compatible with termguicolors
-	" Termguicolors requires that both the terminal and Vim are truecolor
-	" capable.  The environment variable $COLORTERM is usually not set
-	" automatically - this must be done manually (typically in .bashrc) when
-	" using a truecolor-capable terminal.
-	let s:has_tgc = has("termguicolors") && $COLORTERM == "truecolor" &&
-				\ !empty(&t_8f) && !empty(&t_8b)
+	let s:has_tgc = has("termguicolors") && !empty(&t_8f) && !empty(&t_8b)
 	" Capable of setting underline color in terminal
 	let s:term_ulcolor = has('patch-8.2.863') &&
 				\ (s:has_tgc ? !empty(&t_8u) : !empty(&t_AU))
@@ -249,12 +238,19 @@ endif
 
 " Tab behavior
 set tabstop     =4
-set shiftwidth  =0 " Use value of tabstop
 set softtabstop =0 " Disabled
 set smarttab       " Use shiftwidth at beginning of line, and tabstop (or
                    "   softtabstop) elsewhere
 set noexpandtab
+
+" Indenting
+set shiftwidth  =0 " Use value of tabstop
 set autoindent     " Keep indent of previous line
+set cinoptions  =Lsl1(0Wsk2s   " Ls:   Deindent labels
+                               " l1:   Align block with case label
+                               " (0:   Align just inside unclosed parentheses
+                               " Ws:   Fixed 1*sw indent after ( at EOL
+                               " k2s:  Fixed 2*sw indent in if, etc. condition
 
 " Line wrapping
 set nowrap
@@ -333,10 +329,22 @@ if has("extra_search")
 endif
 
 " Folding
-set foldminlines =4
-if has("eval")
-	let g:javaScript_fold = 1
+if has('folding')
+	set foldmethod   =syntax
+	set foldminlines =4
+	let g:javaScript_fold      = 1
+	let g:xml_syntax_folding   = 1
 endif
+
+" Quickfix List
+set errorformat^=
+			\%-G%*\\a[%*\\d]:\ ***\ [%f:%l:\ %o]\ %m,
+			\%-G%*\\a[%*\\d]:\ [%f:%l:\ %o]\ %m,
+			\%-G%*\\a:\ ***\ [%f:%l:\ %o]\ %m,
+			\%-G%*\\a:\ [%f:%l:\ %o]\ %m
+
+" Misc Options
+set modeline
 
 " Autocmds
 if has("autocmd")
@@ -371,7 +379,7 @@ nnoremap <Leader>* :let @/='\<'.expand("<cword>").'\>'<CR>
 " Re-detect filetype
 nnoremap <Leader>fd :filetype detect<CR>
 " Jump to git conflict markers
-nnoremap <Leader>gc /\%^/;/^\([<=>]\)\@=\1\{7}<CR>
+nnoremap <Leader>gc /\%^/;/^\([<<Bar>=>]\)\@=\1\{7}<CR>
 " :Kappa:
 nnoremap <Up><Up><Down><Down><Left><Right><Left><Right>ba<CR>
 			\ :topl 1new<Bar>setl bt=nofile bh=hide noswf<CR>i  Lives:

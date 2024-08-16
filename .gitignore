@@ -1,6 +1,7 @@
 # SSH system-specific generated files
 df/.ssh/id*
 df/.ssh/known_hosts
+df/.ssh/known_hosts.old
 
 # Terminfo compiled database
 scripts/terminfo/out/

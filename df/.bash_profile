@@ -3,26 +3,44 @@
 # .bash_profile: Sourced in login shells
 
 # source the users bashrc if it exists
-[ -f "$HOME/.bashrc" ] && source "$HOME/.bashrc"
+[ -f "$HOME/.bashrc" ] && . "$HOME/.bashrc"
 
-# Set PATH so it includes user's private bin if it exists
-[ -d "$HOME/bin" ] && PATH="$HOME/bin:$PATH"
+# Prepend personal bin directories to $PATH
+[ -d "$HOME/bin" ]       && export PATH="$HOME/bin:$PATH"
+[ -d "$HOME/scripts" ]   && export PATH="$HOME/scripts:$PATH"
 
-# Set MANPATH so it includes users' private man if it exists
-[ -d "$HOME/man" ] && MANPATH="$HOME/man:$MANPATH"
+# Append portable tree bin directories to $PATH
+if [ -d "$HOME/opt/tree" ]; then
+	while IFS= read -r tree; do
+		[ -z "$tree" ] && continue
+		[ -d "$tree/bin" ] && export PATH="$PATH:$tree/bin"
+	done <<-EOF
+		$(find -L "$HOME/opt/tree" -mindepth 1 -maxdepth 1 -type d)
+	EOF
+fi
 
-# Set INFOPATH so it includes users' private info if it exists
-[ -d "$HOME/info" ] && INFOPATH="$HOME/info:$INFOPATH"
-
-# Add ~/scripts to $PATH if it exists
-[ -d "$HOME/scripts" ] && PATH="$HOME/scripts:$PATH"
+# Override INFOPATH to use automatic resolution
+export INFOPATH='PATH:'
 
 case "$(uname -s)" in
 	CYGWIN*)
 		# Include Windows Applications folder in PATH
-		[ -d "/proc/cygdrive/c/Applications" ] && PATH="$PATH:/proc/cygdrive/c/Applications"
+		[ -d "/proc/cygdrive/c/Applications" ] &&
+			export PATH="$PATH:/proc/cygdrive/c/Applications"
+
+		# Ensure Cygwin paths precede all Windows paths
+		unset first last
+		OIFS="$IFS"; IFS=':'
+		for dir in ${PATH}; do
+			case "$dir" in
+				/mnt/*|/cygdrive/*|/proc/cygdrive/*)   last="$last:$dir" ;;
+				*)                                     first="$first:$dir" ;;
+			esac
+		done
+		IFS="$OIFS"; unset OIFS
+		PATH="${first:1}$last"
 		;;
 esac
 
 # Source local .bash_profile if it exists
-[ -f "$HOME/.local.bash_profile" ] && source "$HOME/.local.bash_profile"
+[ -f "$HOME/.local.bash_profile" ] && . "$HOME/.local.bash_profile"

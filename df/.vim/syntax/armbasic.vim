@@ -16,7 +16,7 @@ let s:fold = has("folding") ?
 	    \ : 0
 
 if s:fold
-    set foldmethod=syntax
+    setlocal foldmethod=syntax
 endif
 
 syntax clear
@@ -49,19 +49,19 @@ syntax	match	armbasicBinary		/%[01]\+\>/
 syntax	match	armbasicFloat		/\(\(\W\&\S\&[^).]\|\<\(AND\|OR\|XOR\|NOT\|MOD\|RETURN\|CASE\)\>\)\@<=\s*\zs-\)\?\(\(\<\d\+\(\.\d*\)\?\|\.\d\+\)e[+-]\?\d\+\>\|\<\d\+\.\(\d\+\>\)\?\|\.\d\+\>\)/
 
 " Goto Labels
-syntax	match	armbasicGotoLabel	/^\s*\zs\h\w*:/ nextgroup=armbasicLabelError
-syntax	match	armbasicMain		/^\s*\zsMAIN:/ nextgroup=armbasicLabelError
-syntax	region	armbasicLabelError	excludenl start=/./ end=/$/ contained contains=armbasicComment,armbasicLineCont
+syntax	match	armbasicGotoLabel	/^\s*\zs\h\w*:/ nextgroup=armbasicLabelError skipwhite
+syntax	match	armbasicMain		/^\s*\zsMAIN:/ nextgroup=armbasicLabelError skipwhite
+syntax	region	armbasicLabelError	excludenl start=/\S/ end=/$/ contained contains=armbasicComment,armbasicLineCont
 
 " Subs and Functions
 syntax	keyword	armbasicSubStart	SUB nextgroup=armbasicSubRegion skipwhite
 syntax	keyword	armbasicFuncStart	FUNCTION nextgroup=armbasicFuncRegion skipwhite
 if s:fold
-    syntax region armbasicSubRegion	matchgroup=armbasicSubName start=/\<\h\w*\>:\=/ matchgroup=armbasicSub end=/^\s*END \=SUB\>/ keepend contained contains=TOP fold
-    syntax region armbasicFuncRegion	matchgroup=armbasicSubName start=/\<\h\w*\>:\=/ matchgroup=armbasicSub end=/^\s*END \=FUNCTION\>/ keepend contained contains=TOP fold
+    syntax region armbasicSubRegion	matchgroup=armbasicSubName start=/\<\h\w*\>:\=/ matchgroup=armbasicSub end=/^\s*END \=SUB\>/ contained contains=TOP fold
+    syntax region armbasicFuncRegion	matchgroup=armbasicSubName start=/\<\h\w*\>:\=/ matchgroup=armbasicSub end=/^\s*END \=FUNCTION\>/ contained contains=TOP fold
 else
-    syntax region armbasicSubRegion	matchgroup=armbasicSubName start=/\<\h\w*\>:\=/ matchgroup=armbasicSub end=/^\s*END \=SUB\>/ keepend contained contains=TOP
-    syntax region armbasicFuncRegion	matchgroup=armbasicSubName start=/\<\h\w*\>:\=/ matchgroup=armbasicSub end=/^\s*END \=FUNCTION\>/ keepend contained contains=TOP
+    syntax region armbasicSubRegion	matchgroup=armbasicSubName start=/\<\h\w*\>:\=/ matchgroup=armbasicSub end=/^\s*END \=SUB\>/ contained contains=TOP
+    syntax region armbasicFuncRegion	matchgroup=armbasicSubName start=/\<\h\w*\>:\=/ matchgroup=armbasicSub end=/^\s*END \=FUNCTION\>/ contained contains=TOP
 endif
 
 
@@ -109,9 +109,9 @@ syntax	region	armbasicIncLine		excludenl matchgroup=armbasicInclude start=/\<inc
 syntax	region	armbasicIncluded	excludenl start=/"/ end=/"/ end=/$/ contained contains=armbasicLineCont
 syntax	region	armbasicIncluded	excludenl start=/</ end=/>/ end=/$/ contained contains=armbasicLineCont
 
-syntax	region	armbasicPreIfLine	excludenl matchgroup=armbasicPreCondit start=/\<if\>/ end=/$/ contained contains=armbasicDefined,armbasicPreBool,armbasicLineCont nextgroup=armbasicPreConditBlock skipempty
-syntax	region	armbasicPreIfLine	excludenl matchgroup=armbasicPreCondit start=/\<\(ifdef\|ifndef\)\>/ end=/$/ contained contains=armbasicLineCont nextgroup=armbasicPreConditBlock skipempty
-syntax	region	armbasicPreIfLine	excludenl matchgroup=armbasicPreCondit start=/\<elif\>/ end=/$/ contained contains=armbasicDefined,armbasicPreBool,armbasicLineCont
+syntax	region	armbasicPreIfLine	excludenl matchgroup=armbasicPreCondit start=/\<if\>/ end=/$/ contained contains=armbasicDefined,armbasicPreBool,armbasicComment,armbasicLineCont nextgroup=armbasicPreConditBlock skipempty
+syntax	region	armbasicPreIfLine	excludenl matchgroup=armbasicPreCondit start=/\<\(ifdef\|ifndef\)\>/ end=/$/ contained contains=armbasicComment,armbasicLineCont nextgroup=armbasicPreConditBlock skipempty
+syntax	region	armbasicPreIfLine	excludenl matchgroup=armbasicPreCondit start=/\<elif\>/ end=/$/ contained contains=armbasicDefined,armbasicPreBool,armbasicComment,armbasicLineCont
 
 syntax	region	armbasicPreDiag		excludenl matchgroup=armbasicPreProc start=/\<\(warning\|error\)\>/ end=/$/ contained contains=armbasicComment,armbasicLineCont,@Spell
 

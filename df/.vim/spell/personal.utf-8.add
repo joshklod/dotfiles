@@ -26,3 +26,9 @@ DeviceNet
 PSU
 I2C
 BNC
+HD
+EtherCAT
+bootloader
+protothread
+protothreads
+vimrc

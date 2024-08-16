@@ -10,10 +10,25 @@
 # Shortcut to check command existence
 iscommand () { command -v "$@" >/dev/null 2>&1; }
 
+# Fix $TERM inside a Vim Terminal
+if [ -n "$VIM_TERMINAL" ]; then
+	# If the parent terminal supports truecolor, use the truecolor syntax that
+	# Vim understands.  If not, leave $TERM alone.  Programs won't send
+	# truecolor sequences, and Vim will handle everything correctly.
+	if tput truecolor 2>/dev/null; then
+		export TERM=xterm-semitruecolor # Vim's terminal acts like this
+	fi
+	unset VIM_TERMINAL # This is misleading if inherited by another terminal
+fi
+
 # Check terminal for color support
 if iscommand tput; then
 	COLORS=$(tput colors) || COLORS=-1
-	tput truecolor 2>/dev/null && export COLORTERM=truecolor
+	if tput truecolor 2>/dev/null; then
+		export COLORTERM=truecolor
+	else
+		unset COLORTERM
+	fi
 else
 	COLORS=-1
 fi
@@ -30,7 +45,7 @@ shopt -s histappend # Don't clobber history from parallel shell sessions
 # Environment variables
 export AUTOPAGE_CUTOFF='50%'
 export EDITOR=$(command -v vim) # Use Vim as default editor
-export GNUMAKEFLAGS='--output-sync=target'
+export GNUMAKEFLAGS='--output-sync=target --no-print-directory'
 export HISTCONTROL=ignoredups # Ignore duplicates in history
 export LESS='-iR'               # Interpret ANSI escape sequences
 export MAKEFLAGS='--jobs=4'
