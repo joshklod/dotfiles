@@ -32,3 +32,6 @@ bootloader
 protothread
 protothreads
 vimrc
+FPGA
+Quartus
+ModelSim
