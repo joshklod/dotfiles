@@ -344,6 +344,7 @@ set errorformat^=
 			\%-G%*\\a:\ [%f:%l:\ %o]\ %m
 
 " Misc Options
+set nofixendofline   " Preserve missing EOL from last line
 set modeline
 
 " Autocmds
