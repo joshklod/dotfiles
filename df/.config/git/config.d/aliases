@@ -5,6 +5,8 @@
 	twolineg = tformat:%<|(12)%x20%C(auto)%h %C(auto,blue)%<(16)%an%C(auto)%d%n %<|(12)%x20 %s
 	tldate   = tformat:%C(auto)%h %C(auto,cyan)%<(12)%ad%C(auto)%d%n  %s
 	tldateg  = tformat:%<|(12)%x20%C(auto)%h %C(auto,cyan)%<(12)%ad%C(auto)%d%n %<|(12)%x20 %s
+	tlboth   = tformat:%C(auto)%h %C(auto,blue)%<(16)%an %C(auto,cyan)%<(12)%ad%C(auto)%d%n  %s
+	tlbothg  = tformat:%<|(12)%x20%C(auto)%h %C(auto,blue)%<(16)%an %C(auto,cyan)%<(12)%ad%C(auto)%d%n %<|(12)%x20 %s
 
 [alias]
 	# Not meant to be used

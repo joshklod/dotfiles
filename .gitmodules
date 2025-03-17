@@ -49,3 +49,6 @@
 [submodule "editorconfig-vim"]
 	path = df/.vim/pack/main/start/editorconfig-vim
 	url = https://github.com/editorconfig/editorconfig-vim.git
+[submodule "arm-syntax-vim"]
+	path = df/.vim/pack/main/start/arm-syntax-vim
+	url = https://github.com/ARM9/arm-syntax-vim.git

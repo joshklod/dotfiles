@@ -6,8 +6,9 @@
 [ -f "$HOME/.bashrc" ] && . "$HOME/.bashrc"
 
 # Prepend personal bin directories to $PATH
-[ -d "$HOME/bin" ]       && export PATH="$HOME/bin:$PATH"
-[ -d "$HOME/scripts" ]   && export PATH="$HOME/scripts:$PATH"
+[ -d "$HOME/.local/bin" ]   && export PATH="$HOME/.local/bin:$PATH"
+[ -d "$HOME/bin" ]          && export PATH="$HOME/bin:$PATH"
+[ -d "$HOME/scripts" ]      && export PATH="$HOME/scripts:$PATH"
 
 # Append portable tree bin directories to $PATH
 if [ -d "$HOME/opt/tree" ]; then

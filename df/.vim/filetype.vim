@@ -3,6 +3,7 @@ if exists("did_load_filetypes")
 endif
 
 augroup filetypedetect
+    au! BufRead,BufNewFile *.[sS]		setfiletype arm
     au! BufRead,BufNewFile *.bas		setfiletype armbasic
     au! BufRead,BufNewFile *.i			setfiletype c
     au! BufRead,BufNewFile *.sch,*.lib
