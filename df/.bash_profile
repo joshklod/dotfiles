@@ -6,15 +6,15 @@
 [ -f "$HOME/.bashrc" ] && . "$HOME/.bashrc"
 
 # Prepend personal bin directories to $PATH
-[ -d "$HOME/.local/bin" ]   && export PATH="$HOME/.local/bin:$PATH"
-[ -d "$HOME/bin" ]          && export PATH="$HOME/bin:$PATH"
-[ -d "$HOME/scripts" ]      && export PATH="$HOME/scripts:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/scripts:$PATH"
 
 # Append portable tree bin directories to $PATH
 if [ -d "$HOME/opt/tree" ]; then
 	while IFS= read -r tree; do
 		[ -z "$tree" ] && continue
-		[ -d "$tree/bin" ] && export PATH="$PATH:$tree/bin"
+		export PATH="$PATH:$tree/bin"
 	done <<-EOF
 		$(find -L "$HOME/opt/tree" -mindepth 1 -maxdepth 1 -type d)
 	EOF
@@ -26,8 +26,7 @@ export INFOPATH='PATH:'
 case "$(uname -s)" in
 	CYGWIN*)
 		# Include Windows Applications folder in PATH
-		[ -d "/proc/cygdrive/c/Applications" ] &&
-			export PATH="$PATH:/proc/cygdrive/c/Applications"
+		export PATH="$PATH:/proc/cygdrive/c/Applications"
 
 		# Ensure Cygwin paths precede all Windows paths
 		unset first last
