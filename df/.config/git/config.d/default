@@ -35,6 +35,7 @@
 	showStat = false
 [init]
 	templateDir = ~/.config/git/template
+	defaultBranch = main
 [submodule]
 	fetchJobs = 0 # Detect reasonable default
 [rerere]
