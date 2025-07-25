@@ -56,6 +56,7 @@ $RECYCLE.BIN/
 
 # Word temporary
 ~$*.doc*
+~$*.dot*
 
 # Word Auto Backup File
 Backup of *.doc*
