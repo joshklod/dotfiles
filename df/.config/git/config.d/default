@@ -49,3 +49,5 @@
 [advice]
 	detachedHead = false
 	addIgnoredFile = false
+	mergeConflict = false
+	submoduleMergeConflict = false
