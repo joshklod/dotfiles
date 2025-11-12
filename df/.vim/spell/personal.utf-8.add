@@ -38,3 +38,4 @@ ModelSim
 Verilog
 deduplicate
 TDK
+enum
