@@ -42,6 +42,7 @@
 	diffs   = diff --stat
 	fuge    = !git have-fugitive && vim -c \"Gedit $1:$2\" && :
 	ls-refs = for-each-ref --format='%(refname)'
+	obj2file = !git show \"$1\" -- > \"$1\" && :
 	page    = !git -p
 	peek    = !bash -c '$(git var GIT_EDITOR) <(git show \"$1:$2\")' git-peek
 	show-date = log --no-walk=unsorted --pretty='%ad'

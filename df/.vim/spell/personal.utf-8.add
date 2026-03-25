@@ -38,3 +38,7 @@ ModelSim
 Verilog
 deduplicate
 TDK
+enum
+CMSIS
+subdirectory
+PLL
