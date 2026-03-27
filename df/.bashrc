@@ -10,7 +10,7 @@
 # Shortcut to check command existence
 iscommand () { command -v "$@" >/dev/null 2>&1; }
 
-# Fix $TERM inside a Vim Terminal
+# Terminal-specific hacks
 if [ -n "$VIM_TERMINAL" ]; then
 	# If the parent terminal supports truecolor, use the truecolor syntax that
 	# Vim understands.  If not, leave $TERM alone.  Programs won't send
@@ -19,6 +19,9 @@ if [ -n "$VIM_TERMINAL" ]; then
 		export TERM=xterm-semitruecolor # Vim's terminal acts like this
 	fi
 	unset VIM_TERMINAL # This is misleading if inherited by another terminal
+elif [ -n "$WT_SESSION" ]; then
+	# Windows Terminal
+	export TERM=xterm-truecolor
 fi
 
 # Check terminal for color support
