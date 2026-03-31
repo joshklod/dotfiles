@@ -138,7 +138,7 @@ if has("syntax")
 		set termguicolors
 	endif
 	syntax enable
-	if s:haveColors('solarized8') && s:fancy_colors
+	if s:haveColors('solarized8') && s:fancy_colors && has('patch-8.0.1038')
 		let g:solarized_extra_hi_groups = 1
 		colorscheme solarized8
 
