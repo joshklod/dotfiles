@@ -153,6 +153,20 @@ if has("syntax")
 			highlight SpellLocal ctermul=136 " Yellow
 			highlight SpellRare  ctermul=37  " Cyan
 		endif
+	elseif s:haveColors('solarized') && s:fancy_colors
+		if &t_Co >= 256
+			let g:solarized_termcolors =256
+		endif
+		let g:solarized_menu       =0
+		colorscheme solarized
+
+		" Use `ctermul` attribute if available
+		if s:term_ulcolor
+			highlight SpellBad   ctermul=160 " Red
+			highlight SpellCap   ctermul=61  " Purple
+			highlight SpellLocal ctermul=136 " Yellow
+			highlight SpellRare  ctermul=37  " Cyan
+		endif
 	else
 		colorscheme industry
 	endif
