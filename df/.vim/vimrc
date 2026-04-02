@@ -160,6 +160,16 @@ if has("syntax")
 		let g:solarized_menu       =0
 		colorscheme solarized
 
+		" Fix broken highlights
+		highlight SpellBad   ctermbg=NONE ctermfg=160
+		                   \ guifg=#dc322f guisp=#dc322f " Red
+		highlight SpellCap   ctermbg=NONE ctermfg=61
+		                   \ guifg=#6c71c4 guisp=#6c71c4 " Purple
+		highlight SpellLocal ctermbg=NONE ctermfg=136
+		                   \ guifg=#b58900 guisp=#b58900 " Yellow
+		highlight SpellRare  ctermbg=NONE ctermfg=37
+		                   \ guifg=#2aa198 guisp=#2aa198 " Cyan
+
 		" Use `ctermul` attribute if available
 		if s:term_ulcolor
 			highlight SpellBad   ctermul=160 " Red
