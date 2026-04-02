@@ -179,6 +179,14 @@ if has("syntax")
 		endif
 	else
 		colorscheme industry
+
+		" Use `ctermul` attribute if available
+		if s:term_ulcolor
+			highlight SpellBad   ctermul=196 " Red
+			highlight SpellCap   ctermul=27  " Blue
+			highlight SpellLocal ctermul=201 " Magenta
+			highlight SpellRare  ctermul=46  " Green
+		endif
 	endif
 
 	" Color Overrides
