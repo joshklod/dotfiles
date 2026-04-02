@@ -201,11 +201,11 @@ if has("syntax")
 		endif
 	endif
 
-	" Use cterm=undercurl regardless of &termguicolors setting
-	highlight SpellBad   cterm=undercurl
-	highlight SpellCap   cterm=undercurl
-	highlight SpellLocal cterm=undercurl
-	highlight SpellRare  cterm=undercurl
+	" Always use undercurl for spelling errors
+	highlight SpellBad   term=undercurl cterm=undercurl gui=undercurl
+	highlight SpellCap   term=undercurl cterm=undercurl gui=undercurl
+	highlight SpellLocal term=undercurl cterm=undercurl gui=undercurl
+	highlight SpellRare  term=undercurl cterm=undercurl gui=undercurl
 
 	" Highlight spelling w/ underline color only, if possible
 	if has('gui_running') || s:term_ulcolor
