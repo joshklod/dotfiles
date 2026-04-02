@@ -104,11 +104,12 @@ if !has('packages')
 endif
 
 " Set sensible defaults
-if s:havePlug('plugin/sensible.vim')
-	runtime! ALL plugin/sensible.vim
-elseif filereadable($VIMRUNTIME . "/defaults.vim")
+if filereadable($VIMRUNTIME . "/defaults.vim")
 	unlet! skip_defaults_vim
 	silent! source $VIMRUNTIME/defaults.vim
+endif
+if s:havePlug('plugin/sensible.vim')
+	runtime! ALL plugin/sensible.vim
 endif
 
 " Plugins
