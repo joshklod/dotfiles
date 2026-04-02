@@ -382,6 +382,10 @@ set errorformat^=
 " Misc Options
 set nofixendofline   " Preserve missing EOL from last line
 set modeline
+set viminfo   =!,'100,s10,h   " !:      Save UPPERCASE global variables
+                              " '100:   Save marks for last 100 files
+                              " s10:    Limit registers to 10 KB
+                              " h:      Clear highlight status
 
 " Autocmds
 if has("autocmd")
