@@ -105,7 +105,6 @@ endif
 
 " Set sensible defaults
 if s:havePlug('defaults.vim')
-	unlet! skip_defaults_vim
 	runtime! ALL defaults.vim
 endif
 if s:havePlug('plugin/sensible.vim')
