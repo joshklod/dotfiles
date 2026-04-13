@@ -104,11 +104,11 @@ if !has('packages')
 endif
 
 " Set sensible defaults
+if s:havePlug('defaults.vim')
+	runtime! ALL defaults.vim
+endif
 if s:havePlug('plugin/sensible.vim')
 	runtime! ALL plugin/sensible.vim
-elseif filereadable($VIMRUNTIME . "/defaults.vim")
-	unlet! skip_defaults_vim
-	silent! source $VIMRUNTIME/defaults.vim
 endif
 
 " Plugins
@@ -138,19 +138,13 @@ if has("syntax")
 		set termguicolors
 	endif
 	syntax enable
-	if s:haveColors('solarized8') && s:fancy_colors
+	if s:haveColors('solarized8') && s:fancy_colors && has('patch-8.0.1038')
 		let g:solarized_extra_hi_groups = 1
 		colorscheme solarized8
 
 		" Color Overrides
 		highlight Special  ctermfg=160 guifg=#dc322f               " Red
 		highlight SpellBad ctermfg=160 guifg=#dc322f guisp=#dc322f " Red
-
-		" Use cterm=undercurl regardless of &termguicolors setting
-		highlight SpellBad   cterm=undercurl
-		highlight SpellCap   cterm=undercurl
-		highlight SpellLocal cterm=undercurl
-		highlight SpellRare  cterm=undercurl
 
 		" Use `ctermul` attribute if available
 		if s:term_ulcolor
@@ -159,16 +153,40 @@ if has("syntax")
 			highlight SpellLocal ctermul=136 " Yellow
 			highlight SpellRare  ctermul=37  " Cyan
 		endif
+	elseif s:haveColors('solarized') && s:fancy_colors
+		if &t_Co >= 256
+			let g:solarized_termcolors =256
+		endif
+		let g:solarized_menu       =0
+		colorscheme solarized
 
-		" Highlight spelling w/ underline color only, if possible
-		if has('gui_running') || s:term_ulcolor
-			highlig SpellBad   ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE
-			highlig SpellCap   ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE
-			highlig SpellLocal ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE
-			highlig SpellRare  ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE
+		" Fix broken highlights
+		highlight SpellBad   ctermbg=NONE ctermfg=160
+		                   \ guifg=#dc322f guisp=#dc322f " Red
+		highlight SpellCap   ctermbg=NONE ctermfg=61
+		                   \ guifg=#6c71c4 guisp=#6c71c4 " Purple
+		highlight SpellLocal ctermbg=NONE ctermfg=136
+		                   \ guifg=#b58900 guisp=#b58900 " Yellow
+		highlight SpellRare  ctermbg=NONE ctermfg=37
+		                   \ guifg=#2aa198 guisp=#2aa198 " Cyan
+
+		" Use `ctermul` attribute if available
+		if s:term_ulcolor
+			highlight SpellBad   ctermul=160 " Red
+			highlight SpellCap   ctermul=61  " Purple
+			highlight SpellLocal ctermul=136 " Yellow
+			highlight SpellRare  ctermul=37  " Cyan
 		endif
 	else
 		colorscheme industry
+
+		" Use `ctermul` attribute if available
+		if s:term_ulcolor
+			highlight SpellBad   ctermul=196 " Red
+			highlight SpellCap   ctermul=27  " Blue
+			highlight SpellLocal ctermul=201 " Magenta
+			highlight SpellRare  ctermul=46  " Green
+		endif
 	endif
 
 	" Color Overrides
@@ -181,6 +199,20 @@ if has("syntax")
 						\ '#7F7F7F', '#FF0000', '#00FF00', '#FFFF00',
 						\ '#5CA0FF', '#FF00FF', '#00FFFF', '#FFFFFF']
 		endif
+	endif
+
+	" Always use undercurl for spelling errors
+	highlight SpellBad   term=undercurl cterm=undercurl gui=undercurl
+	highlight SpellCap   term=undercurl cterm=undercurl gui=undercurl
+	highlight SpellLocal term=undercurl cterm=undercurl gui=undercurl
+	highlight SpellRare  term=undercurl cterm=undercurl gui=undercurl
+
+	" Highlight spelling w/ underline color only, if possible
+	if has('gui_running') || s:term_ulcolor
+		highlight SpellBad   ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE
+		highlight SpellCap   ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE
+		highlight SpellLocal ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE
+		highlight SpellRare  ctermfg=NONE ctermbg=NONE guifg=NONE guibg=NONE
 	endif
 endif
 
@@ -350,6 +382,10 @@ set errorformat^=
 " Misc Options
 set nofixendofline   " Preserve missing EOL from last line
 set modeline
+set viminfo   =!,'100,s10,h   " !:      Save UPPERCASE global variables
+                              " '100:   Save marks for last 100 files
+                              " s10:    Limit registers to 10 KB
+                              " h:      Clear highlight status
 
 " Autocmds
 if has("autocmd")
