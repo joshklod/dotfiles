@@ -1,5 +1,3 @@
-#!/bin/bash
-#
 # .bash_profile: Sourced in login shells
 
 # source the users bashrc if it exists

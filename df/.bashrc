@@ -1,5 +1,3 @@
-#!/bin/bash
-#
 # .bashrc: Sourced in interactive shells
 
 # If not running interactively, don't do anything
