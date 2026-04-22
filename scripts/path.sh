@@ -1,5 +1,3 @@
-#!/bin/sh
-
 path_is_abs() {
 	printf '%s' "$*" | grep -zq -- '^/'
 }

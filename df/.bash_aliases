@@ -1,5 +1,3 @@
-#!/bin/bash
-#
 # .bash_aliases: Sourced in interactive shells
 
 # Necessary for case statement in cs()
