@@ -42,3 +42,8 @@ enum
 CMSIS
 subdirectory
 PLL
+TLA
+preprocessor
+typedef
+Doxygen
+README
