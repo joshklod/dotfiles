@@ -4,6 +4,7 @@
 : ${SHRC_SHELL:=sh}
 : ${SHRC_COMMON=sh}
 : ${SHRC_LOGIN=}
+: ${SHRC_LOGOUT=}
 : ${SHRC_INTERACTIVE=}
 
 # Generic configuration
@@ -21,19 +22,25 @@ shrc_source_rc () {
 	shrc_source "$SHRC_DIR/$1.$SHRC_SHELL"
 }
 
-shrc_source_rc 'local/first'
-shrc_source_rc 'pre'
-shrc_source_rc 'local/pre'
-if [ -n "$SHRC_LOGIN" ]; then
-	shrc_source_rc 'login'
-	shrc_source_rc 'local/login'
+if [ -n "$SHRC_LOGOUT" ]; then
+	shrc_source_rc 'local/logout'
+	shrc_source_rc 'logout'
+	shrc_source_rc 'local/post-logout'
+else
+	shrc_source_rc 'local/first'
+	shrc_source_rc 'pre'
+	shrc_source_rc 'local/pre'
+	if [ -n "$SHRC_LOGIN" ]; then
+		shrc_source_rc 'login'
+		shrc_source_rc 'local/login'
+	fi
+	if [ -n "$SHRC_INTERACTIVE" ]; then
+		shrc_source_rc 'interactive'
+		shrc_source_rc 'local/interactive'
+	fi
+	shrc_source_rc 'always'
+	shrc_source_rc 'local/always'
 fi
-if [ -n "$SHRC_INTERACTIVE" ]; then
-	shrc_source_rc 'interactive'
-	shrc_source_rc 'local/interactive'
-fi
-shrc_source_rc 'always'
-shrc_source_rc 'local/always'
 
-unset SHRC_SHELL SHRC_COMMON SHRC_LOGIN SHRC_INTERACTIVE
+unset SHRC_SHELL SHRC_COMMON SHRC_LOGIN SHRC_LOGOUT SHRC_INTERACTIVE
 unset shrc_source shrc_source_rc
