@@ -94,7 +94,7 @@ if [[ "$TERM" == @(xterm*|mintty) ]]; then
 fi
 
 ## Source aliases file
-[ -f "$HOME/.bash_aliases" ] && source "$HOME/.bash_aliases"
+[ -f "$SHRC_DIR/aliases.bash" ] && source "$SHRC_DIR/aliases.bash"
 
 ## Cleanup
 unset iscommand
