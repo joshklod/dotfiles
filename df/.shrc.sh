@@ -26,7 +26,7 @@ if [ -n "$SHRC_LOGOUT" ]; then
 	shrc_source_rc 'local/logout'
 	shrc_source_rc 'logout'
 	shrc_source_rc 'local/post-logout'
-else
+elif [ -z "${_SHRC_DONE-}" ]; then
 	shrc_source_rc 'local/first'
 	shrc_source_rc 'pre'
 	shrc_source_rc 'local/pre'
@@ -40,6 +40,8 @@ else
 	fi
 	shrc_source_rc 'always'
 	shrc_source_rc 'local/always'
+
+	_SHRC_DONE=true
 fi
 
 unset SHRC_SHELL SHRC_COMMON SHRC_LOGIN SHRC_LOGOUT SHRC_INTERACTIVE
