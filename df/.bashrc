@@ -1,7 +1,3 @@
 SHRC_SHELL=bash
 
-case "$-" in
-	*i*) SHRC_INTERACTIVE=true ;;
-esac
-
 . "$HOME/.shrc.sh"

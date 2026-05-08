@@ -5,7 +5,13 @@
 : ${SHRC_COMMON=sh}
 : ${SHRC_LOGIN=}
 : ${SHRC_LOGOUT=}
-: ${SHRC_INTERACTIVE=}
+
+if [ -z "${SHRC_INTERACTIVE+set}" ]; then
+	# Interactive mode can be detected in POSIX shells
+	case "$-" in
+		*i*) SHRC_INTERACTIVE=true ;;
+	esac
+fi
 
 # Generic configuration
 : ${SHRC_DIR:=${XDG_CONFIG_HOME:-$HOME/.config}/shrc}
