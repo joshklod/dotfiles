@@ -1,9 +1,6 @@
 # Necessary for case statement in cs()
 shopt -s extglob
 
-# One-line mathematical calculation
-calc () { bc <<< "$*"; }
-
 # cd and ls
 cs() {
 	# Declare local variables

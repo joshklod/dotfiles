@@ -27,6 +27,9 @@ alias llal='lall'
 # Go back to previous directory
 alias back='cd "$OLDPWD"'
 
+# One-line mathematical calculation
+calc () { echo "$*" | bc; }
+
 # Print $PATH in a human-readable format
 alias path='echo $PATH | tr : \\n'
 
