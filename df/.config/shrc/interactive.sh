@@ -18,17 +18,13 @@ elif [ -n "$WT_SESSION" ]; then
 fi
 
 # Check terminal for color support
-if iscommand tput; then
-	COLORS=$(tput colors) || COLORS=-1
-	if tput truecolor 2>/dev/null; then
-		export COLORTERM=truecolor
-	else
-		unset COLORTERM
-	fi
-else
-	COLORS=-1
-fi
+COLORS=$(tput colors) || COLORS=-1
 export COLORS
+if tput truecolor 2>/dev/null; then
+	export COLORTERM=truecolor
+else
+	unset COLORTERM
+fi
 
 # Environment variables
 export AUTOPAGE_CUTOFF='50%'
