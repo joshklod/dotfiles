@@ -4,20 +4,20 @@ export ENV="$HOME/.shrc.sh"
 # Make non-interactive non-login Bash shells work with shrc
 export BASH_ENV="$HOME/.bashrc"
 
-# Prepend personal bin directories to $PATH
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/bin:$PATH"
-export PATH="$HOME/scripts:$PATH"
-
-# Append portable tree bin directories to $PATH
+# Prepend portable tree bin directories to $PATH
 if [ -d "$HOME/opt/tree" ]; then
 	while IFS= read -r tree; do
 		[ -z "$tree" ] && continue
-		export PATH="$PATH:$tree/bin"
+		export PATH="$tree/bin:$PATH"
 	done <<-EOF
 		$(find -L "$HOME/opt/tree" -mindepth 1 -maxdepth 1 -type d)
 	EOF
 fi
+
+# Prepend personal bin directories to $PATH
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/scripts:$PATH"
 
 # Override INFOPATH to use automatic resolution
 export INFOPATH='PATH:'
