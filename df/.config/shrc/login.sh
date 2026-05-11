@@ -16,8 +16,8 @@ fi
 
 # Prepend personal bin directories to $PATH
 export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/scripts:$PATH"
+export PATH="$HOME/bin:$PATH"
 
 # Override INFOPATH to use automatic resolution
 export INFOPATH='PATH:'
