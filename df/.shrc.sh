@@ -8,9 +8,7 @@
 
 if [ -z "${SHRC_INTERACTIVE+set}" ]; then
 	# Interactive mode can be detected in POSIX shells
-	case "$-" in
-		*i*) SHRC_INTERACTIVE=true ;;
-	esac
+	case "$-" in *i*) SHRC_INTERACTIVE=true; esac
 fi
 
 # Generic configuration
