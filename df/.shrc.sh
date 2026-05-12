@@ -49,4 +49,4 @@ elif [ -z "${_SHRC_DONE-}" ]; then
 fi
 
 unset SHRC_SHELL SHRC_COMMON SHRC_LOGIN SHRC_LOGOUT SHRC_INTERACTIVE
-unset shrc_source shrc_source_rc
+unset -f shrc_source shrc_source_rc

@@ -47,4 +47,4 @@ fi
 [ -f "$SHRC_DIR/aliases.sh" ] && . "$SHRC_DIR/aliases.sh"
 
 ## Cleanup
-unset iscommand
+unset -f iscommand

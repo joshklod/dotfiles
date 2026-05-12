@@ -29,7 +29,8 @@ if [ $COLORS -ge 8 ]; then
 	PS1="$reset\n$blue\u@\h $cyan\w$reset\n$cyan\$ $reset"
 	PS2="$reset$cyan> $reset"
 	
-	unset octal_escape blue cyan reset
+	unset blue cyan reset
+	unset -f octal_escape
 else
 	# user@host path
 	# $
@@ -41,7 +42,7 @@ fi
 if [[ "$TERM" == @(xterm*|mintty) ]]; then
 	settitle() { echo "\[\e]0;$1\a\]"; }
 	PS1="$(settitle '\w')$PS1"
-	unset settitle
+	unset -f settitle
 fi
 
 ## Source aliases file
