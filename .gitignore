@@ -1,3 +1,6 @@
+# shrc system-local config
+df/.config/shrc/local/
+
 # SSH system-specific generated files
 df/.ssh/id*
 df/.ssh/known_hosts

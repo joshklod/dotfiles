@@ -115,6 +115,9 @@ endif
 if has("autocmd")
 	filetype plugin indent on
 endif
+if s:havePlug('ftplugin/markdown.vim')
+	let g:vim_markdown_borderless_table = 1
+endif
 if s:havePlug("plugin/templates.vim")
 	let g:templates_directory = s:homertp."/templates"
 endif

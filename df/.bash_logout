@@ -1,4 +1,4 @@
 SHRC_SHELL=bash
-SHRC_LOGIN=true
+SHRC_LOGOUT=true
 
 . "$HOME/.shrc.sh"
