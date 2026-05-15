@@ -21,6 +21,11 @@ printm() {
 	esac
 }
 
+file_exists() {
+	# Return true also for broken symlinks
+	[ -e "$1" ] || [ -h "$1" ]
+}
+
 do_cmd() {
 	printm out "$@"
 	"$@"
@@ -30,7 +35,7 @@ back_up() {
 	orig="$1"
 	backup="$orig.bak"
 
-	if [ -e "$backup" ]; then
+	if file_exists "$backup"; then
 		printm warn "Failed to back up '$orig' - '$backup' already exists"
 		return 1
 	fi
@@ -51,7 +56,7 @@ link() {
 	target="$(path_auto "$dest" "$link_dir" "$target")"
 	file="$(path_normalize "$link_dir/$link_name")"
 
-	if [ -e "$file" ]; then
+	if file_exists "$file"; then
 		if [ -h "$file" ]; then
 			if [ "$(readlink "$file")" = "$target" ]; then
 				printm info "'$file' is already linked"
@@ -70,7 +75,7 @@ link() {
 
 dest="${1-$HOME}"
 
-if ! [ -e "$dest" ]; then
+if ! file_exists "$dest"; then
 	printm err "Destination '$dest' does not exist"
 	exit 1
 elif ! [ -d "$dest" ]; then
@@ -84,7 +89,7 @@ fi
 config="$(path_normalize "$dest/.config")"
 
 if ! [ -d "$(realpath -m "$config")" ]; then
-	if [ -e "$config" ]; then
+	if file_exists "$config"; then
 		printm err "'$config' is not a directory"
 		exit 2
 	fi

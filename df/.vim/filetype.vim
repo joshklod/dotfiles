@@ -8,6 +8,7 @@ augroup filetypedetect
     au! BufRead,BufNewFile *.i			setfiletype c
     au! BufRead,BufNewFile *.sch,*.lib
 	\ if (getline(1) =~# 'EESchema') | setfiletype eeschema | endif
+    au! BufRead,BufNewFile Jenkinsfile		setfiletype groovy
 augroup END
 
 " vim: ts=8 sw=4
