@@ -1,3 +1,7 @@
+# GnuPG config (whitelisted)
+df/.gnupg/**
+!df/.gnupg/gpg.conf
+
 # shrc system-local config
 df/.config/shrc/local/
 
