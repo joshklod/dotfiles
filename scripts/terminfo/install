@@ -1,8 +1,14 @@
 #!/bin/sh
 
+prints () {
+	printf '%s\n' "$*"
+}
+
 script_dir=$(dirname "$0")
 
 destination=${1:-~/.terminfo}
 
 "$script_dir/gen-db.sh"
-cp -RTv --remove-destination "$script_dir/out" "$destination"
+
+prints "Copying into '$destination'..."
+rsync -avhc "$script_dir/out/" "$destination/"
