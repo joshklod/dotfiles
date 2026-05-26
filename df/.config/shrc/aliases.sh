@@ -5,6 +5,7 @@ alias ls='ls -C --color=auto --dereference-command-line \
 alias grep='grep --color=auto'
 alias picocom='picocom -b 19200'
 alias bc='bc -l'
+alias rsync='rsync -hh --info=progress2,stats'
 
 # Interactive overwriting
 alias rm='rm -I'
