@@ -4,6 +4,10 @@ export ENV="$HOME/.shrc.sh"
 # Make non-interactive non-login Bash shells work with shrc
 export BASH_ENV="$HOME/.bashrc"
 
+# Configure locale
+export LANG=en_US.UTF-8
+export LC_COLLATE=C.UTF-8 # Sort capitals first and don't ignore punctuation
+
 # Prepend portable tree bin directories to $PATH
 if [ -d "$HOME/opt/tree" ]; then
 	while IFS= read -r tree; do
