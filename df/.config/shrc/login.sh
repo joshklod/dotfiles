@@ -14,7 +14,8 @@ if [ -d "$HOME/opt/tree" ]; then
 		[ -z "$tree" ] && continue
 		export PATH="$tree/bin:$PATH"
 	done <<-EOF
-		$(find -L "$HOME/opt/tree" -mindepth 1 -maxdepth 1 -type d)
+		$(find -L "$HOME/opt/tree" -mindepth 1 -maxdepth 1 \
+		       -type d \! -name 'available')
 	EOF
 fi
 
