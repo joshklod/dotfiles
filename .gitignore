@@ -11,7 +11,7 @@ df/.ssh/known_hosts
 df/.ssh/known_hosts.old
 
 # Terminfo compiled database
-scripts/terminfo/out/
+modules/terminfo/out/
 
 # Vim system-local config
 df/.vim/local.vimrc
