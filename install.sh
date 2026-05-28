@@ -4,7 +4,7 @@ set -o errexit
 
 script_dir="$(dirname "$0")"
 
-. "$script_dir/scripts/path.sh"
+. "$script_dir/lib/path.sh"
 
 prints() {
 	printf '%s\n' "$*"
