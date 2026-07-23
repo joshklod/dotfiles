@@ -63,3 +63,23 @@ case "$(uname -s)" in
 		alias cygupgrade='cygsetup --quiet-mode'
 		;;
 esac
+
+# WSL
+if [ -n "$(wslinfo --version 2>/dev/null)" ]; then
+	# Open Explorer window in current directory
+	alias exp='explorer.exe .'
+
+	# Execute command in a new terminal window
+	win() {
+		wt.exe -w new -d "$(wslpath -w "$PWD")" \
+			wsl.exe -d "$WSL_DISTRO_NAME" -e \
+				sh -ilc "$(printf '%q ' "$@")"
+	}
+
+	# Execute command in a new terminal tab
+	tab() {
+		wt.exe -w last -d "$(wslpath -w "$PWD")" \
+			wsl.exe -d "$WSL_DISTRO_NAME" -e \
+				sh -ilc "$(printf '%q ' "$@")"
+	}
+fi
