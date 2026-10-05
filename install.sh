@@ -4,7 +4,7 @@ set -o errexit
 
 script_dir="$(dirname "$0")"
 
-. "$script_dir/scripts/path.sh"
+. "$script_dir/lib/path.sh"
 
 prints() {
 	printf '%s\n' "$*"
@@ -123,5 +123,5 @@ while IFS= read -r dir; do
 		do_cmd "$dir/install" || true
 	fi
 done <<-EOF
-	$(find -L "$script_dir/scripts" -mindepth 1 -maxdepth 1 -type d)
+	$(find -L "$script_dir/modules" -mindepth 1 -maxdepth 1 -type d)
 EOF
